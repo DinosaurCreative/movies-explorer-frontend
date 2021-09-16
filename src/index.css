@@ -9,15 +9,6 @@
 @import url(./blocks/logo/_place/logo_place_login.css);
 
 
-@import url(./blocks/greeting/greeting.css);
-
-
-@import url(./blocks/form/form.css);
-@import url(./blocks/form/__underline/form__underline.css);
-@import url(./blocks/form/__span/form__span.css);
-@import url(./blocks/form/__input/form__input.css);
-
-
 @import url(./components/App/App.css);
 
 

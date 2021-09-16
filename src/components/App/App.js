@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="page">
       <div className="page__container">
-        { false && <Header />}
+        { true && <Header />}
         { false && <Footer />}
-        { true && <Login />}
+        { false && <Login />}
       </div>
 
     </div>
