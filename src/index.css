@@ -4,6 +4,20 @@
 @import url(./fonts/fonts.css);
 
 
+@import url(./blocks/logo/logo.css);
+@import url(./blocks/logo/_place/logo_place_header.css);
+@import url(./blocks/logo/_place/logo_place_login.css);
+
+
+@import url(./blocks/greeting/greeting.css);
+
+
+@import url(./blocks/form/form.css);
+@import url(./blocks/form/__underline/form__underline.css);
+@import url(./blocks/form/__span/form__span.css);
+@import url(./blocks/form/__input/form__input.css);
+
+
 @import url(./components/App/App.css);
 
 
@@ -41,3 +55,4 @@
 @import url(./components/SavedMovies/SavedMovies.css);
 @import url(./components/SavedMovies/MoviesCardList/MoviesCardList.css);
 @import url(./components/SavedMovies/MoviesCard/MoviesCard.css);
+
