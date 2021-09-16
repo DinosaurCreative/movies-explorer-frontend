@@ -1,0 +1,22 @@
+.header__link_authorization {
+  font-size: 12px;
+  line-height: 30px;
+  background-color: #3DDC84;
+  color: #000;
+  height: 32px;
+  margin: auto;
+  width: 72px;
+  border-radius: 3px;
+  text-align: center; 
+  transition: transform .2s ease-in-out, filter .2s ease-in-out;
+}
+
+.header__link_authorization:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  -webkit-filter: drop-shadow(0px 3px 3px rgb(4, 194, 29, .8));
+  filter: drop-shadow(0px 0px 3px rgb(7, 168, 42, .8));
+}
+.header__link_authorization::after {
+  border-bottom: none; 
+}
