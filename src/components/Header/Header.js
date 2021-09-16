@@ -5,13 +5,13 @@ import './Header.css';
 function Header() {
   return (
     <header className="header">
-      <div className="header_container">
+      <div className="header__container">
       <Link to="/" href="#" className="header__logo" />
-      <div className="header_links-container">
+      <div className="header__links-container">
         <Link to="/movies" href="#" className="header__link" >{"Фильмы"}</Link>
         <Link to="/saved-movies" href="#" className="header__link" >{"Сохраненные фильльмы"}</Link>
-        <Link to="/saved-movies" href="#" className="header__link" >{"Сохраненные фильльмы"}</Link>
       </div>
+      <Link to="/saved-movies" href="#" className="header__account-btn" />
       </div>
     </header>
   );
