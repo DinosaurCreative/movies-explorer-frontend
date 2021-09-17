@@ -4,15 +4,17 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Register from '../Register/Register'
+import Profile from '../Profile/Profile';
 function App() {
 
   return (
     <div className="page">
       <div className="page__container">
-        { false && <Header />}
+        { true && <Header />}
+        { false && <Profile />}
         { false && <Login />}
-        { true && <Register />}
-        { false && <Footer />}
+        { false && <Register />}
+        { true && <Footer />}
       </div>
 
     </div>
