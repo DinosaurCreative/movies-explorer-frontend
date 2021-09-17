@@ -47,3 +47,5 @@
 @import url(./components/SavedMovies/MoviesCardList/MoviesCardList.css);
 @import url(./components/SavedMovies/MoviesCard/MoviesCard.css);
 
+
+@import url(./components/Error/Error.css);

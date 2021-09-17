@@ -1,0 +1,5 @@
+@import url(../../blocks/error/error.css);
+@import url(../../blocks/error/__type/error__type.css);
+@import url(../../blocks/error/__link/error__link.css);
+@import url(../../blocks/error/__caption/error__caption.css);
+@import url(../../blocks/error/__container/error__container.css);
