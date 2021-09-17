@@ -1,9 +1,7 @@
-.footer {
-  max-width: 1140px;
+.register {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   align-content: center;
-  justify-content: end;
+  justify-content: center;
 }
