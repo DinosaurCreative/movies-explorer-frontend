@@ -5,7 +5,6 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  margin: auto auto 0;
 }
 
 .error__link::after {
@@ -15,6 +14,7 @@
   padding-bottom: 5px; 
   transform: scaleX(0);  
   transition: transform .2s ease-in-out;
+  margin-bottom: 60px;
 }
 
 .error__link:hover:after {

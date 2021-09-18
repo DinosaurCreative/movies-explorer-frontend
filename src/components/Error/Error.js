@@ -6,8 +6,10 @@ function Error() {
   return (
     <div className="error">
       <div className='error__container'>
-        <h1 className='error__type'>404</h1>
-        <p className='error__caption'>Страница не найдена</p>
+        <div className='error__text-container'>
+          <h1 className='error__title'>404</h1>
+          <p className='error__caption'>Страница не найдена</p>
+        </div>
         <Link to='/' href='#' className='error__link'>Назад</Link>
       </div>
     </div>
