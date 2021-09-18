@@ -6,20 +6,21 @@ import Login from '../Login/Login';
 import Register from '../Register/Register'
 import Profile from '../Profile/Profile';
 import Error from '../Error/Error';
+import Main from '../Main/Main';
 
 function App() {
 
   return (
     <div className="page">
       <div className="page__container">
-        { true && <Error />}
-        { false && <Header />}
+        { false && <Error />}
+        { true && <Header />}
+        { true && <Main />}
         { false && <Profile />}
         { false && <Login />}
         { false && <Register />}
-        { false && <Footer />}
+        { true && <Footer />}
       </div>
-
     </div>
   )
 
