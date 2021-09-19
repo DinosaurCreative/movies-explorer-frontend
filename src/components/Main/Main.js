@@ -2,6 +2,7 @@ import React from 'react';
 import './Main.css';
 import Promo from '../Main/Promo/Promo';
 import AboutProject from './AboutProject/AboutProject';
+import Techs from './Techs/Techs';
 
 function Main() {
   return (
@@ -9,6 +10,7 @@ function Main() {
       <div className='main__container'>
         <Promo />
         <AboutProject />
+        <Techs />
       </div>
 
     </div>

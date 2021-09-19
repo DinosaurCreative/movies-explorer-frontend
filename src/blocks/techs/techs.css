@@ -1,0 +1,5 @@
+.techs {
+  display: flex;
+  background-color: #272727;
+  flex-direction: column;
+}

@@ -1,0 +1,19 @@
+.techs__name {
+  display: flex;
+  margin: 0 10px 0 0;
+  width: 90px;
+  height: 60px;
+  background-color: #303030;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.04em;
+  justify-content: center;
+  align-items: center;
+}
+
+.techs__name:last-of-type {
+  margin-right: 0;
+}
