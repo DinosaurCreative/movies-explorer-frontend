@@ -13,13 +13,13 @@ function App() {
   return (
     <div className="page">
       <div className="page__container">
-        { true && <Error />}
-        { false && <Header />}
-        { false && <Main />}
+        { false && <Error />}
+        { true && <Header />}
+        { true && <Main />}
         { false && <Profile />}
         { false && <Login />}
         { false && <Register />}
-        { false && <Footer />}
+        { true && <Footer />}
       </div>
     </div>
   )
