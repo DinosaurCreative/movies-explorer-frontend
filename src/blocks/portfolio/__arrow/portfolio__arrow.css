@@ -1,0 +1,16 @@
+.portfolio__arrow {
+  display: flex;
+  flex-direction: row;
+  background-image: url(../../../images/arrow.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 29px;
+  height: 60px;
+  transition: transform .2s ease-in-out, filter .2s ease-in-out;
+}
+
+.portfolio__arrow:hover {
+  transform: scale(1.4);
+  -webkit-filter: drop-shadow(0px 3px 3px rgb(4, 194, 29, .8));
+  filter: drop-shadow(0px 0px 3px rgb(237, 245, 239));
+}

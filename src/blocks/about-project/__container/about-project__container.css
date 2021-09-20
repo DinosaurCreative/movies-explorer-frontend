@@ -1,5 +1,5 @@
 .about-project__container {
-  margin: 0 70px; 
+  margin: 123px 70px 0; 
   display: flex;
   flex-direction: column;
 }

@@ -5,7 +5,7 @@ function AboutProject() {
   return (
     <div className='about-project'>
       <div className='about-project__container'>
-        <h2 className='about-project__title'>О проекте</h2>
+        <h2 className='block-title'>О проекте</h2>
         <ul className='about-project__table'>
           <li className='about-project__table-cell'>
             <h3 className='about-project__table-heading'>Дипломный проект включал 5 этапов</h3>

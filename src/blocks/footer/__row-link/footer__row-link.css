@@ -1,11 +1,10 @@
-.footer__row-link {
-  margin: 0 0 0 20px;
+/* .footer__row-link {
+  color: #fff;
   text-decoration: none;
+  margin: 0 0 0 20px;
   list-style-type: none;
   font-size: 13px;
-  line-height: 16px;
-  color: #fff;
-  transition: opacity .2s ease-in-out;
+b  transition: opacity .2s ease-in-out;
 }
 
 .footer__row-link:first-child {
@@ -28,4 +27,4 @@
 
 .footer__row-link:hover:after {
   transform: scaleX(1);
-}
+} */

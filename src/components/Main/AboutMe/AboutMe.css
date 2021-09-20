@@ -1,8 +1,6 @@
 @import url(../../../blocks/about-me/about-me.css);
 @import url(../../../blocks/about-me/__info/about-me__info.css);
-@import url(../../../blocks/about-me/__link/about-me__link.css);
 @import url(../../../blocks/about-me/__name/about-me__name.css);
-@import url(../../../blocks/about-me/__title/about-me__title.css);
 @import url(../../../blocks/about-me/__avatar/about-me__avatar.css);
 @import url(../../../blocks/about-me/__personal/about-me__personal.css);
 @import url(../../../blocks/about-me/__container/about-me__container.css);

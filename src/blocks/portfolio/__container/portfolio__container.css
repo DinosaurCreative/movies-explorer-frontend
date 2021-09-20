@@ -1,0 +1,8 @@
+.portfolio__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 70px 125px;
+  width: 100%;
+}
+
+

@@ -1,0 +1,12 @@
+.link_header-registration {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  line-height: 17px;
+  align-self: center;
+  margin-right: 16px;
+}
+
+.link_header-registration:first-child {
+  margin-right: 30px;
+} 

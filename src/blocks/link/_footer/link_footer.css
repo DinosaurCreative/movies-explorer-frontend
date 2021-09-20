@@ -1,0 +1,9 @@
+.link_footer {
+  margin: 0 0 0 20px;
+  list-style-type: none;
+  line-height: 16px;
+
+}
+.link_footer:first-child {
+  margin-left: 0;
+}

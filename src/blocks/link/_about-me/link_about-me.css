@@ -1,0 +1,10 @@
+.link_about-me {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.link_about-me:first-of-type {
+  margin-right: 10px;
+}
