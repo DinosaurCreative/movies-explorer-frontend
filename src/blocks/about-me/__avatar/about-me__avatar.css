@@ -1,0 +1,9 @@
+.about-me__avatar {
+  background-image: url(../../../images/avatar.jpg);
+  width: 270px;
+  height: 327px;
+  background-position: center;
+  border-radius: 3px;
+  margin: 66px 0 auto auto;
+
+}

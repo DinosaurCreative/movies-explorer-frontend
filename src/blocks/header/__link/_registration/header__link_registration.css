@@ -6,25 +6,3 @@
 .header__link_registration:first-child {
   margin-right: 30px;
 }
-
-.header__link_registration::after {
-  display: block;
-  content: '';
-  border-bottom: solid 1px rgb(255, 255, 255);
-  padding-bottom: 1px; 
-  transform: scaleX(0);  
-  transition: transform .2s ease-in-out;
-  opacity: .7; 
-}
-
-.header__link:hover:after {
-  transform: scaleX(1);
-}
-
-.header__link.fromRight:after{
-  transform-origin:100% 50%;
-}
-
-.header__link.fromLeft:after{
-  transform-origin:  0% 50%;
-}

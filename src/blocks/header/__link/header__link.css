@@ -4,7 +4,7 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
-  border-spacing: 4px;
+  border-spacing: 3px;
   transition: opacity .2s;
 }
 .header__link:first-child {

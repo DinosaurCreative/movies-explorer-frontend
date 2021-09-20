@@ -1,31 +1,30 @@
-.footer__row-link {
-  margin: 0 0 0 20px;
+.about-me__link {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
   text-decoration: none;
-  list-style-type: none;
-  font-size: 13px;
-  line-height: 16px;
   color: #fff;
   transition: opacity .2s ease-in-out;
 }
 
-.footer__row-link:first-child {
-  margin-left: 0;
+.about-me__link:first-of-type {
+  margin-right: 10px;
 }
 
-.footer__row-link:hover {
+.about-me__link:hover {
   opacity: .7;
 }
 
-.footer__row-link::after {
+.about-me__link::after {
   display: block;
   content: '';
   border-bottom: solid 1px #fff;
-  padding-bottom: 2px; 
   transform: scaleX(0);  
   transition: transform .2s ease-in-out;
   opacity: .7;
 }
 
-.footer__row-link:hover:after {
+.about-me__link:hover:after {
   transform: scaleX(1);
 }
