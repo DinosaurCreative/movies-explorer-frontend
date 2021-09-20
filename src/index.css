@@ -13,10 +13,11 @@
 
 
 @import url(./blocks/link/link.css);
-@import url(./blocks/link/_header-registration/link_header-registration.css);
-@import url(./blocks/link/_header-authoration/link_header-authoration.css);
 @import url(./blocks/link/_footer/link_footer.css);
 @import url(./blocks/link/_about-me/link_about-me.css);
+@import url(./blocks/link/_navigation/link_navigation.css);
+@import url(./blocks/link/_header-authoration/link_header-authoration.css);
+@import url(./blocks/link/_header-registration/link_header-registration.css);
 
 
 @import url(./components/App/App.css);
