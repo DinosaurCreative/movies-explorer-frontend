@@ -1,0 +1,7 @@
+.movie-card__info {
+  display: flex;
+  flex-direction: row;
+  margin: 14px 14px 0 14px;
+  justify-content: space-between;
+  height: 50px;
+}

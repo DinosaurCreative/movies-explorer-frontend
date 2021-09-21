@@ -1,0 +1,17 @@
+.movies-card-list__more-btn {
+  border: none;
+  border-radius: 6px;
+  background-color: #2F2F2F;
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  height: 36px;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.movies-card-list__more-btn:hover {
+  background-color: #444343;
+}
