@@ -1,0 +1,9 @@
+.search-form__border {
+  /* border-left: 1px solid #505050; */
+  display: flex;
+  background-color: #505050;
+  max-height: 40px;
+  height: 100%;
+  width: 1px;
+  margin: auto 0;
+}

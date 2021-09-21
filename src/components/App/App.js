@@ -7,6 +7,7 @@ import Register from '../Register/Register'
 import Profile from '../Profile/Profile';
 import Error from '../Error/Error';
 import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
       <div className="page__container">
         { false && <Error />}
         { true && <Header />}
-        { true && <Main />}
+        { false && <Main />}
+        { true && <Movies />}
         { false && <Profile />}
         { false && <Login />}
         { false && <Register />}
