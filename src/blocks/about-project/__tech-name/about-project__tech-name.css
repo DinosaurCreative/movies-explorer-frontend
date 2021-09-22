@@ -1,0 +1,11 @@
+.about-project__tech-name {
+  margin: 14px 0 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #8B8B8B;
+}

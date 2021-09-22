@@ -1,0 +1,5 @@
+.about-project__container {
+  margin: 123px 70px 0; 
+  display: flex;
+  flex-direction: column;
+}

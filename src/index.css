@@ -13,6 +13,8 @@
 @import url(./blocks/logo/logo.css);
 @import url(./blocks/logo/_place/logo_place_header.css);
 @import url(./blocks/logo/_place/logo_place_login.css);
+@import url(./blocks/scroll-up/scroll-up.css);
+@import url(./blocks/scroll-up/_vivble/scroll-up_visible.css);
 
 
 
