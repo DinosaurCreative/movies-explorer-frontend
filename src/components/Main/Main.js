@@ -16,7 +16,6 @@ function Main() {
         <AboutMe />
         <Portfolio />
       </div>
-
     </div>
   )
 }

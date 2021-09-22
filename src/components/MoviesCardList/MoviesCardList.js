@@ -5,7 +5,7 @@ import MovieCard from '../MovieCard/MovieCard';
 function MoviesCardList() {
   return (
     <div className='movies-card-list'>
-      <ul className='card-list'>
+      <ul className='movie-card-list__catalog'>
         <MovieCard />
         <MovieCard />
         <MovieCard />

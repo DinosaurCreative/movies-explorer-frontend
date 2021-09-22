@@ -1,5 +1,7 @@
 import React from 'react';
 import '../../index.css';
+import './App.css';
+
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -17,7 +19,7 @@ function App() {
         { false && <Error />}
         { true && <Header />}
         { false && <Main />}
-        { true && <Movies />}
+        { false && <Movies />}
         { false && <Profile />}
         { false && <Login />}
         { false && <Register />}
