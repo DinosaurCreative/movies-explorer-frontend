@@ -1,15 +1,13 @@
-.movies-card-list {
+.search-form__container {
   display: flex;
   flex-direction: column;
   max-width: 1140px;
-  width: 100%;
-  margin-left: 70px;
-  margin-right: 70px;
   align-self: center;
+  width: 100%;
 }
 
-/* .movies-card-list:before {
+.search-form__container::after {
   content: '';
   border: 1px solid #424242;
   margin-bottom: 10px;
-} */
+}

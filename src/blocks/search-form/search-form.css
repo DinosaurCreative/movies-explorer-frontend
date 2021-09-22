@@ -1,7 +1,7 @@
 .search-form {
   display: flex;
   flex-direction: row;
-  margin: 70px 70px 80px;
+  margin: 70px 0 80px;
   background-color: #2F2F2F;
   border-radius: 9px;
 }

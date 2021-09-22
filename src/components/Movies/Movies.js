@@ -10,7 +10,6 @@ function Movies() {
       <SearchForm />
       <MoviesCardList />
       { false && <Preloader />}
-      
     </div>
   )
 }
