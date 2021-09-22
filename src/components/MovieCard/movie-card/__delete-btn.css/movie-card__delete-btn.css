@@ -1,6 +1,6 @@
 .movie-card__delete-btn {
   position: absolute;
-  background: url(../../../images/saved.svg) no-repeat;
+  background: url(../../../../images/saved.svg) no-repeat;
   border: none;
   max-height: 21px;
   max-width: 21px;

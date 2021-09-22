@@ -4,7 +4,7 @@ import './Error.css';
 
 function Error() {
   return (
-    <div className="error">
+    <div className='error'>
       <div className='error__container'>
         <div className='error__text-container'>
           <h1 className='error__title'>404</h1>

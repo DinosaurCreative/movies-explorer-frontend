@@ -13,13 +13,13 @@ import SavedMovies from '../SavedMovies/SavedMovies'
 function App() {
 
   return (
-    <div className="page">
-      <div className="page__container">
+    <div className='page'>
+      <div className='page__container'>
         { false && <Error />}
         { true && <Header />}
-        { false && <Main />}
+        { true && <Main />}
         { false && <Movies />}
-        { true && <SavedMovies />}
+        { false && <SavedMovies />}
         { false && <Profile />}
         { false && <Login />}
         { false && <Register />}

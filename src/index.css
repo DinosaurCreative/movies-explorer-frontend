@@ -3,8 +3,6 @@
 @import url(./vendor/normalize.css);
 
 
-@import url(./blocks/card-list/card-list.css);
-
 @import url(./blocks/link/_about-me/link_about-me.css);
 @import url(./blocks/link/_navigation/link_navigation.css);
 @import url(./blocks/link/_header-registration/link_header-registration.css);

@@ -1,8 +1,7 @@
-@import url(../../blocks/footer/footer.css); 
-@import url(../../blocks/footer/__rows/footer__rows.css);
-@import url(../../blocks/footer/__author/footer__author.css);
-@import url(../../blocks/footer/__row-link/footer__row-link.css);
-@import url(../../blocks/footer/__row-links/footer__row-links.css);
-@import url(../../blocks/footer/__description/footer__description.css);
-@import url(../../blocks/footer/__container/footer__container.css);
-/* @import url(../..); */
+@import url(./footer/footer.css);
+@import url(./footer/__rows/footer__rows.css);
+@import url(./footer/__author/footer__author.css);
+@import url(./footer/__row-link/footer__row-link.css);
+@import url(./footer/__row-links/footer__row-links.css);
+@import url(./footer/__description/footer__description.css);
+@import url(./footer/__container/footer__container.css);

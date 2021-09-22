@@ -14,7 +14,7 @@
   font-size: 18px;
   line-height: 20px;
   padding-left: 42px;
-  background-image: url(../../../images/search_icon.svg);
+  background-image: url(../../../../images/search_icon.svg);
   background-repeat: no-repeat;
   background-position-y: -6px;
   transition: opacity .3s ease-in-out;

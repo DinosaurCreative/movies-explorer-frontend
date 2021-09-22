@@ -5,15 +5,15 @@ import './Header.css';
 
 function Header() {
   return (
-    <header className="header">
-      <div className="header__container">
-      <Link to="/" href="#" className="logo logo_place_header" />
-      <div className="header__links-container">
+    <header className='header'>
+      <div className='header__container'>
+      <Link to='/' href='#' className='logo logo_place_header' />
+      <div className='header__links-container'>
         <Navigation />
-        {false && <Link to="/signup" className="link link_header-registration" >{"Регистрация"}</Link>}
-        {false && <Link to="/signin" className="link link_header-authorization" >{"Войти"}</Link>}
+        {false && <Link className='link link_header-registration' to='/signup' href='#' >{'Регистрация'}</Link>}
+        {false && <Link className='link link_header-authorization' to='/signin' href='#' >{'Войти'}</Link>}
       </div>
-      <Link to="/saved-movies" href="#" className="header__account-btn" />
+      <Link to='/profile' href='#' className='header__account-btn' />
       </div>
     </header>
   );
