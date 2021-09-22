@@ -9,21 +9,38 @@ import Error from '../Error/Error';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
 
   return (
     <div className='page'>
       <div className='page__container'>
-        { false && <Error />}
         { true && <Header />}
-        { true && <Main />}
-        { false && <Movies />}
-        { false && <SavedMovies />}
-        { false && <Profile />}
+        <Switch>
+          <Route  path='/main'>
+            { true && <Main />}
+          </Route>
+          
+          <Route  path='/movies'>
+            { true && <Movies />}
+          </Route>
+          
+          <Route  path='/profile'>
+            { true && <Profile />}
+          </Route>
+
+          <Route  path='/error'>
+            { true && <Error />}
+          </Route>
+          <Route  path='/saved-movies'>
+            { true && <SavedMovies />}
+          </Route>
+        </Switch>
+        
         { false && <Login />}
         { false && <Register />}
-        { true && <Footer />}
+        { false && <Footer />}
       </div>
     </div>
   )

@@ -2,7 +2,6 @@
   display: flex;
   margin: auto;
   height: 100vh;
-  /* flex-direction: column;
-  align-content: center;
-  justify-content: center; */
+  flex-direction: column;
+  justify-content: center;
 }
