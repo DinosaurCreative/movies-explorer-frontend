@@ -23,8 +23,7 @@
 }
 
 .movie-card__save-btn:hover {
-  transform: scale(1.2);
+  transform: scale(1.05);
   color: #EE3465;
-  -webkit-filter: drop-shadow(0px 3px 3px #313131);
   filter: drop-shadow(0px 0px 3px #313131);
 }

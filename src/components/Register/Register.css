@@ -1,11 +1,1 @@
-@import url(../../blocks/logo/_place/logo_place_register.css);
-@import url(./register/__button/register__button.css);
-@import url(./register/__container/register__container.css);
-@import url(./register/__form/register__form.css);
-@import url(./register/__greeting/register__greeting.css);
-@import url(./register/__input/register__input.css);
-@import url(./register/__registration-link/register__registration-link.css);
-@import url(./register/__registration-question/register__registration-question.css);
-@import url(./register/__span/register__span.css);
-@import url(./register/__underline/register__underline.css);
 @import url(./register/register.css);

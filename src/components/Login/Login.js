@@ -1,23 +1,19 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import './Login.css';
 
 function Login() {
   return (
     <div className='login'>
-      <div className='login__container'>
+      <div className='form__container'>
         <Link to='/' href='#' className='logo logo_place_login' />
-        <h1 className='login__greeting'>Рады видеть!</h1>
-        <form className='login__form'>
-          <span className='login__span'>E-mail</span>
-          <input className='login__input' type='email'></input>
-          <span className='login__underline' />
-          <span className='login__span'>Пароль</span>
-          <input className='login__input' type='password'></input>
-          <span className='login__underline' />
+        <h1 className='form__greeting'>Рады видеть!</h1>
+        <form className='form'>
+          <span className='form__name-span'>E-mail</span>
+          <input className='form__input' type='email'></input>
+          <span className='form__name-span'>Пароль</span>
+          <input className='form__input' type='password'></input>
         </form>
-        <button className='login__button'>Войти</button>
-        <p className='login__registration-question'>Еще не зарегистрированы?{<Link to='/signup' className='login__registration-link'> Регистрация</Link>}</p>
+        <button className='form__button'>Войти</button>
+        <p className='from__status-ask'>Еще не зарегистрированы?{<Link to='/signup' className='form__link form__link_register'> Регистрация</Link>}</p>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 .movie-card__delete-btn {
   position: absolute;
-  background: url(../../../../images/saved.svg) no-repeat;
+  background: url(../../../../images/delete_saved_movie.svg) no-repeat;
   border: none;
   max-height: 21px;
   max-width: 21px;
@@ -16,7 +16,6 @@
 
 
 .movie-card__delete-btn:hover {
-  transform: scale(1.1);
-  -webkit-filter: drop-shadow(0px 3px 3px #ee3465);
-  filter: drop-shadow(0px 0px 3px #ee3465);
+  transform: scale(1.2);
+  filter: drop-shadow(0px 0px 3px #095c75);
 }

@@ -1,8 +1,0 @@
-.login__underline {
-  border-bottom: 1px solid #424242;
-  margin: 10px 0 24px;
-}
-
-.login__underline:last-of-type {
-  margin-bottom: 42px;
-}

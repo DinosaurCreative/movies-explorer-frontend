@@ -1,7 +1,5 @@
 .register {
-  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
+  align-self: center;
+  margin: auto;
 }

@@ -17,6 +17,5 @@
 
 .search-form__button:hover {
   transform: scale(1.1);
-  -webkit-filter: drop-shadow(0px 3px 3px #4285F4);
   filter: drop-shadow(0px 0px 3px #4285F4);
 } 

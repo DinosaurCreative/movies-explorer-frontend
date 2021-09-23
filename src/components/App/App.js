@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../index.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -9,38 +8,57 @@ import Error from '../Error/Error';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
-import { Route, Switch } from 'react-router-dom';
-
+import AboutProject from '../AboutProject/AboutProject'
+import ScrollUp from '../ScrollUp/ScrollUp';
+import { Route, Switch, useLocation } from 'react-router-dom';
 function App() {
-
+  
+  const location = useLocation();
+  
   return (
     <div className='page'>
       <div className='page__container'>
-        { true && <Header />}
+        { location.pathname !== '/signin' 
+        && location.pathname !== '/signup' 
+        && <Header />}
         <Switch>
           <Route  path='/main'>
-            { true && <Main />}
+            <Main />
           </Route>
+
           
           <Route  path='/movies'>
-            { true && <Movies />}
+            <Movies />
           </Route>
           
           <Route  path='/profile'>
-            { true && <Profile />}
+            <Profile />
           </Route>
 
           <Route  path='/error'>
-            { true && <Error />}
+            <Error />
           </Route>
           <Route  path='/saved-movies'>
-            { true && <SavedMovies />}
+            <SavedMovies />
+          </Route>
+          
+          <Route  exact path='/'>
+            <AboutProject />
+          </Route>
+
+          <Route path = '/signin'>
+            <Login />
+          </Route>
+          
+          <Route path = '/signup'>
+            <Register />
           </Route>
         </Switch>
-        
-        { false && <Login />}
-        { false && <Register />}
-        { false && <Footer />}
+        <ScrollUp />
+        { location.pathname !== '/profile' 
+        && location.pathname !== '/signin' 
+        && location.pathname !== '/signup' 
+        && <Footer />}
       </div>
     </div>
   )
