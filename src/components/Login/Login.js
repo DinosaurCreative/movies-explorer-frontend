@@ -9,10 +9,12 @@ function Login() {
         <form className='form'>
           <span className='form__name-span'>E-mail</span>
           <input className='form__input' type='email'></input>
+          <span className='form__error-span'></span>
           <span className='form__name-span'>Пароль</span>
           <input className='form__input' type='password'></input>
+          <span className='form__error-span'></span>
         </form>
-        <button className='form__button'>Войти</button>
+        <button className='form__button' type='submit'>Войти</button>
         <p className='from__status-ask'>Еще не зарегистрированы?{<Link to='/signup' className='form__link form__link_register'> Регистрация</Link>}</p>
       </div>
     </div>

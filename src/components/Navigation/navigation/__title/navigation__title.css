@@ -1,0 +1,22 @@
+@media screen and (max-height: 768px) {
+  .navigation__title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 105px;
+    align-self: center;
+  }
+  
+}
+@media screen and (max-height: 430px) {
+  .navigation__title {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .navigation__title {
+    margin-right: 100px;
+  }
+}

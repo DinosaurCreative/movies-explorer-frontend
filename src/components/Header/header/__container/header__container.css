@@ -2,4 +2,13 @@
   display: flex;
   padding: 0 70px;
   justify-content: space-between;
+  height: 100%;
+  min-width: 320px;
+}
+
+@media screen and (max-width: 767px) {
+  .header__container {
+    padding: 0 30px;
+  }
+
 }

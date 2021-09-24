@@ -1,9 +1,9 @@
 .logo {
   background-image: url('../../images/header_logo.svg');
   background-repeat: no-repeat;
-  background-size: cover;
-  width: 38px;
-  height: 38px;
+  background-size: contain;
+  max-width: 38px;
+  max-height: 38px;
   transition: transform .2s ease-in-out, filter .2s ease-in-out;
 }
   

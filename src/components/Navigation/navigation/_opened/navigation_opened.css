@@ -1,0 +1,8 @@
+.navigation_opened {
+  left: 248px;
+  display: flex;
+  flex-direction: column;
+  width: 68%;
+  margin-right: 3%;
+  min-height: 380px;
+}

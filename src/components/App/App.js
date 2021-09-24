@@ -8,24 +8,53 @@ import Error from '../Error/Error';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
-import AboutProject from '../AboutProject/AboutProject'
 import ScrollUp from '../ScrollUp/ScrollUp';
+import EditProfile from '../EditProfile/EditProfile';
 import { Route, Switch, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+
 function App() {
-  
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen ] = useState(false)
+
+
+
+  const [screenWidth, setScreenWidth] = useState(window.outerWidth);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWidth, { passive: true });   
+    return () => {
+      window.removeEventListener('rezize', handleWidth);
+    };
+  }, []);
+
+  const handleWidth = () => {
+    setScreenWidth(window.outerWidth);
+  };
+
+
+
+  function menuOpenHandler() {
+    setIsMenuOpen(!isMenuOpen);
+  }
   
   return (
-    <div className='page'>
+    <div className='page navigation__container'>
       <div className='page__container'>
         { location.pathname !== '/signin' 
         && location.pathname !== '/signup' 
-        && <Header />}
+        && <Header menuHandler = {menuOpenHandler}
+                   menuStatus = {isMenuOpen}
+                   screenWidth = {screenWidth}
+        />}
         <Switch>
-          <Route  path='/main'>
+          <Route  exact path='/'>
             <Main />
           </Route>
-
+          <Route path='/edit-profile'>
+            <EditProfile />
+          </Route>
           
           <Route  path='/movies'>
             <Movies />
@@ -41,11 +70,6 @@ function App() {
           <Route  path='/saved-movies'>
             <SavedMovies />
           </Route>
-          
-          <Route  exact path='/'>
-            <AboutProject />
-          </Route>
-
           <Route path = '/signin'>
             <Login />
           </Route>
@@ -58,6 +82,7 @@ function App() {
         { location.pathname !== '/profile' 
         && location.pathname !== '/signin' 
         && location.pathname !== '/signup' 
+        && location.pathname !== '/edit-profile' 
         && <Footer />}
       </div>
     </div>

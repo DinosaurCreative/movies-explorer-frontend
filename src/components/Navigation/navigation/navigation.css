@@ -1,3 +1,18 @@
 .navigation {
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  transition: all .3s ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+  .navigation {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 769px;
+    background-color: #202020;
+    z-index: 1;
+  }
 }

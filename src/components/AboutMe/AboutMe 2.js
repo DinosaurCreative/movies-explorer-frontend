@@ -1,8 +1,5 @@
-import React from 'react';
-import './AboutMe.css';
-import { Link } from 'react-router-dom';
-
 function AboutMe() {
+  
   return (
     <div className='about-me'>
       <div className='about-me__container'>
@@ -19,8 +16,8 @@ function AboutMe() {
               фриланс-заказами и ушёл с постоянной работы.
             </p>
             <div className='about-me__connections'>
-              <Link to='/' href='#' className='link link_about-me'>Facebook</Link>
-              <Link to='/' href='#' className='link link_about-me'>Github</Link>
+              <a className='link link_about-me' href='https://github.com' target='_blank' rel='noreferrer' >Github</a>
+              <a className='link link_about-me' href='https://facebook.com' target='_blank' rel='noreferrer' >Facebook</a>
             </div>
           </div>
           <div className='about-me__avatar' />
