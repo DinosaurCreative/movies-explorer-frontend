@@ -13,12 +13,9 @@ import EditProfile from '../EditProfile/EditProfile';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-
 function App() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen ] = useState(false)
-
-
 
   const [screenWidth, setScreenWidth] = useState(window.outerWidth);
 
@@ -40,8 +37,8 @@ function App() {
   }
   
   return (
-    <div className='page navigation__container'>
-      <div className='page__container'>
+    <div className='page'>
+      <div className={`page__container ${isMenuOpen && screenWidth < 768 ? 'page__container_dark' : ''}`}>
         { location.pathname !== '/signin' 
         && location.pathname !== '/signup' 
         && <Header menuHandler = {menuOpenHandler}
