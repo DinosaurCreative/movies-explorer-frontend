@@ -3,3 +3,9 @@
   flex-direction: column;
   margin: 100px 70px;
 }
+
+@media screen and (max-width: 767px) {
+  .techs__container {
+    margin: 90px 60px;
+  }
+}

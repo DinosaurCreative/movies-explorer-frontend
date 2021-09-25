@@ -1,6 +1,12 @@
 .about-me__container {
-  margin: 110px 70px 110px;
+  margin: 110px 70px 100px;
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .about-me__container {
+    margin: 90px 50px 90px;
+  }
 }

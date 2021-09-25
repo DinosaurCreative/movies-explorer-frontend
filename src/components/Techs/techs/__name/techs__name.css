@@ -17,3 +17,10 @@
 .techs__name:last-of-type {
   margin-right: 0;
 }
+
+@media screen and (max-width: 767px) {
+  .techs__name {
+    min-width: 84px;
+    min-height: 57px;
+  }
+}

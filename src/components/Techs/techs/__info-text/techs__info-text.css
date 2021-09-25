@@ -7,3 +7,11 @@
   letter-spacing: -0.04em;
   text-align: center;
 }
+
+
+@media screen and (max-width: 767px) {
+  .techs__info-text {
+    line-height: 20px;
+    margin-bottom: 83px;
+  }
+}

@@ -4,5 +4,11 @@
   font-size: 50px;
   line-height: 58px;
   margin: 90px auto 26px;
+}
 
+
+@media screen and (max-width: 767px) {
+  .techs__info-title {
+    margin: 80px auto 20px;
+  }
 }

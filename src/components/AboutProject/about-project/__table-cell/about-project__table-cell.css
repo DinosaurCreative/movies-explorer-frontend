@@ -1,3 +1,14 @@
 .about-project__table-cell {
   list-style-type: none;
 }
+
+.about-project__table-cell:first-of-type {
+  margin-right: 40px;
+}
+
+@media screen and (max-width: 767px) {
+
+  .about-project__table-cell:first-of-type {
+    margin-right: 30px;
+  }
+}
