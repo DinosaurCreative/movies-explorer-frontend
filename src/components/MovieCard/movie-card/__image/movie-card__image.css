@@ -3,5 +3,11 @@
   width: 360px;
   height: 201px;
   border-radius: 6px;
+}
 
+@media screen and (max-width: 767px) {
+  .movie-card__image {
+    width: 340px;
+    height: 190px;
+  }
 }

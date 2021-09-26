@@ -6,3 +6,9 @@
   font-size: 30px;
   line-height: 50px;
 }
+
+@media screen and (max-width: 1050px) {
+  .portfolio__link {
+    font-size: 28px;
+  }
+}

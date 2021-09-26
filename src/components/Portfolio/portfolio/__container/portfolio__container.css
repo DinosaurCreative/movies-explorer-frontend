@@ -5,4 +5,8 @@
   width: 100%;
 }
 
-
+@media screen and (max-width: 1050px) {
+  .portfolio__container {
+    margin: 0 50px 90px;
+  }
+}

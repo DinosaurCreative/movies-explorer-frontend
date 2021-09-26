@@ -5,3 +5,11 @@
   margin-top: 123px;
   margin-bottom: 220px;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__data-container {
+    margin-top: 96px;
+    margin-bottom: 210px;
+  }
+
+}

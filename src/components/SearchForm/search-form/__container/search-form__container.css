@@ -1,7 +1,6 @@
 .search-form__container {
   display: flex;
   flex-direction: column;
-  max-width: 1140px;
   align-self: center;
   width: 100%;
 }
@@ -9,5 +8,11 @@
 .search-form__container::after {
   content: '';
   border: 1px solid #424242;
-  margin-bottom: 10px;
+  margin: 0 70px 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .search-form__container::after {
+    margin: 0 30px 10px;
+  }
 }

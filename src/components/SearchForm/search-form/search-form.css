@@ -1,7 +1,14 @@
 .search-form {
   display: flex;
   flex-direction: row;
-  margin: 70px 0 80px;
+  margin: 70px 70px 80px;
   background-color: #2F2F2F;
   border-radius: 9px;
+}
+
+
+@media screen and (max-width: 767px) {
+  .search-form {
+    margin: 80px 30px 80px;
+  }
 }

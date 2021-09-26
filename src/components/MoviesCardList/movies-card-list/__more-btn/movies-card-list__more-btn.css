@@ -10,8 +10,15 @@
   height: 36px;
   cursor: pointer;
   transition: all .3s ease;
+  margin: 0 70px;
 }
 
 .movies-card-list__more-btn:hover {
   background-color: #444343;
+}
+
+@media screen and (max-width: 767px) {
+  .movies-card-list__more-btn {
+    margin: 0 30px;
+  }
 }
