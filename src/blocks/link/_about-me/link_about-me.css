@@ -8,3 +8,9 @@
 .link_about-me:first-of-type {
   margin-right: 20px;
 }
+
+@media screen and (max-width: 400px) {
+  .link_about-me:first-of-type {
+    margin-right: 26px;
+  }
+}

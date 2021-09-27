@@ -12,3 +12,10 @@
   border-bottom: solid 1px #424242;
   padding-bottom: 20px; 
 }
+
+@media screen and (max-width: 400px) {
+  .footer__description {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

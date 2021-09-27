@@ -5,11 +5,20 @@
   grid-template-columns: repeat(auto-fit, 90px);
   row-gap: 10px;
   column-gap: 10px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 @media screen and (max-width: 767px) {
   .techs__names {
     grid-template-columns: repeat(auto-fit, 84px);
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .techs__names {
+    grid-template-columns: repeat(2, 84px);
   }
 }
 

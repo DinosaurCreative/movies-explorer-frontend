@@ -10,3 +10,9 @@
     margin: 0 50px 90px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .portfolio__container {
+    margin: 0 14px 70px;
+  }
+}

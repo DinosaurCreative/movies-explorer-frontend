@@ -5,7 +5,6 @@ function Portfolio() {
     <div className='portfolio'>
       <div className='portfolio__container'>
         <h2 className='portfolio__title'>Портфолио</h2>
-        
         <div className='portfolio__links'>
           <h3 className='portfolio__link'>Статичный сайт</h3>
           <Link to='/' href='#' className='portfolio__arrow' />

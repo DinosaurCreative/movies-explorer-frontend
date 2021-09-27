@@ -3,5 +3,11 @@
   display: flex;
   margin-top: 0;
   margin-bottom: 172px;
-  min-width: 320px;
+
+}
+
+@media screen and (max-width: 767px) {
+  .promo__container {
+    margin: 14px 0 0;
+  }
 }

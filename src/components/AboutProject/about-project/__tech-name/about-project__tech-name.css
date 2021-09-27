@@ -9,3 +9,11 @@
   line-height: 17px;
   color: #8B8B8B;
 }
+
+@media screen and (max-width: 400px) {
+  .about-project__tech-name {
+    font-size: 11px;
+    line-height: 13px;
+    margin: 10px 0 70px;
+  }
+}

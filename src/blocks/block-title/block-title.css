@@ -14,3 +14,14 @@
   border-bottom: 1px #DADADA solid;
   margin-top: 23px;
 }
+
+@media screen and (max-width: 400px) {
+  .block-title {
+    font-size: 18px;
+    line-height: 22px;    
+  }
+
+  .block-title::after {
+    margin-top: 28px;
+  }
+}

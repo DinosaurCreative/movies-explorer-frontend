@@ -3,13 +3,22 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
-  word-spacing: 1.2px;
   margin-top: 26px;
+  letter-spacing: -0.04em;
 }
 
 @media screen and (max-width: 767px) {
   .about-project__table-text {
     font-size: 12px;
     line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about-project__table-text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-top: 16px;
+    margin-bottom: 0;
   }
 }

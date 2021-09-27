@@ -7,3 +7,19 @@
 .link_footer:first-child {
   margin-left: 0;
 }
+
+
+@media screen and (max-width: 400px) {
+  .link_footer {
+    flex-direction: column;
+    padding: 0;
+    margin: auto;
+  }
+  .link_footer:first-child {
+    margin: auto auto 12px;
+  }
+  .link_footer:last-child {
+    margin: 12px auto 30px;
+  }
+
+}

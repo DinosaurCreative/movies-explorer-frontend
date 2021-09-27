@@ -30,3 +30,11 @@
     margin-right: 50px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .about-me__info {
+    margin-top: 40px;
+    margin-right: auto;
+
+  }
+}

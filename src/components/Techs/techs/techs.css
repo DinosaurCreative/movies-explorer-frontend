@@ -3,3 +3,9 @@
   background-color: #272727;
   flex-direction: column;
 }
+
+@media screen and (max-width: 400px) {
+  .techs {
+    background-color: transparent;
+  }
+}

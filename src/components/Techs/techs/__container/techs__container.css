@@ -9,3 +9,9 @@
     margin: 90px 50px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .techs__container {
+    margin: 70px 18px;
+  }
+}

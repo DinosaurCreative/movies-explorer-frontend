@@ -30,9 +30,7 @@ function App() {
     setScreenWidth(window.outerWidth);
   };
 
-  const test=()=> {
-    setUnknownPathError(true);
-  }
+
   function menuOpenHandler() {
     setIsMenuOpen(!isMenuOpen);
   }

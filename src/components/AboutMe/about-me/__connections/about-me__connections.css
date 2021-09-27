@@ -12,3 +12,9 @@
     height: 15px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .about-me__connections {
+    margin: 40px 0 0;
+  }
+}

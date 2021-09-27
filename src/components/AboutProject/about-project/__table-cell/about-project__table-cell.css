@@ -1,5 +1,6 @@
 .about-project__table-cell {
   list-style-type: none;
+
 }
 
 .about-project__table-cell:first-of-type {
@@ -7,8 +8,14 @@
 }
 
 @media screen and (max-width: 767px) {
-
   .about-project__table-cell:first-of-type {
     margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about-project__table-cell:first-of-type {
+    margin-right: auto;
+    margin-bottom: 56px;
   }
 }

@@ -14,5 +14,15 @@
     font-weight: normal;
     font-size: 12px;
     line-height: 18px;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-me__personal {
+    max-width: 370px;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 18px;
   }
 }

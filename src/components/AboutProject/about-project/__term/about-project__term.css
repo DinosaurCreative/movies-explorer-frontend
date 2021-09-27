@@ -11,3 +11,10 @@
   background-color: #303030;
   margin: 0;
 }
+
+@media screen and (max-width: 400px) {
+  .about-project__term {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

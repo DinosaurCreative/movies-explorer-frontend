@@ -5,11 +5,22 @@
   background-position: center;
   border-radius: 3px;
   margin: 0 0 auto auto;
+  background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 767px) {
   .about-me__avatar {
-    width: 255px;
-    height: 307px;
+    max-width: 255px;
+    max-height: 307px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about-me__avatar {
+    min-width: 292px;
+    min-height: 325px;
+    height: 100%;
+    width: 100%;
+    margin: 60px auto 0;
   }
 }
