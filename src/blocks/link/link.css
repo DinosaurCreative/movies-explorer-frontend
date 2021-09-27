@@ -4,7 +4,7 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
-  transition: opacity .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 .link:hover {

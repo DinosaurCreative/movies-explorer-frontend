@@ -1,6 +1,6 @@
 .techs__name {
   display: flex;
-  margin: 0 10px 0 0;
+  margin: 0;
   width: 90px;
   height: 60px;
   background-color: #303030;
@@ -12,15 +12,14 @@
   letter-spacing: -0.04em;
   justify-content: center;
   align-items: center;
-}
 
-.techs__name:last-of-type {
-  margin-right: 0;
 }
 
 @media screen and (max-width: 767px) {
   .techs__name {
-    min-width: 84px;
-    min-height: 57px;
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    line-height: 15px;
   }
 }

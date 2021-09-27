@@ -16,8 +16,8 @@ import { useState, useEffect } from 'react';
 function App() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen ] = useState(false)
-
-  const [screenWidth, setScreenWidth] = useState(window.outerWidth);
+  const [ unknownPathError, setUnknownPathError ] = useState(false);
+  const [ screenWidth, setScreenWidth ] = useState(window.outerWidth);
 
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });   
@@ -30,15 +30,20 @@ function App() {
     setScreenWidth(window.outerWidth);
   };
 
-
-
+  const test=()=> {
+    setUnknownPathError(true);
+  }
   function menuOpenHandler() {
     setIsMenuOpen(!isMenuOpen);
   }
   
   return (
+
     <div className='page'>
-      <div className={`page__container ${isMenuOpen && screenWidth < 768 ? 'page__container_dark' : ''}`}>
+
+        {unknownPathError ? <Error pathErrorHandler = {setUnknownPathError}
+        />
+      :<div className={`page__container ${isMenuOpen && screenWidth < 768 ? 'page__container_dark' : ''}`}>
         { location.pathname !== '/signin' 
         && location.pathname !== '/signup' 
         && <Header menuHandler = {menuOpenHandler}
@@ -60,10 +65,6 @@ function App() {
           <Route  path='/profile'>
             <Profile />
           </Route>
-
-          <Route  path='/error'>
-            <Error />
-          </Route>
           <Route  path='/saved-movies'>
             <SavedMovies />
           </Route>
@@ -81,7 +82,7 @@ function App() {
         && location.pathname !== '/signup' 
         && location.pathname !== '/edit-profile' 
         && <Footer />}
-      </div>
+      </div>}
     </div>
   )
 

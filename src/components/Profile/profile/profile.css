@@ -1,11 +1,5 @@
 .profile {
   display: flex;
-  margin: 148px auto 70px;
+  margin: auto;
   flex-direction: column;
-}
-
-@media screen and (max-width: 767px) {
-  .profile {
-    margin: 310px auto 270px
-  }
 }

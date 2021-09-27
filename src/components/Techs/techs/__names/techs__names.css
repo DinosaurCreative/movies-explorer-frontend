@@ -1,5 +1,19 @@
+
 .techs__names {
-  display: flex;
-  flex-direction: row;
+  display: grid;
   justify-content: center;
+  grid-template-columns: repeat(auto-fit, 90px);
+  row-gap: 10px;
+  column-gap: 10px;
 }
+
+@media screen and (max-width: 767px) {
+  .techs__names {
+    grid-template-columns: repeat(auto-fit, 84px);
+  }
+}
+
+
+
+
+

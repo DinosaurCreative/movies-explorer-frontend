@@ -1,10 +1,8 @@
 @import url(./profile/profile.css);
-@import url(./profile/__edit/profile__edit.css);
 @import url(./profile/__name/profile__name.css);
 @import url(./profile/__email/profile__email.css);
 @import url(./profile/__email/profile__email.css);
 @import url(./profile/__links/profile__links.css);
-@import url(./profile/__signout/profile__signout.css);
 @import url(./profile/__greeting/profile__greeting.css);
 @import url(./profile/__underline/profile__underline.css);
 @import url(./profile/__container/profile__container.css);
