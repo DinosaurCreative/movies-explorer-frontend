@@ -9,7 +9,7 @@
   min-width: 36px;
   border-radius: 20px;
   position: relative;
-  margin: 0 0 0 20px;
+  margin: 0;
   background-color: #f7871e;
   transition: all .2s ease;
 }

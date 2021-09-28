@@ -30,3 +30,10 @@
 .search-form__input:focus {
   border: 1px #253b85 solid;
 }
+
+@media screen and (max-width: 560px) {
+  .search-form__input::placeholder {
+    background-image: none;
+    padding-left: 0;
+  }
+}
