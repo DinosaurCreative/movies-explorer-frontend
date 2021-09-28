@@ -16,10 +16,10 @@
     margin: auto;
   }
   .link_footer:first-child {
-    margin: auto auto 12px;
+    margin: auto auto 8px;
   }
   .link_footer:last-child {
-    margin: 12px auto 30px;
+    margin: 5px auto 30px;
   }
 
 }

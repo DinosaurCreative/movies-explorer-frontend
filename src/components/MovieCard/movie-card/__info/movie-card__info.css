@@ -3,11 +3,18 @@
   flex-direction: row;
   margin: 14px 14px 0;
   justify-content: space-between;
-  height: 50px;
+  height: max-content;
 }
 
 @media screen and (max-width: 767px) {
   .movie-card__info {
     margin: 25px 0 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .movie-card__info {
+    margin: 13px 0 0;
+    height: 0;
   }
 }

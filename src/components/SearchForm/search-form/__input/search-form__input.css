@@ -35,5 +35,7 @@
   .search-form__input::placeholder {
     background-image: none;
     padding-left: 0;
+    font-size: 14px;
+    line-height: 20px;
   }
 }

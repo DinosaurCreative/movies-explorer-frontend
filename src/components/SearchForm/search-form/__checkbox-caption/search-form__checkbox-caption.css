@@ -5,3 +5,15 @@
   line-height: 18px;
   margin: auto 20px auto 15px;
 }
+
+@media screen and (max-width: 400px) {
+  .search-form__checkbox-caption {
+    font-size: 11px;
+    line-height: 18px;
+    margin-right: 0;
+  }
+}
+
+
+
+

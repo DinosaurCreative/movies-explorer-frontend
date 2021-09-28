@@ -6,3 +6,10 @@
   margin-bottom: 172px;
   justify-content: center;
 }
+
+
+@media screen and (max-width: 400px) {
+  .saved-movies {
+    margin-bottom: 300px;
+  }
+}
