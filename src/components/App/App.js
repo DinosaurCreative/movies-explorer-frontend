@@ -39,7 +39,7 @@ function App() {
 
     <div className='page'>
 
-        {true ? <Error pathErrorHandler = {setUnknownPathError}
+        {unknownPathError ? <Error pathErrorHandler = {setUnknownPathError}
         />
       :<div className={`page__container ${isMenuOpen && screenWidth < 769 ? 'page__container_dark' : ''}`}>
         { location.pathname !== '/signin' 

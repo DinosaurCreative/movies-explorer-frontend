@@ -24,6 +24,12 @@
   }
 }
 
+@media screen and (max-width: 500px) {
+  .navigation__account-btn {
+    margin-bottom: 40px;
+  }
+}
+
 @media screen and (max-height: 300px) {
   .navigation__account-btn {
     margin-top: 10px;

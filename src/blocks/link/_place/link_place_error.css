@@ -9,7 +9,7 @@
   cursor: pointer;
   position: absolute;
   bottom: 0;
-  bottom: 50px;
+  top: 585px;
 }
 
 .link_place_error::after {
@@ -24,7 +24,7 @@
 }
 @media screen and (max-width: 500px) {
   .link_place_error {
-    bottom: 30px;
+    top: 715px;
     font-size: 12px;
     line-height: 15px;
   }
