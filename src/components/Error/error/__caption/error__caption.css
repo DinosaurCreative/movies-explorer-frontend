@@ -5,3 +5,10 @@
   line-height: 19px;
   margin: auto;
 }
+
+@media screen and (max-width: 500px) {
+  .error__caption {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

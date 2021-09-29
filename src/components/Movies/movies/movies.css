@@ -5,3 +5,9 @@
   margin-top: 74px;
   margin-bottom: 252px;
 }
+
+@media screen and (max-width: 500px) {
+  .movies {
+    margin-bottom: 211px;
+  }
+}

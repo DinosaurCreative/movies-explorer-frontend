@@ -16,7 +16,7 @@ function MoviesCardList() {
         />
         <MovieCard card = {eveningfrance}
         />
-        {/* <MovieCard card = {sameplace}
+        <MovieCard card = {sameplace}
         />
         <MovieCard card = {middleofnowhere}
         />
@@ -25,15 +25,15 @@ function MoviesCardList() {
         <MovieCard card = {eveningfrance}
         />
         <MovieCard card = {sameplace}
-        /> */}
-        {/* <MovieCard card = {middleofnowhere}
+        />
+        <MovieCard card = {middleofnowhere}
         />
         <MovieCard card = {stones}
         />
         <MovieCard card = {eveningfrance}
         />
         <MovieCard card = {sameplace}
-        /> */}
+        />
       </ul>
       {location.pathname !== '/saved-movies' &&<button className='movies-card-list__more-btn'>Ещё</button>}
     </div>

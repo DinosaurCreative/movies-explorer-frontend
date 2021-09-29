@@ -9,9 +9,3 @@
     padding-right: 0;
   }
 }
-@media screen and (max-width: 500px) {
-  .logo_place_header {
-    width: 44px;
-    height: 44px;
-  }
-}
