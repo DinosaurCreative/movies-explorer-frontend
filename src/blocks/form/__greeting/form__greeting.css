@@ -5,3 +5,10 @@
   font-weight: 500;
   margin: 40px auto 0 0;
 }
+
+@media screen and (max-width: 500px) {
+  .form__greeting {
+    margin-top: 50px;
+    margin-left: auto;
+  }
+}

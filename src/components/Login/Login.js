@@ -4,7 +4,7 @@ function Login() {
   return (
     <div className='login'>
       <div className='form__container'>
-        <Link to='/' href='#' className='logo logo_place_login' />
+        <Link to='/' href='#' className='logo logo_place_form' />
         <h1 className='form__greeting'>Рады видеть!</h1>
         <form className='form'>
           <span className='form__name-span'>E-mail</span>
@@ -14,8 +14,8 @@ function Login() {
           <input className='form__input' type='password'></input>
           <span className='form__error-span'></span>
         </form>
-        <button className='form__button' type='submit'>Войти</button>
-        <p className='from__status-ask'>Еще не зарегистрированы?{<Link to='/signup' className='form__link form__link_register'> Регистрация</Link>}</p>
+        <button className='form__button from__button_place_login' type='submit'>Войти</button>
+        <p className='from__status-ask'>Еще не зарегистрированы?{<Link to='/signup' className='link link_form'> Регистрация</Link>}</p>
       </div>
     </div>
   )

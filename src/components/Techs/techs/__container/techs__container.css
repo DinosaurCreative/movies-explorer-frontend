@@ -10,7 +10,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .techs__container {
     margin: 70px 18px;
   }

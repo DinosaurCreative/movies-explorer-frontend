@@ -1,0 +1,13 @@
+.link_form {
+  font-size: 14px;
+  line-height: 17px;
+  color: #4285F4;
+  margin-left: 6px;
+}
+
+@media screen and (max-width: 500px) {
+  .link_form {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

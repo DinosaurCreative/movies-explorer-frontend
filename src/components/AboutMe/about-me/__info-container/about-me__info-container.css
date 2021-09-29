@@ -4,7 +4,7 @@
   margin-top: 66px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .about-me__info-container {
     margin: 0;
     display: flex;

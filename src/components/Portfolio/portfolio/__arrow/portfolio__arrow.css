@@ -21,7 +21,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .portfolio__arrow {
     width: 18px;
     height: 28px;

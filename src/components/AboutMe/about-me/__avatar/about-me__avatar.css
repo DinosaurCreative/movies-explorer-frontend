@@ -15,7 +15,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .about-me__avatar {
     min-width: 292px;
     min-height: 325px;

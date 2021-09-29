@@ -13,7 +13,7 @@
   padding-bottom: 20px; 
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .footer__description {
     font-size: 12px;
     line-height: 15px;

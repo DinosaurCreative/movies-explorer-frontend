@@ -23,7 +23,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .movies-card-list__more-btn {
     margin: 40px 10px;
   }

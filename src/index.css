@@ -8,15 +8,16 @@
 @import url(./blocks/link/link.css);
 @import url(./blocks/link/_footer/link_footer.css);
 @import url(./blocks/block-title/block-title.css);
-@import url(./blocks/logo/_place/logo_place_login.css);
+@import url(./blocks/logo/_place/logo_place_form.css);
 @import url(./blocks/logo/_place/logo_place_header.css);
 @import url(./blocks/logo/logo.css);
-@import url(./blocks/logo/_place/logo_place_register.css);
 @import url(./blocks/link/_header-authoration/link_header-authoration.css);
 @import url(./blocks/link/_navigation/link_navigation.css);
 @import url(./blocks/link/_side-menu-opened/link__side-menu-opened.css);
 @import url(./blocks/link/_side-menu-opened/link__side-menu-opened.css);
 @import url(./blocks/link/_profile/link_profile.css);
+@import url(./blocks/link/_form/link_form.css);
+@import url(./blocks/link/_error/link_error.css);
 
 
 @import url(./components/ScrollUp/ScrollUp.css);
@@ -24,15 +25,14 @@
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__status-ask/from__status-ask.css);
 @import url(./blocks/form/__name-span/form__name-span.css);
-@import url(./blocks/form/__link/form__link.css);
 @import url(./blocks/form/__input/form__input.css);
 @import url(./blocks/form/__greeting/form__greeting.css);
 @import url(./blocks/form/__error-span/form__error-span.css);
 @import url(./blocks/form/__container/form__container.css);
 @import url(./blocks/form/__button/form__button.css);
 @import url(./blocks/form/__button/_place/form__button_place_register.css);
+@import url(./blocks/form/__button/_place/from__button_place_login.css);
 @import url(./blocks/form/__input/_place/form__input_place_edit.css);
-@import url(./blocks/form/__link/_register/form__link_register.css);
 @import url(./blocks/form/__container/_place/form__container_place_edit.css);
 @import url(./blocks/form/__greeting/_place/form__greeting_place_edit.css);
 

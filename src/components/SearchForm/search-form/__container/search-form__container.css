@@ -17,7 +17,7 @@
     margin: 0 30px 10px;
   }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .search-form__container::after {
     border: 1px solid #424242;
     margin: 0 14px 10px;

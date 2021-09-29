@@ -5,3 +5,11 @@
   align-self: center;
   height: auto;
 }
+
+@media screen and (max-width: 500px) {
+  .form__container {
+    width: auto;
+    margin: 56px 0 30px;
+    width: 260px;
+  }
+}

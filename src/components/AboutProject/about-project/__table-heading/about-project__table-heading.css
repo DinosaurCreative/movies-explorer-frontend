@@ -7,7 +7,7 @@
   letter-spacing: -0.06em;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .about-project__table-headind {
     font-size: 18px;
     line-height: 22px;  

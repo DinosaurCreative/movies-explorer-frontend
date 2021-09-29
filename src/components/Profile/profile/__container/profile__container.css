@@ -3,6 +3,12 @@
   flex-direction: column;
   width: 410px;
   align-self: center;
-  height: auto;
+  margin-top: 310px;
+}
 
+@media screen and (max-width: 500px) {
+  .profile__container {
+    width: 100%;
+    margin: 142px 30px auto;
+  }
 }

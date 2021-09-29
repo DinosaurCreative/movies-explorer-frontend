@@ -16,13 +16,14 @@
 }
 
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
+  .techs__names {
+    grid-template-columns: repeat(auto-fit, 84px);
+  }
+}
+
+@media screen and (max-width: 320px) {
   .techs__names {
     grid-template-columns: repeat(2, 84px);
   }
 }
-
-
-
-
-

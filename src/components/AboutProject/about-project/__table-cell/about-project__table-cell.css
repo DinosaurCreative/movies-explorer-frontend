@@ -13,7 +13,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .about-project__table-cell:first-of-type {
     margin-right: auto;
     margin-bottom: 56px;

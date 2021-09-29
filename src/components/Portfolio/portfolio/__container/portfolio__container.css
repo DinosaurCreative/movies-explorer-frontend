@@ -11,7 +11,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .portfolio__container {
     margin: 0 14px 70px;
   }

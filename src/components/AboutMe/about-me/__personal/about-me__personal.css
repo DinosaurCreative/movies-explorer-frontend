@@ -18,7 +18,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 500px) {
   .about-me__personal {
     max-width: 370px;
     font-style: normal;

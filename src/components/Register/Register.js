@@ -5,7 +5,7 @@ function Register() {
   return (
     <div className='register'>
       <div className='form__container'>
-      <Link to='/' href='#' className='logo logo_place_register' />
+      <Link to='/' href='#' className='logo logo_place_form' />
         <h1 className='form__greeting'>Добро пожаловать!</h1>
         <form className='form'>
           <span className='form__name-span'>Имя</span>
@@ -19,7 +19,7 @@ function Register() {
           <span className='form__error-span'></span>
         </form>
         <button className='form__button form__button_place_register'>Зарегистрироваться</button>
-        <p className='from__status-ask'>Уже зарегистрированы?{<Link to='/signin' className='form__link'>Войти</Link>}</p>
+        <p className='from__status-ask'>Уже зарегистрированы?{<Link to='/signin' className='link link_form'>Войти</Link>}</p>
       </div>
     </div>
   )

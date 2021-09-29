@@ -6,3 +6,12 @@
   align-self: center;
   margin: 16px auto 70px;
 }
+
+@media screen and (max-width: 500px) {
+  .from__status-ask {
+    width: auto;
+    margin: 14px auto 0;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

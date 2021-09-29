@@ -7,11 +7,12 @@
 
 @media screen and (max-width: 767px) {
   .about-me__container {
-    margin: 90px 0 90px;
+    margin: 90px 50px 90px;
   }
 }
 
-@media screen and (max-width: 400px) {
+
+@media screen and (max-width: 550px) {
   .about-me__container {
     margin: 70px 14px 70px;
   }
