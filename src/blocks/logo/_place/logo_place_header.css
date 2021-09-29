@@ -4,7 +4,7 @@
   padding-right: 65px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .logo_place_header {
     padding-right: 0;
   }

@@ -16,7 +16,7 @@ function MoviesCardList() {
         />
         <MovieCard card = {eveningfrance}
         />
-        {/* <MovieCard card = {sameplace}
+        <MovieCard card = {sameplace}
         />
         <MovieCard card = {middleofnowhere}
         />
@@ -26,7 +26,7 @@ function MoviesCardList() {
         />
         <MovieCard card = {sameplace}
         />
-        <MovieCard card = {middleofnowhere}
+        {/* <MovieCard card = {middleofnowhere}
         />
         <MovieCard card = {stones}
         />
