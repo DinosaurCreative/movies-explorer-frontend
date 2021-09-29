@@ -8,5 +8,6 @@
 @media screen and (max-width: 500px) {
   .techs {
     background-color: transparent;
+    margin-top: 0;
   }
 }

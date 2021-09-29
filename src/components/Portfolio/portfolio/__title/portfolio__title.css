@@ -8,8 +8,9 @@
 }
 
 @media screen and (max-width: 500px) {
-  .portfolio__container {
+  .portfolio__title {
     font-size: 14px;
-    margin-bottom: 40px;
+    line-height: 18px;
+    margin-bottom: 30px;
   }
 }

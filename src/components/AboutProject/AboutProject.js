@@ -18,8 +18,8 @@ function AboutProject() {
         </ul>
         <div className='about-project__terms'>
           <div className='about-project__tech about-project__tech_backend'>
-            <h3 className='about-project__term about-project__term_backend'>1 Неделя</h3>
-            <p className='about-project__tech-name'>Backend</p>
+            <h3 className='about-project__term about-project__term_backend'>1 неделя</h3>
+            <p className='about-project__tech-name'>Back-end</p>
           </div>
           <div className='about-project__tech'>
             <h3 className='about-project__term'>4 недели</h3>

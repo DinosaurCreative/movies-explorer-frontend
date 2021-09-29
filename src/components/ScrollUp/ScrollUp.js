@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { animateScroll as scroll } from "react-scroll";
+import { animateScroll as scroll } from 'react-scroll';
 
 function ScrollUp() {
   const [ scrollPosition, setScrollPosition] = useState(0);

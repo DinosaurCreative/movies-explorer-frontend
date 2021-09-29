@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .about-project__table-headind {
+  .about-project__table-heading {
     font-size: 18px;
     line-height: 22px;  
   }

@@ -14,12 +14,14 @@
     flex-direction: column;
     padding: 0;
     margin: auto;
+    font-size: 12px;
+    line-height: 15px;
   }
   .link_place_footer:first-child {
     margin: auto auto 8px;
   }
   .link_place_footer:last-child {
-    margin: 5px auto 30px;
+    margin: 5px auto 25px;
   }
 
 }
