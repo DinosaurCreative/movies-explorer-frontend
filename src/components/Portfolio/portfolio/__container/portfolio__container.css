@@ -1,11 +1,11 @@
 .portfolio__container {
   display: flex;
   flex-direction: column;
-  margin: 0 70px 125px;
+  margin: 0 70px 115px;
   width: 100%;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 768px) {
   .portfolio__container {
     margin: 0 50px 90px;
   }

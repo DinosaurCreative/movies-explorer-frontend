@@ -1,10 +1,10 @@
 .about-project__container {
   display: flex;
   flex-direction: column;
-  margin: 110px 90px 0; 
+  margin: 110px 70px 0; 
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .about-project__container {
     margin: 90px 50px 0; 
   }

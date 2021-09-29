@@ -1,4 +1,3 @@
-
 .techs__names {
   display: grid;
   justify-content: center;
@@ -9,12 +8,11 @@
   margin-right: 4px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .techs__names {
     grid-template-columns: repeat(auto-fit, 84px);
   }
 }
-
 
 @media screen and (max-width: 500px) {
   .techs__names {

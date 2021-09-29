@@ -8,7 +8,7 @@
   z-index: 2;
 }
 
-/* .navigation_opened::before {
+.navigation_opened::before {
   background-color: black;
   opacity: .3;
   position: fixed;
@@ -17,4 +17,4 @@
   top: 0;
   bottom: 0;
   z-index: -1;
-} */
+}

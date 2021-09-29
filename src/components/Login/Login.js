@@ -15,7 +15,7 @@ function Login() {
           <span className='form__error-span'></span>
         </form>
         <button className='form__button from__button_place_login' type='submit'>Войти</button>
-        <p className='from__status-ask'>Еще не зарегистрированы?{<Link to='/signup' className='link link_form'> Регистрация</Link>}</p>
+        <p className='from__status-ask'>Еще не зарегистрированы?{<Link to='/signup' className='link link_place_form link_place_form-login'> Регистрация</Link>}</p>
       </div>
     </div>
   )

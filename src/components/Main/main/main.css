@@ -6,8 +6,8 @@
 
 }
 
-@media screen and (max-width: 767px) {
-  .promo__container {
-    margin: 14px 0 0;
+@media screen and (max-width: 768px) {
+  .main {
+    margin-bottom: 162px;
   }
 }

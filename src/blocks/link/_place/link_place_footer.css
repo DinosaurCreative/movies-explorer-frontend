@@ -1,24 +1,24 @@
-.link_footer {
+.link_place_footer {
   margin: 0 0 0 20px;
   list-style-type: none;
   line-height: 16px;
 
 }
-.link_footer:first-child {
+.link_place_footer:first-child {
   margin-left: 0;
 }
 
 
 @media screen and (max-width: 500px) {
-  .link_footer {
+  .link_place_footer {
     flex-direction: column;
     padding: 0;
     margin: auto;
   }
-  .link_footer:first-child {
+  .link_place_footer:first-child {
     margin: auto auto 8px;
   }
-  .link_footer:last-child {
+  .link_place_footer:last-child {
     margin: 5px auto 30px;
   }
 

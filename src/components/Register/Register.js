@@ -19,7 +19,7 @@ function Register() {
           <span className='form__error-span'></span>
         </form>
         <button className='form__button form__button_place_register'>Зарегистрироваться</button>
-        <p className='from__status-ask'>Уже зарегистрированы?{<Link to='/signin' className='link link_form'>Войти</Link>}</p>
+        <p className='from__status-ask'>Уже зарегистрированы?{<Link to='/signin' className='link link_place_form link_place_form-registration'>Войти</Link>}</p>
       </div>
     </div>
   )

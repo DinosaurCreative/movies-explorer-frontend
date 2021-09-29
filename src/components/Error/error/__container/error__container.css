@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: center;
   max-width: 400px;
-  margin: 0 auto;
-  height: 100%;
-  align-content: space-around;
+  margin: auto;
+  /* height: 100%; */
+  /* align-content: space-around; */
+  justify-content: center;
 }

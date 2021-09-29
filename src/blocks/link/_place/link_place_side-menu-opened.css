@@ -1,5 +1,5 @@
 @media screen and (max-width: 767px) {
-  .link__side-menu-opened {
+  .link_place_side-menu-opened {
     margin: unset;
     font-style: normal;
     font-weight: 500;
@@ -10,15 +10,15 @@
     opacity: 1;
   }
 
-  .link__side-menu-opened:after {
+  .link_place_side-menu-opened:after {
     border-bottom: solid 2px #fff;
   }
 
-  .link__side-menu-opened:first-of-type {
+  .link_place_side-menu-opened:first-of-type {
     margin-top: 105px;
   }
   
-  .link__side-menu-opened:nth-child(4) {
+  .link_place_side-menu-opened:nth-child(4) {
     margin-bottom: 40px;
   }
 }

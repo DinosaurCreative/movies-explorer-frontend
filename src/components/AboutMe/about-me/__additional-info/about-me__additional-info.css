@@ -6,7 +6,13 @@
   margin: 18px auto 0 0;
 }
 
-
+@media screen and (max-width:768px) {
+  .about-me__additional-info {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 15px;
+  }
+}
 
 @media screen and (max-width:500px) {
   .about-me__additional-info {

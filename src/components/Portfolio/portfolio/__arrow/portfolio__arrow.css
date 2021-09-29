@@ -15,7 +15,7 @@
   filter: drop-shadow(0px 0px 3px rgb(237, 245, 239));
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .portfolio__arrow {
     width: 27px;
   }

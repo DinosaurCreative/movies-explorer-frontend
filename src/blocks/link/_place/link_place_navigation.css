@@ -1,8 +1,8 @@
-.link_navigation {
+.link_place_navigation {
   align-self: center;
 }
 
-.link_navigation:first-of-type {
+.link_place_navigation:first-of-type {
   margin-right: 16px;
   margin-left: auto;
 }

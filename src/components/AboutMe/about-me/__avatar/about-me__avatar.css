@@ -8,7 +8,7 @@
   background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .about-me__avatar {
     max-width: 255px;
     max-height: 307px;

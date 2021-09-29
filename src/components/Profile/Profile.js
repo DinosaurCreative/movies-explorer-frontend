@@ -17,8 +17,8 @@ function Profile() {
           </div>
         </div>
         <div className='profile__links'>
-          <Link to='/edit-profile' hef='#' className='link link_profile'>Редактировать</Link>
-          <Link to='/signin' hef='#' className='link link_profile'>Выйти из аккаунта</Link>
+          <Link to='/edit-profile' hef='#' className='link link_place_profile'>Редактировать</Link>
+          <Link to='/signin' hef='#' className='link link_place_profile'>Выйти из аккаунта</Link>
         </div>
       </div>
     </div>

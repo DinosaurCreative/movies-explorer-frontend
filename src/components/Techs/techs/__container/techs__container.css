@@ -1,10 +1,10 @@
 .techs__container {
   display: flex;
   flex-direction: column;
-  margin: 100px 70px;
+  margin: 100px 70px 85px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .techs__container {
     margin: 90px 50px;
   }

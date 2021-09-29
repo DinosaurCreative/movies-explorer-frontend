@@ -15,12 +15,11 @@ function AboutMe() {
               Я родился и живу в Санкт-Петербурге, закончил факультет режиссуры. У меня есть 
               жена и кот. Катаюсь н сноуборде, играю на гитаре а ещё увлекаюсь .
               Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». 
-              После того, как прошёл курс по веб-разработке, начал заниматься 
-              фриланс-заказами и ушёл с постоянной работы.
+              После того, как прошёл курс по веб-разработке,
             </p>
             <div className='about-me__connections'>
-              <Link to='/' href='#' className='link link_about-me'>Facebook</Link>
-              <Link to='/' href='#' className='link link_about-me'>Github</Link>
+              <Link to='/' href='#' className='link link_place_about-me'>Facebook</Link>
+              <Link to='/' href='#' className='link link_place_about-me'>Github</Link>
             </div>
           </div>
           <div className='about-me__avatar' />

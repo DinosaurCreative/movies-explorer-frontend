@@ -3,22 +3,24 @@
 @import url(./vendor/normalize.css);
 
 
-@import url(./blocks/link/_about-me/link_about-me.css);
-@import url(./blocks/link/_header-registration/link_header-registration.css);
+@import url(./blocks/link/_place/link_place_about-me.css);
 @import url(./blocks/link/link.css);
-@import url(./blocks/link/_footer/link_footer.css);
+@import url(./blocks/link/_place/link_place_form-login.css);
+@import url(./blocks/link/_place/link_place_form-registration.css);
+
+@import url(./blocks/link/_place/link_place_header-registration.css);
+@import url(./blocks/link/_place/link_place_footer.css);
+@import url(./blocks/link/_place/link_place_header-authoration.css);
+@import url(./blocks/link/_place/link_place_navigation.css);
+@import url(./blocks/link/_place/link_place_side-menu-opened.css);
+@import url(./blocks/link/_place/link_place_profile.css);
+@import url(./blocks/link/_place/link_place_form.css);
+@import url(./blocks/link/_place/link_place_error.css);
+
+@import url(./blocks/logo/logo.css);
 @import url(./blocks/block-title/block-title.css);
 @import url(./blocks/logo/_place/logo_place_form.css);
 @import url(./blocks/logo/_place/logo_place_header.css);
-@import url(./blocks/logo/logo.css);
-@import url(./blocks/link/_header-authoration/link_header-authoration.css);
-@import url(./blocks/link/_navigation/link_navigation.css);
-@import url(./blocks/link/_side-menu-opened/link__side-menu-opened.css);
-@import url(./blocks/link/_side-menu-opened/link__side-menu-opened.css);
-@import url(./blocks/link/_profile/link_profile.css);
-@import url(./blocks/link/_form/link_form.css);
-@import url(./blocks/link/_error/link_error.css);
-
 
 @import url(./components/ScrollUp/ScrollUp.css);
 

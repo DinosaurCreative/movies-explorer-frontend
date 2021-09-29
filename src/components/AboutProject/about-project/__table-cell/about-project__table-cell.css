@@ -7,9 +7,10 @@
   margin-right: 40px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .about-project__table-cell:first-of-type {
-    margin-right: 30px;
+    margin-right: 38px;
+    max-width: 310px;
   }
 }
 

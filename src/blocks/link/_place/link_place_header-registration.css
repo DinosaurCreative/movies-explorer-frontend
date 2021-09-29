@@ -1,4 +1,4 @@
-.link_header-registration {
+.link_place_header-registration {
   display: flex;
   flex-direction: column;
   font-size: 12px;
@@ -7,7 +7,7 @@
   margin-right: 16px;
 }
 
-.link_header-registration:first-child {
+.link_place_header-registration:first-child {
   margin-right: 30px;
   margin-left: auto;
 } 

@@ -12,7 +12,7 @@
   margin: 0 70px 10px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .search-form__container::after {
     margin: 0 30px 10px;
   }

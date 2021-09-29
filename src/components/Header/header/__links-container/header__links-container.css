@@ -5,7 +5,7 @@
   transition: all .2s ease-in;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .header__links-container  {
     width: 0;
   }

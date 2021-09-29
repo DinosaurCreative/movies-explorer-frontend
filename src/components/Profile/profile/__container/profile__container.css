@@ -3,7 +3,13 @@
   flex-direction: column;
   width: 410px;
   align-self: center;
-  margin-top: 310px;
+  margin-top: 148px;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__container {
+    margin-top: 310px;
+  }
 }
 
 @media screen and (max-width: 500px) {

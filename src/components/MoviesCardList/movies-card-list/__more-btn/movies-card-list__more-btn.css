@@ -17,7 +17,7 @@
   background-color: #444343;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .movies-card-list__more-btn {
     margin: 0 30px;
   }
