@@ -19,7 +19,7 @@ function App() {
   const [ isMenuOpen, setIsMenuOpen ] = useState(false)
   const [ unknownPathError, setUnknownPathError ] = useState(false);
   const [ screenWidth, setScreenWidth ] = useState(window.outerWidth);
-  const [ isModalOpen, SetIsModalOpen ] = useState(true);
+  const [ isModalOpen, SetIsModalOpen ] = useState(false);
 
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });   
