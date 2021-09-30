@@ -60,3 +60,5 @@
 @import url(./components/SavedMovies/SavedMovies.css);
 @import url(./components/AboutProject/AboutProject.css);
 @import url(./components/MoviesCardList/MoviesCardList.css);
+
+@import url(./components/ModalPopup/ModalPopup.css);

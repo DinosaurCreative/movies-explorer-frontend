@@ -10,14 +10,16 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import ScrollUp from '../ScrollUp/ScrollUp';
 import EditProfile from '../EditProfile/EditProfile';
+import ModalPopup from '../ModalPopup/ModalPopup';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function App() {
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen ] = useState(false)
+  const [ isMenuOpen, setIsMenuOpen ] = useState(false)
   const [ unknownPathError, setUnknownPathError ] = useState(false);
   const [ screenWidth, setScreenWidth ] = useState(window.outerWidth);
+  const [ isModalOpen, SetIsModalOpen ] = useState(true);
 
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });   
@@ -36,8 +38,11 @@ function App() {
   
   return (
 
-    <div className='page'>
-        {unknownPathError ? <Error pathErrorHandler = {setUnknownPathError}
+    <div className='page'>{
+      isModalOpen && <ModalPopup closeModal = {SetIsModalOpen}
+                                 isModalOpen = { isModalOpen }
+      />
+      }{unknownPathError ? <Error pathErrorHandler = {setUnknownPathError}
         />
       :<div className={`page__container ${isMenuOpen && screenWidth < 769 ? 'page__container_dark' : ''}`}>
         { location.pathname !== '/signin' 
@@ -72,12 +77,13 @@ function App() {
             <Register />
           </Route>
         </Switch>
-        <ScrollUp />
         { location.pathname !== '/profile' 
         && location.pathname !== '/signin' 
         && location.pathname !== '/signup' 
         && location.pathname !== '/edit-profile' 
         && <Footer />}
+        
+        <ScrollUp />
       </div>}
     </div>
   )
