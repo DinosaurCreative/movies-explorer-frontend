@@ -6,7 +6,6 @@ function Navigation(props) {
     if (!e.srcElement.className.includes('navigation') || e.key === 'Escape') {
       window.removeEventListener('keydown', closeMenuHandler);
       window.removeEventListener('click', closeMenuHandler);   
-   
       props.menuHandler();
     }
   }

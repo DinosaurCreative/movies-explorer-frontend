@@ -30,7 +30,6 @@ function App() {
     setScreenWidth(window.outerWidth);
   };
 
-
   function menuOpenHandler() {
     setIsMenuOpen(!isMenuOpen);
   }
@@ -38,7 +37,6 @@ function App() {
   return (
 
     <div className='page'>
-
         {unknownPathError ? <Error pathErrorHandler = {setUnknownPathError}
         />
       :<div className={`page__container ${isMenuOpen && screenWidth < 769 ? 'page__container_dark' : ''}`}>

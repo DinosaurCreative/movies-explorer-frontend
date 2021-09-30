@@ -1,6 +1,5 @@
 import { useHistory } from 'react-router-dom';
 
-
 function Error(props) {
   const history = useHistory();
   const handleBackClick = () => {

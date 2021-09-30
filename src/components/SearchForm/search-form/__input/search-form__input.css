@@ -20,7 +20,6 @@
   background-repeat: no-repeat;
   background-position-y: -6px;
   transition: opacity .3s ease-in-out;
-
 }
 
 .search-form__input:focus::-webkit-input-placeholder {

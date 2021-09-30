@@ -15,6 +15,7 @@
     margin-bottom: 75px;
   }
 }
+
 @media screen and (max-width: 500px) {
   .about-project__tech-name {
     font-size: 11px;
