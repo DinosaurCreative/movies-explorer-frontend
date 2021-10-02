@@ -3,7 +3,7 @@ function SearchForm() {
   return (
     <div className='search-form__container'>
       <form className='search-form'>
-        <input className='search-form__input' placeholder='Фильм' />
+        <input className='search-form__input' required placeholder='Фильм' />
         <button className='search-form__button' type='submit' />
         <div className='search-form__border' />
         <div className='search-form__checkbox-container'>

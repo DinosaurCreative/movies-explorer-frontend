@@ -13,6 +13,7 @@
   cursor: pointer;
   transition: all .2s ease-in-out;
   margin-right: 30px;
+  outline: none;
 }
 
 .search-form__button:hover {

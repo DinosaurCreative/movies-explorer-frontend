@@ -8,10 +8,10 @@ function Login() {
         <h1 className='form__greeting'>Рады видеть!</h1>
         <form className='form'>
           <span className='form__name-span'>E-mail</span>
-          <input className='form__input' type='email'></input>
+          <input className='form__input' required type='email'></input>
           <span className='form__error-span'></span>
           <span className='form__name-span'>Пароль</span>
-          <input className='form__input' type='password'></input>
+          <input className='form__input' required type='password'></input>
           <span className='form__error-span'></span>
         </form>
         <button className='form__button from__button_place_login' type='submit'>Войти</button>

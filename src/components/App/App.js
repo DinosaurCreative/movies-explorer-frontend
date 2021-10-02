@@ -18,18 +18,19 @@ function App() {
   const location = useLocation();
   const [ isMenuOpen, setIsMenuOpen ] = useState(false)
   const [ unknownPathError, setUnknownPathError ] = useState(false);
-  const [ screenWidth, setScreenWidth ] = useState(window.outerWidth);
+  const [ screenWidth, setScreenWidth ] = useState(document.documentElement.clientWidth);
   const [ isModalOpen, SetIsModalOpen ] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('resize', handleWidth, { passive: true });   
+    window.addEventListener('resize', handleWidth, { passive: true });
+    console.log(screenWidth);
     return () => {
       window.removeEventListener('rezize', handleWidth);
     };
   }, []);
 
   const handleWidth = () => {
-    setScreenWidth(window.outerWidth);
+    setScreenWidth(document.documentElement.clientWidth);
   };
 
   function menuOpenHandler() {
@@ -37,7 +38,6 @@ function App() {
   }
   
   return (
-
     <div className='page'>{
       isModalOpen && <ModalPopup closeModal = {SetIsModalOpen}
                                  isModalOpen = { isModalOpen }
@@ -50,6 +50,7 @@ function App() {
         && <Header menuHandler = {menuOpenHandler}
                    menuStatus = {isMenuOpen}
                    screenWidth = {screenWidth}
+                   isMenuOpen = {isMenuOpen}
         />}
         <Switch>
           <Route  exact path='/'>
