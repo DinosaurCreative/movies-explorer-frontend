@@ -1,0 +1,5 @@
+.movie-card__saved {
+  background: url(../../../../images/saved.svg) no-repeat;
+  max-width: 21px;
+  font-size: 0;
+}

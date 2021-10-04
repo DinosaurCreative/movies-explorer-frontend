@@ -1,0 +1,19 @@
+.search-form {
+  display: flex;
+  flex-direction: row;
+  margin: 70px 70px 70px;
+  background-color: #2F2F2F;
+  border-radius: 9px;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form {
+    margin: 80px 30px 109px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .search-form {
+    margin: 80px 10px 109px;
+  }
+}

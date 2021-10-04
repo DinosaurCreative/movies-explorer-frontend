@@ -1,0 +1,20 @@
+.movie-card__image {
+  object-fit: cover;
+  width: 360px;
+  height: 201px;
+  border-radius: 6px;
+}
+
+@media screen and (max-width: 768px) {
+  .movie-card__image {
+    width: 340px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .movie-card__image {
+    width: 300px;
+    height: 168px;
+  }
+}

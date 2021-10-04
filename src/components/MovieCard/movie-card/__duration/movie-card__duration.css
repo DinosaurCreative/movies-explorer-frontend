@@ -1,0 +1,15 @@
+.movie-card__duration {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2F2F2F;
+  margin: 0 0 0 30px;
+  color: #8B8B8B;
+  height: 18px;
+  width: 52px;
+  border-radius: 3px;
+}
