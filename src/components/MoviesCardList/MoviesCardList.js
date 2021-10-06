@@ -1,5 +1,5 @@
 import MovieCard from '../MovieCard/MovieCard';
-import photos from '../../utils/constants';
+import { photos } from '../../utils/constants';
 
 import { useLocation } from 'react-router-dom';
 function MoviesCardList() {
