@@ -1,31 +1,65 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
+import { Form, Field, SubmitButton, errorMessageHandler, errorStatusHandler } from '../../utils/Forms';
+import validators from '../../utils/validators';
 
 function SearchForm() {
-  
-  const [formValue,  setFormValue ] = useState({
-    movieName: '',
-  });
+  const [movieError, setMovieError ] = useState(false);
 
-  const handleInputChange = useCallback((e) => {
-    const { name, value } = e.target;
-    setFormValue(prevState => ({...prevState, [name]: value }));
-  }, [setFormValue]);
-
-  const { movie } = formValue;
+  const errorSpanHandler = (prop, status) => {
+    if (prop === 'userMovie') {
+      setMovieError(status);
+      return;
+    }
+  }
 
   return (
     <div className='search-form__container'>
-      <form className='search-form'>
-        <input className='search-form__input' required placeholder='Фильм' name='movieName' onChange={handleInputChange} value={movie} />
-        <button className='search-form__button' type='submit' />
+      <Form className='search-form'
+            type='submit'
+            validators={validators}>
+        <div className='search-form__input-container'>
+        <Field className='search-form__input'
+               placeholder='Фильм'
+               name='userMovie'
+               type='text'>
+          {({ onChange, ...props }) => {
+            return (<input
+                     placeholder={props.placeholder}
+                     className={`${props.className} ${errorStatusHandler(props) && 'serch-form__input_type_error'}`}
+                     onFocus={() => errorSpanHandler(props.name, true)}
+                     onBlur={() => errorSpanHandler(props.name, false)}
+                     onChange={(e) => onChange(e.target.value)} />)
+                     
+          }}
+        </Field>
+        <Field name='userMovie'
+               className='search-form__error-span'
+               errorslist={{
+                 required: 'Поле не должно быть пустым.',
+               }}>
+          {(props) => {
+              return (<span {...props} 
+                className = {`${props.className} ${!movieError && 'search-form__error-span_type_hidden'}`}>{errorMessageHandler(props)}</span>)
+            }}</Field>
+        
+        
+        </div>    
+        <SubmitButton className='search-form__button'
+               type='submit'>{
+          ({ disabled, ...props }) => {
+            return (<button 
+                      {...props}
+                      className={`${props.className} ${disabled && 'search-form__button_type_disabled'}`}/>)
+          }
+        }</SubmitButton>
         <div className='search-form__border' />
         <div className='search-form__checkbox-container'>
           <input className='search-form__checkbox' type='checkbox' />
           <p className='search-form__checkbox-caption'>Короткометражки</p>
         </div>
-      </form>
-    </div>
+      </Form>
+  </div>
   )
-}
+ }
 
 export default SearchForm;

@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 
 const FormContext = React.createContext({});
 
-export const Form = ({children, className, id, validators, onChange, onSubmit}) => {
+export const Form = ({children, className, validators, onChange, onSubmit}) => {
   const [ formValues, setForValues ] = useState({});
   const [ isInvalid, setIsInvalid ] = useState(true);
   const [ formErrors, setFormErrors ] = useState({});
@@ -62,7 +62,6 @@ export const Form = ({children, className, id, validators, onChange, onSubmit}) 
   
   return (
     <form className = {className}
-          id = {id} 
           onSubmit = {handleSubmit}>
       <FormContext.Provider value={formContextValue}>
         {children}
@@ -71,10 +70,7 @@ export const Form = ({children, className, id, validators, onChange, onSubmit}) 
   );
 };
 
-
-
-
-export const Field = ({children, name, className, type, errorslist, id}) => {
+export const Field = ({ children, name, className, type, errorslist, placeholder}) => {
   const [ value, setValue] = useState('');
   const { onChangeInput, formErrors, formValues } = useContext(FormContext);
   
@@ -88,15 +84,13 @@ export const Field = ({children, name, className, type, errorslist, id}) => {
       className,
       type,
       errorslist,
-      id,
       errors: formErrors[name],
       values: formValues[name],
+      placeholder,
       onChange: setValue,
     })
   )
 }
-
-
 
 export const SubmitButton = ({ children, className, type, form }) => {
   const { isInvalid } = useContext(FormContext);
@@ -108,4 +102,21 @@ export const SubmitButton = ({ children, className, type, form }) => {
       disabled: isInvalid,
     })
   )
+}
+
+export const errorMessageHandler = (props) => {
+  for (const name in props.errors) {
+    if(props.errors[name]) {
+      return props.errorslist[name];
+    }
+  }  
+}
+
+export const errorStatusHandler = (props) => {
+  for(const name in props.errors) {
+    if(props.errors[name]) {
+      return true;
+    }
+  }
+  return false;
 }
