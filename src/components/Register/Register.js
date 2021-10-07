@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Field, SubmitButton, errorStatusHandler, errorMessageHandler } from '../../utils/Forms';
 import validators from '../../utils/validators';
+import { errors } from '../../utils/constants'
 
 function Register() {
   const [emailError, setEmailError ] = useState(false);
@@ -53,8 +54,8 @@ function Register() {
           <Field className='form__error-span'
                  name='userName'
                  errorslist={{
-                  required: 'Поле не должно быть пустым.',                      
-                  minLength: 'Длина имени не может быт короче двух символов.',
+                  required: errors.required,                      
+                  minLength: errors.minNameLength,
                 }}>
             {(props) => {
               return (<span {...props} 
@@ -83,8 +84,8 @@ function Register() {
           <Field className='form__error-span'
                  name='userEmail'
                  errorslist={{
-                   required: 'Поле не должно быть пустым.',                      
-                   isValidEmail: 'Введен некорректный имейл.',
+                   required: errors.required,                      
+                   isValidEmail: errors.isValidEmail,
                  }}>
             {(props) => {
               return (<span {...props} 
@@ -110,8 +111,8 @@ function Register() {
           <Field name='userPassword'
                   className='form__error-span'
                   errorslist={{
-                    required: 'Поле не должно быть пустым',
-                    minLength: 'Длина пароля должна быть более восьми символов.',
+                    required: errors.required,
+                    minLength: errors.minPassLength,
                   }}>
             {(props) => {
               return (<span {...props} 

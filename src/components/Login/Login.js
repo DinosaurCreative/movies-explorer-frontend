@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Form, Field, SubmitButton, errorStatusHandler, errorMessageHandler } from '../../utils/Forms';
 import validators from '../../utils/validators';
+import { errors } from '../../utils/constants'
 
 function Login() {
   const [emailError, setEmailError ] = useState(false);
@@ -47,8 +48,8 @@ function Login() {
           <Field name = 'userEmail'
                   className = 'form__error-span'
                   errorslist = {{
-                    required: 'Поле не должно быть пустым.',                      
-                    isValidEmail: 'Введен некорректный имейл.',
+                    required: errors.required,                      
+                    isValidEmail: errors.isValidEmail,
                   }}>
             {(props) => {
               return (<span {...props} 
@@ -73,8 +74,8 @@ function Login() {
           <Field name = 'userPassword'
                   className = 'form__error-span'
                   errorslist = {{
-                    required: 'Поле не должно быть пустым',
-                    minLength: 'Длина пароля должна быть более восьми символов.',
+                    required: errors.required,
+                    minLength: errors.minPassLength,
                   }}>
             {(props) => {
               return (<span {...props} 

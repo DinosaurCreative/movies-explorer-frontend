@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Field, SubmitButton, errorMessageHandler, errorStatusHandler } from '../../utils/Forms';
 import validators from '../../utils/validators';
-
+import { errors } from '../../utils/constants'
 function SearchForm() {
   const [movieError, setMovieError ] = useState(false);
 
@@ -35,7 +35,7 @@ function SearchForm() {
         <Field name='userMovie'
                className='search-form__error-span'
                errorslist={{
-                 required: 'Поле не должно быть пустым.',
+                 required: errors.required,
                }}>
           {(props) => {
               return (<span {...props} 
