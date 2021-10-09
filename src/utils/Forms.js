@@ -50,7 +50,7 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // onSubmit(formValues);
+    onSubmit();
   }
 
   const formContextValue = {

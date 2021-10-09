@@ -1,4 +1,4 @@
-import beatfilmApiURL from './constants';
+import { beatfilmApiURL }  from './constants';
 
 export class MovieApi {
   constructor({ address, headers}) {
@@ -15,13 +15,19 @@ export class MovieApi {
   }
 
   getMovies() {
-    return fetch(`${this._address}`, {
+    return fetch(`${this._address}/beatfilm-movies`, {
       method: 'GET',
       headers: this._headers,
-      credentials: 'include',
     })
     .then(res => this._checkServerResponse(res))
   }
 }
 
-export default MovieApi;
+const movieApi = new MovieApi({
+  address: beatfilmApiURL,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+export default movieApi;

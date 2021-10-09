@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 function Portfolio() {
   return (
     <div className='portfolio'>

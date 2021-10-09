@@ -9,12 +9,13 @@ export const photos = [
   card4,
 ];
 
-export const beatfilmApiURL = 'https://api.nomoreparties.co/beatfilm-movies';
+export const beatfilmApiURL = 'https://api.nomoreparties.co';
 export const mainApiURL = 'https://api.watchthis.nomoredomains.club';
 
 export const errors = {
   minPassLength: 'Длина пароля должна быть более восьми символов.',
   isValidEmail: 'Введен некорректный имейл.',
   minNameLength: 'Длина имени не может быт короче двух символов.',
-  required: 'Поле не должно быть пустым.'
+  required: 'Поле не должно быть пустым.',
+  serverResponseErr: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
 }
