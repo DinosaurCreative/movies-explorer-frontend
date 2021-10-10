@@ -1,26 +1,31 @@
 import MovieCard from '../MovieCard/MovieCard';
-/* eslint-disable no-unused-vars */
+
 import { useLocation } from 'react-router-dom';
 import { MoviesContext } from '../../contexts/contexts';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 
 function MoviesCardList(props) {
   const movies = useContext(MoviesContext);
   const location  = useLocation();
   const localMovies = JSON.parse(localStorage.getItem('movies'));
-  const [ isButtonHidden, setIsButtonHidden ] = useState(false);
-  const addMoreMovies = () => {
+  const uploadCardsQunt = props.screenWidth < 769 ?  2 : 3;
+
+  function moreButtonVisibilityHandler() {
+    return location.pathname !== '/saved-movies' &&
+           movies.length !== 0 
+           && !(movies.length === localMovies.length) 
+  }
+
+  function addMoreMovies() {
     const num = movies.length;
-    for(let i = num; i < num + 3; i++) {
+    for(let i = num; i < num + uploadCardsQunt; i++) {
       if(localMovies[i]){
         props.setMovies(movies => [...movies, localMovies[i]]);
       }
-      if(localMovies.length === ++movies.length) {
-        setIsButtonHidden(true)
-      }
     } 
   }
+
   return (
     <div className='movies-card-list'>
       <ul className='movie-card-list__catalog'>{
@@ -29,10 +34,8 @@ function MoviesCardList(props) {
           return <MovieCard card = {item} 
                             key = {item.id}/>})
       }</ul>
-      {location.pathname !== '/saved-movies' &&
-       movies.length !== 0 &&
-      !isButtonHidden &&
-        <button className='movies-card-list__more-btn' disabled={movies.length === 0} type='button' onClick={addMoreMovies}>Ещё</button>}
+          {movies.length === 0 && !props.isPreloaderShowing && <h1 className='movie-card-list__missing-content-msg'>Ничего не найдено</h1>}
+      {moreButtonVisibilityHandler()  &&<button className='movies-card-list__more-btn' type='button' onClick={addMoreMovies}>Ещё</button>}
     </div>
   )
 }

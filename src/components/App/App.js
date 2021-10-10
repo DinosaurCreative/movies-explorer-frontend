@@ -29,10 +29,7 @@ function App() {
   const [ modalError, setModalError ] = useState('');
   const [ movies, setMovies ] = useState([]);
   const [ currentUser, setCurrentUser ] = useState({ name: '', email: '', id: '' });
-  // useEffect(() => {
-  //     console.log(typeof movies);
-  //     console.log(movies)
-  // }, [movies]);
+  const [ isPreloaderShowing, setIsPreloaderShowing ] = useState(false);
 
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });
@@ -40,20 +37,21 @@ function App() {
       window.removeEventListener('rezize', handleWidth);
     };
   }, []);
-
-  const handleWidth = () => {
+ 
+  function handleWidth() {
     setScreenWidth(document.documentElement.clientWidth);
   };
 
-  const menuOpenHandler = () => {
+  function menuOpenHandler() {
     setIsMenuOpen(!isMenuOpen);
   }
   
-  const showServerErrorHandler = (error) => {
+  function showServerErrorHandler(error) {
     setIsModalOpen(true);
     setModalError(error);
   }
-  const hideServerErrorHandler = () => {
+
+  function hideServerErrorHandler() {
     setIsModalOpen(false);
     setModalError('');
   }
@@ -85,7 +83,10 @@ function App() {
               </Route>
               <Route  path='/movies'>
                 <Movies setMovies={setMovies}
-                        showServerErrorHandler={showServerErrorHandler}/>
+                        showServerErrorHandler={showServerErrorHandler}
+                        screenWidth={screenWidth}
+                        isPreloaderShowing={isPreloaderShowing}
+                        setIsPreloaderShowing={setIsPreloaderShowing}/>
               </Route>
                 
               <Route  path='/saved-movies'>

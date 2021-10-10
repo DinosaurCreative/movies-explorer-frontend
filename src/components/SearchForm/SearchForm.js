@@ -10,20 +10,23 @@ import { MoviesContext } from '../../contexts/contexts';
 
 function SearchForm(props) {
   const [movieError, setMovieError ] = useState(false);
-  const movies = useContext(MoviesContext);
-  const localStorageMov =  JSON.parse(localStorage.getItem('movies'));
-  const desireMovie = localStorage.getItem('movieName');
+  // const movies = useContext(MoviesContext);
+  const uploadingCards = props.screenWidth < 480 ? 5 : props.screenWidth < 769 ? 8 : 12;
 
-  function localMoviesHandler() {
-    for(let i = 0; i < localStorageMov.length && i < 12; i++) {
-      props.setMovies(movies => [...movies, localStorageMov[i]])
+  function localMoviesHandler(value) {
+    // const localStorageMov =  JSON.parse(localStorage.getItem('movies'));
+    if(value) {
+      for(let i = 0; i < value.length && i < uploadingCards; i++) {
+        props.setMovies(movies => [...movies, value[i]])
+      }
     }
   }
 
   useEffect(() => {
-    props.setMovies([])
-    if(JSON.parse(localStorage.getItem('movies'))) {
-      localMoviesHandler();
+    props.setMovies([]);
+    const localStorageMov =  JSON.parse(localStorage.getItem('movies'));
+    if(localStorageMov) {
+      localMoviesHandler(localStorageMov);
     }
   }, [])
 
@@ -34,35 +37,52 @@ function SearchForm(props) {
   function errorHandler(err) {
     props.showServerErrorHandler(err)
   }
-  
-  function sortCards(value) {
-    return value.filter(item => {
-      if(item.nameRU.toLowerCase().includes(desireMovie)) {
-        return item;
-      } 
-    });
+
+  function preloaderToggler(val) {
+    props.setIsPreloaderShowing(val)
   }
   
+  // function sortCards2(value) {
+  //   return value.filter(item => item.nameRU.toLowerCase().includes(localStorage.getItem('movieName')));
+  // }
 
-  const getMovieHandler = () => {
-    Promise.all([props.setMovies([]),localStorage.removeItem('movies')])
+  function sortCards(value) {
+    const sorted = value.filter(item => {
+      if(item.nameRU && item.nameRU.toLowerCase().includes(localStorage.getItem('movieName'))) {
+        return item;
+      } if (item.nameEN && item.nameEN.toLowerCase().includes(localStorage.getItem('movieName'))) {
+        return item;
+      }
+    })
+
+    return sorted;
+  }
+  
+  function getMovieHandler() {
+    preloaderToggler(true)
+    Promise.all([props.setMovies([]), localStorage.removeItem('movies')])
       .then(() => {
         movieApi.getMovies()
           .then((res) => {
-            localStorage.setItem('movies', JSON.stringify(sortCards(res)))
+            localStorage.setItem('movies', JSON.stringify(sortCards(res)));
           })
           .then(() => {
-            localMoviesHandler();
+            const localStorageMov =  JSON.parse(localStorage.getItem('movies'));
+            localMoviesHandler(localStorageMov)
           })
           .catch((err) => {
-            console.log(err)
+            console.log(err);
             errorHandler(errors.serverResponseErr);
           })
-      }).catch(err => console.log(err))
+          .finally(() => preloaderToggler(false))
+      })
+      .catch((err) => {
+        console.log(err);
+        errorHandler(err);
+      })
   }
 
-
-  const errorSpanHandler = (prop, status) => {
+  function errorSpanHandler(prop, status) {
     if (prop === 'userMovie') {
       setMovieError(status);
     }
@@ -81,35 +101,40 @@ function SearchForm(props) {
                type='text'>
           {({ onChange, ...props }) => {
             return (<input
-                     placeholder={props.placeholder}
-                     className={`${props.className} ${errorStatusHandler(props) && 'serch-form__input_type_error'}`}
-                     onFocus={() => errorSpanHandler(props.name, true)}
-                     onBlur={() => errorSpanHandler(props.name, false)}
-                     onChange={(e) => onChange(setToLocalStorege(e.target.value))} />)
-                     
-          }}
+              placeholder={props.placeholder}
+              className={`${props.className} ${errorStatusHandler(props) && 'serch-form__input_type_error'}`}
+              onFocus={() => errorSpanHandler(props.name, true)}
+              onBlur={() => errorSpanHandler(props.name, false)}
+              onChange={(e) => {
+                onChange(e.target.value);
+                setToLocalStorege(e.target.value);
+              }} />)
+              
+            }}
         </Field>
         <Field name='userMovie'
                className='search-form__error-span'
                errorslist={{
                  required: errors.required,
-               }}>
+                }}>
           {(props) => {
-              return (<span {...props} 
-                className = {`${props.className} ${!movieError && 'search-form__error-span_type_hidden'}`}>{errorMessageHandler(props)}</span>)
+            return (<span {...props} 
+              className = {`${props.className} ${!movieError && 'search-form__error-span_type_hidden'}`}>{errorMessageHandler(props)}</span>)
             }}</Field>
         
         
         </div>    
         <SubmitButton className='search-form__button'
                type='submit'>{
-          ({ disabled, ...props }) => {
-            return (<button 
-                      {...props}
-                      className={`${props.className}  ${disabled && 'search-form__button_type_disabled'}`}
-                      disabled={disabled}/>)
-          }
-        }</SubmitButton>
+                 ({ disabled, ...props }) => {
+                   return (<button 
+                    {...props}
+                    type={'submit'}
+                    className={`${props.className}  ${disabled && 'search-form__button_type_disabled'}`}
+                    disabled={disabled}
+                    />)
+                  }
+                }</SubmitButton>
         <div className='search-form__border' />
         <div className='search-form__checkbox-container'>
           <input className='search-form__checkbox' type='checkbox' />

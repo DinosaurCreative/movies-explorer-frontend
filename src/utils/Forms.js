@@ -32,7 +32,11 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
     }).reduce((acc, item) => ({...acc, ...item}), {});
     setFormErrors(allErrors);
   },[formValues, setFormErrors, validators])
-
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit();
+  }
   useEffect(() => {
     for (let fieldKey in formErrors) {
       const errorKeys = formErrors[fieldKey];
@@ -48,10 +52,6 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
    
   }, [formErrors, setIsInvalid])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit();
-  }
 
   const formContextValue = {
     onChangeInput,

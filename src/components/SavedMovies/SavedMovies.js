@@ -4,8 +4,8 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 function SavedMovies() {
   return (
     <div className='saved-movies'>
-      <SearchForm />
-      <MoviesCardList />
+      {/* <SearchForm /> */}
+      {/* <MoviesCardList /> */}
     </div>
   )
 }

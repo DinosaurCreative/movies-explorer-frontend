@@ -9,11 +9,10 @@ function MovieCard(props) {
     setIsMovieSaved(!isMovieSaved)
   }
   const { card } = props;
-  
   return (
     <li className='movie-card'>
       <div className='movie-card__container'>
-        <img className='movie-card__image' alt={card.nameRU} src={`${beatfilmApiURL}${card.image.url}`}/>
+        <a className='movie-card__trailer' href={card.trailerLink} target='_blank' rel='noreferrer' tooltip={`Посмотреть трейлер на Youtube`}><img className='movie-card__image' alt={card.nameRU} src={`${beatfilmApiURL}${card.image.url}`} /></a>
         {location.pathname === '/movies' && <button className={`movie-card__save-btn ${isMovieSaved ? 'movie-card__saved' : ''}`} type='button' onClick={testHandler} aria-label='Сохранить'>Соxранить</button>}
         {location.pathname === '/saved-movies'  && <button className='movie-card__delete-btn' title='Отмена сохранения' type='button' aria-label='Отмена сохранения' />}
         <div className='movie-card__info'>

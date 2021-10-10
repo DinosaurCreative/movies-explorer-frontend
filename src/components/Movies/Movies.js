@@ -7,9 +7,13 @@ function Movies(props) {
     <div className='movies'>
       <SearchForm setMovies={props.setMovies}
                   showServerErrorHandler={props.showServerErrorHandler}
-                  setDesiredMovie={props.setDesiredMovie} />
-      <MoviesCardList setMovies={props.setMovies} />
-      { false && <Preloader />}
+                  setDesiredMovie={props.setDesiredMovie}
+                  screenWidth={props.screenWidth}
+                  setIsPreloaderShowing={props.setIsPreloaderShowing}/>
+      <MoviesCardList setMovies={props.setMovies} 
+                      screenWidth={props.screenWidth}
+                      isPreloaderShowing={props.isPreloaderShowing}/>
+      { props.isPreloaderShowing && <Preloader />}
     </div>
   )
 }

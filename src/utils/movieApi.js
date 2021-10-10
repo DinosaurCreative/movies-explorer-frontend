@@ -1,6 +1,6 @@
 import { beatfilmApiURL }  from './constants';
 
-export class MovieApi {
+class MovieApi {
   constructor({ address, headers}) {
     this._address = address;
     this._headers = headers;
