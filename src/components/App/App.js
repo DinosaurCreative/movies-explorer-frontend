@@ -12,9 +12,6 @@ import SavedMovies from '../SavedMovies/SavedMovies'
 import ScrollUp from '../ScrollUp/ScrollUp';
 import EditProfile from '../EditProfile/EditProfile';
 import ModalPopup from '../ModalPopup/ModalPopup';
-import mainApi from '../../utils/mainApi';
-import movieApi from '../../utils/movieApi';
-
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { CurrentUserContext, MoviesContext } from '../../contexts/contexts';
@@ -30,6 +27,8 @@ function App() {
   const [ movies, setMovies ] = useState([]);
   const [ currentUser, setCurrentUser ] = useState({ name: '', email: '', id: '' });
   const [ isPreloaderShowing, setIsPreloaderShowing ] = useState(false);
+  const uploadingCards = screenWidth < 480 ? 5 : screenWidth < 769 ? 8 : 12;
+  const uploadCardsQunt = screenWidth < 769 ?  2 : 3;
 
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });
@@ -86,7 +85,9 @@ function App() {
                         showServerErrorHandler={showServerErrorHandler}
                         screenWidth={screenWidth}
                         isPreloaderShowing={isPreloaderShowing}
-                        setIsPreloaderShowing={setIsPreloaderShowing}/>
+                        setIsPreloaderShowing={setIsPreloaderShowing}
+                        uploadingCards={uploadingCards}
+                        uploadCardsQunt={uploadCardsQunt} />
               </Route>
                 
               <Route  path='/saved-movies'>

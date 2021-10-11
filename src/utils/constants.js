@@ -1,12 +1,25 @@
-import card1 from '../images/middleofnowhere.jpg';
-import card2 from '../images/stones.jpg';
-import card3 from '../images/eveningfrance.jpg';
-import card4 from '../images/sameplace.jpg';
+
 export const photos = [
-  card1,
-  card2,
-  card3,
-  card4,
+  {
+  id: 1,
+  nameRU: "«Роллинг Стоунз» в изгнании",
+  nameEN: "Stones in Exile",
+  duration: 61,
+  image: {
+    url: "/uploads/stones_in_exile_b2f1b8f4b7.jpeg",
+  },
+  trailerLink: "https://www.youtube.com/watch?v=UXcqcdYABFw",
+},
+  {
+  id: 2,
+  nameRU: "«Роллинг Стоунз» в изгнании",
+  nameEN: "Stones in Exile",
+  duration: 61,
+  image: {
+    url: "/uploads/stones_in_exile_b2f1b8f4b7.jpeg",
+  },
+  trailerLink: "https://www.youtube.com/watch?v=UXcqcdYABFw",
+}
 ];
 
 export const beatfilmApiURL = 'https://api.nomoreparties.co';
