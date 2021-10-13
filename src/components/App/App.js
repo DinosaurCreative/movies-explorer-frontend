@@ -86,16 +86,18 @@ function App() {
   }
   
   function handleSignIn({ email, password }) {
-    signIn({ email, password })
+    auth.signIn({ email, password })
       .then((res) => {
+
         console.log(res);
-        setIsLoggedIn(true);
-        history.push('/movies')
+        // setIsLoggedIn(true);
+        // history.push('/movies')
       })
       .catch((err) => {
         console.log(err);
         showServerErrorHandler(errors.loginFail);
       })
+      .finally(() => console.log(document.cookie, 11))
   }   
 
   function handleWidth() {

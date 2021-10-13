@@ -1,25 +1,5 @@
 import { mainApiURL } from './constants';
 
-function checkServerResponse(item) {
-  return item.ok ? item.json() : Promise.reject(item.status);
-}
-
-export function signIn({ email, password }) {
-  return fetch(`${mainApiURL}/signin`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    credentials: 'include',
-    body: JSON.stringify({
-      password,
-      email,
-    }),
-  })
-  .catch((res) => checkServerResponse(res))
-}
-
-
 class Auth {
   constructor({ address, headers }) {
     this._address = address;
