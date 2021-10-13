@@ -2,23 +2,23 @@
 export const photos = [
   {
   id: 1,
-  nameRU: "«Роллинг Стоунз» в изгнании",
-  nameEN: "Stones in Exile",
+  nameRU: '«Роллинг Стоунз» в изгнании',
+  nameEN: 'Stones in Exile',
   duration: 61,
   image: {
-    url: "/uploads/stones_in_exile_b2f1b8f4b7.jpeg",
+    url: '/uploads/stones_in_exile_b2f1b8f4b7.jpeg',
   },
-  trailerLink: "https://www.youtube.com/watch?v=UXcqcdYABFw",
+  trailerLink: 'https://www.youtube.com/watch?v=UXcqcdYABFw',
 },
   {
   id: 2,
-  nameRU: "«Роллинг Стоунз» в изгнании",
-  nameEN: "Stones in Exile",
+  nameRU: '«Роллинг Стоунз» в изгнании',
+  nameEN: 'Stones in Exile',
   duration: 61,
   image: {
-    url: "/uploads/stones_in_exile_b2f1b8f4b7.jpeg",
+    url: '/uploads/stones_in_exile_b2f1b8f4b7.jpeg',
   },
-  trailerLink: "https://www.youtube.com/watch?v=UXcqcdYABFw",
+  trailerLink: 'https://www.youtube.com/watch?v=UXcqcdYABFw',
 }
 ];
 
@@ -31,4 +31,5 @@ export const errors = {
   minNameLength: 'Длина имени не может быт короче двух символов.',
   required: 'Поле не должно быть пустым.',
   serverResponseErr: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+  loginFail: 'Не удалось авторизоваться, прпробуйте еще раз.'
 }

@@ -12,14 +12,17 @@ import SavedMovies from '../SavedMovies/SavedMovies'
 import ScrollUp from '../ScrollUp/ScrollUp';
 import EditProfile from '../EditProfile/EditProfile';
 import ModalPopup from '../ModalPopup/ModalPopup';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { CurrentUserContext, MoviesContext } from '../../contexts/contexts';
+import { CurrentUserContext } from '../../contexts/contexts';
+import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
+import mainApi from '../../utils/mainApi';
+import auth, { signIn } from '../../utils/auth';
+import { errors } from '../../utils/constants';
 
 
 function App() {
-  const location = useLocation();
-  const [ isMenuOpen, setIsMenuOpen ] = useState(false)
+  const [ isMenuOpen, setIsMenuOpen ] = useState(false);
   const [ unknownPathError, setUnknownPathError ] = useState(false);
   const [ screenWidth, setScreenWidth ] = useState(document.documentElement.clientWidth);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -27,8 +30,11 @@ function App() {
   const [ movies, setMovies ] = useState([]);
   const [ currentUser, setCurrentUser ] = useState({ name: '', email: '', id: '' });
   const [ isPreloaderShowing, setIsPreloaderShowing ] = useState(false);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  const location = useLocation();
   const uploadingCards = screenWidth < 480 ? 5 : screenWidth < 769 ? 8 : 12;
   const uploadCardsQunt = screenWidth < 769 ?  2 : 3;
+  const history = useHistory();
 
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });
@@ -37,6 +43,61 @@ function App() {
     };
   }, []);
  
+  function handleCheckToken() {
+    auth.checkToken()
+      .then(() => {
+        console.log('yes')
+        setIsLoggedIn(true);
+      })
+      .catch(() => {
+        console.log('no')
+        setIsLoggedIn(false);
+      })
+  }
+
+  // useEffect(() => {
+  //   console.log(location.pathname)
+  //   handleCheckToken();
+  // }, [location.pathname])
+
+  // useEffect(() => {
+  //   if(isLoggedIn) {
+  //     mainApi.getProfileData()
+  //       .then((res) => {
+  //         setCurrentUser(res);
+  //         history.push('/movies')
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         showServerErrorHandler(err)
+  //       })
+  //   }
+  // }, [isLoggedIn])
+
+  function handleSignUp({ name, password, email }) {
+    auth.signUp({ name, password, email })
+      .then(() => {
+        history.push('/signin');
+      })
+      .catch((err) => {
+        console.log(err)
+        showServerErrorHandler(err);
+      })
+  }
+  
+  function handleSignIn({ email, password }) {
+    signIn({ email, password })
+      .then((res) => {
+        console.log(res);
+        setIsLoggedIn(true);
+        history.push('/movies')
+      })
+      .catch((err) => {
+        console.log(err);
+        showServerErrorHandler(errors.loginFail);
+      })
+  }   
+
   function handleWidth() {
     setScreenWidth(document.documentElement.clientWidth);
   };
@@ -57,51 +118,58 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <MoviesContext.Provider value={movies}>  
         <div className='page'>{
-          isModalOpen && <ModalPopup closeModal = {hideServerErrorHandler}
-                                    isModalOpen = { isModalOpen }
-                                    error={modalError}
+          isModalOpen && <ModalPopup closeModal={hideServerErrorHandler}
+                                     isModalOpen={ isModalOpen }
+                                     error={modalError}
           />
           }{unknownPathError ? <Error pathErrorHandler = {setUnknownPathError}
             />
           :<div className={`page__container ${isMenuOpen && screenWidth < 769 ? 'page__container_dark' : ''}`}>
             { location.pathname !== '/signin' 
             && location.pathname !== '/signup' 
-            && <Header menuHandler = {menuOpenHandler}
-                      menuStatus = {isMenuOpen}
-                      screenWidth = {screenWidth}
-                      isMenuOpen = {isMenuOpen}
-            />}
+            && <Header menuHandler={menuOpenHandler}
+                      menuStatus={isMenuOpen}
+                      screenWidth={screenWidth}
+                      isMenuOpen={isMenuOpen}
+                      isLoggedIn={isLoggedIn}/>}
             <Switch>
-              <Route  exact path='/'>
-                <Main />
-              </Route>
-              <Route path='/edit-profile'>
-                <EditProfile />
-              </Route>
-              <Route  path='/movies'>
-                <Movies setMovies={setMovies}
-                        showServerErrorHandler={showServerErrorHandler}
-                        screenWidth={screenWidth}
-                        isPreloaderShowing={isPreloaderShowing}
-                        setIsPreloaderShowing={setIsPreloaderShowing}
-                        uploadingCards={uploadingCards}
-                        uploadCardsQunt={uploadCardsQunt} />
-              </Route>
-                
-              <Route  path='/saved-movies'>
-                <SavedMovies />
-              </Route>
-              <Route  path='/profile'>
-                <Profile />
-              </Route>
+                <Route  exact path='/'>
+                  <Main />
+                </Route>
+              <ProtectedRoute component={EditProfile}
+                              path='/edit-profile' 
+                              isLoggedIn={isLoggedIn}/>
+              
+              <ProtectedRoute component={Movies}
+                              path='/movies'
+                              setMovies={setMovies}
+                              movies={movies}
+                              showServerErrorHandler={showServerErrorHandler}
+                              screenWidth={screenWidth}
+                              isPreloaderShowing={isPreloaderShowing}
+                              setIsPreloaderShowing={setIsPreloaderShowing}
+                              uploadingCards={uploadingCards}
+                              uploadCardsQunt={uploadCardsQunt}
+                              isLoggedIn={isLoggedIn} />
+              
+              <ProtectedRoute component={SavedMovies}
+                              path='/saved-movies'
+                              isLoggedIn={isLoggedIn}
+                              isPreloaderShowing={isPreloaderShowing}
+                              setIsPreloaderShowing={setIsPreloaderShowing}
+                              showServerErrorHandler={showServerErrorHandler} />
+
+              <ProtectedRoute component={Profile} 
+                              path='/profile'
+                              isLoggedIn={isLoggedIn} />
+
               <Route path = '/signin'>
-                <Login />
+                <Login onSubmit={handleSignIn}/>
               </Route>
               
               <Route path = '/signup'>
-                <Register />
+                <Register onSubmit={handleSignUp}/>
               </Route>
             </Switch>
             { location.pathname !== '/profile' 
@@ -112,7 +180,6 @@ function App() {
             <ScrollUp />
           </div>}
         </div>
-      </MoviesContext.Provider>
     </CurrentUserContext.Provider>
   )
 

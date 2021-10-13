@@ -33,7 +33,7 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
     setFormErrors(allErrors);
   },[formValues, setFormErrors, validators])
   
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     onSubmit();
   }

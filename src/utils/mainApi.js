@@ -7,11 +7,7 @@ class MainApi {
   };
 
   _checkServerResponse(item) {
-    if(item.ok) {
-      return item.json();
-    } else {
-      return Promise.reject(item.status);
-    }
+    return item.ok ? item.json() : Promise.reject(item.status);
   };
 
   getProfileData() {

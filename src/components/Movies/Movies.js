@@ -1,14 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useEffect, useState } from 'react';
 import { errors } from '../../utils/constants'
 import movieApi from '../../utils/movieApi';
-import { MoviesContext } from '../../contexts/contexts';
-import { useContext } from 'react';
+import mainApi from '../../utils/movieApi';
 
 function Movies(props) {
-  const movies = useContext(MoviesContext);
   const localMovies = JSON.parse(localStorage.getItem('movies'));
   const [ isShortFilm, setIsShortFilm ] = useState(false);
   useEffect(() => {
@@ -25,7 +25,7 @@ function Movies(props) {
       }
     }
   }
-  
+
   function errorHandler(err) {
     props.showServerErrorHandler(err)
   }
@@ -42,7 +42,7 @@ function Movies(props) {
   }
 
   function sortCards(value) {
-    const sorted = value.filter(item => {    
+    const sorted = value.filter(item => {
       if(item.nameRU && shortFilmHandler(item) && item.nameRU.toLowerCase().includes(localStorage.getItem('movieName'))) {
         return item;
       } if (item.nameEN && shortFilmHandler(item) && item.nameEN.toLowerCase().includes(localStorage.getItem('movieName'))) {
@@ -51,7 +51,7 @@ function Movies(props) {
     })
     return sorted;
   }
-  
+
   function getMovieHandler() {
     preloaderToggler(true)
     Promise.all([props.setMovies([]), localStorage.removeItem('movies')])
@@ -61,33 +61,33 @@ function Movies(props) {
             localStorage.setItem('movies', JSON.stringify(sortCards(res)));
           })
           .then(() => {
-            const localMovies =  JSON.parse(localStorage.getItem('movies'));
+            const localMovies = JSON.parse(localStorage.getItem('movies'));
             localMoviesHandler(localMovies);
           })
           .catch((err) => {
             console.log(err);
             errorHandler(errors.serverResponseErr);
-          })
-          .finally(() => preloaderToggler(false))
+          }) 
       })
       .catch((err) => {
         console.log(err);
         errorHandler(err);
       })
+      .finally(() => preloaderToggler(false))
   }
 
   function moreButtonVisibilityHandler() {
-    return movies.length !== 0 &&
-           !(movies.length === localMovies.length) 
+    return props.movies.length !== 0 &&
+           !(props.movies.length === localMovies.length)
   }
 
   function addMoreMovies() {
-    const num = movies.length;
+    const num = props.movies.length;
     for(let i = num; i < num + props.uploadCardsQunt; i++) {
       if(localMovies[i]){
         props.setMovies(movies => [...movies, localMovies[i]]);
       }
-    } 
+    }
   }
 
   return (
@@ -101,13 +101,14 @@ function Movies(props) {
                   isShortFilm={isShortFilm}
                   setIsShortFilm={setIsShortFilm}/>
 
-      <MoviesCardList setMovies={props.setMovies} 
+      <MoviesCardList setMovies={props.setMovies}
                       screenWidth={props.screenWidth}
                       isPreloaderShowing={props.isPreloaderShowing}
-                      movies={movies}>{
-          moreButtonVisibilityHandler()  && <button className='movies-card-list__more-btn' type='button' onClick={addMoreMovies}>Ещё</button>
-      }</MoviesCardList>
-      { props.isPreloaderShowing && <Preloader />}
+                      movies={props.movies}
+                      showServerErrorHandler={props.showServerErrorHandler}>
+          {moreButtonVisibilityHandler() && <button className='movies-card-list__more-btn' type='button' onClick={addMoreMovies}>Ещё</button>}
+          </MoviesCardList>
+      {props.isPreloaderShowing && <Preloader />}
     </div>
   )
 }

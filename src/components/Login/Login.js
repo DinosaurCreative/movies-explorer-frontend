@@ -4,18 +4,26 @@ import { Form, Field, SubmitButton, errorStatusHandler, errorMessageHandler } fr
 import validators from '../../utils/validators';
 import { errors } from '../../utils/constants'
 
-function Login() {
-  const [emailError, setEmailError ] = useState(false);
-  const [passwordError, setPasswordError ] = useState(false);
+function Login(props) {
+  const [ emailError, setEmailError ] = useState(false);
+  const [ passwordError, setPasswordError ] = useState(false);
+  const [ userLoginData, setUserLoginData ] = useState({ email: '', password: '' })
 
-  const errorSpanHandler = (prop, status) => {
-    if (prop === 'userEmail') {
+  function errorSpanHandler(prop, status) {
+    if (prop === 'email') {
       setEmailError(status);
       return;
-    }
-    if (prop === 'userPassword') {
+    } if (prop === 'password') {
       setPasswordError(status);
     }
+  }
+  
+  function changeUserDataHandler(name, value) {
+    setUserLoginData({ ...userLoginData, [name]: value });
+  };
+
+  function submitHandler() {
+    props.onSubmit(userLoginData);
   }
 
   return (
@@ -23,57 +31,63 @@ function Login() {
       <div className='form__container'>
         <Link to='/' href='#' className='logo logo_place_form' />
         <h1 className='form__greeting'>Рады видеть!</h1>
-        <Form className = 'form'
-                type = 'submit'
-                // onSubmit = {e => console.log(e)}
-                // onChange = {e => console.log(e)}
-                validators = {validators}>
+        <Form className='form'
+                type='submit'
+                onSubmit={submitHandler}
+                // onChange={e => console.log(e)}
+                validators={validators}>
 
-          <Field className = 'form__name-span'>
+          <Field className='form__name-span'>
             {(props) => <span {...props}>E-mail</span>}
           </Field>
 
-          <Field name = 'userEmail'
-                  className = 'form__input'
-                  type = 'email'>
+          <Field name='email'
+                  className='form__input'
+                  type='email'>
 
           {({ onChange, ...props}) => { 
             return (<input 
                       className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
                       onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}
-                      onChange={(e) => onChange(e.target.value)} />)
+                      onChange={(e) => {
+                        onChange(e.target.value);
+                        changeUserDataHandler(props.name, e.target.value);
+                      }} />)
           }}</Field>
 
-          <Field name = 'userEmail'
-                  className = 'form__error-span'
-                  errorslist = {{
+          <Field name='email'
+                  className='form__error-span'
+                  errorslist={{
                     required: errors.required,                      
                     isValidEmail: errors.isValidEmail,
                   }}>
             {(props) => {
               return (<span {...props} 
-                className = {`${props.className} ${!emailError && 'form__error-span_type_hidden'}`}>{errorMessageHandler(props)}</span>)
+                className={`${props.className} ${!emailError && 'form__error-span_type_hidden'}`}>{errorMessageHandler(props)}</span>)
             }}</Field>
 
-          <Field className = 'form__name-span' >
+          <Field className='form__name-span' >
             {(props) => <span {...props}>Пароль</span>
           }</Field>
 
-          <Field name = 'userPassword'
-                  className = 'form__input'
-                  type = 'password'>
+          <Field name='password'
+                  className='form__input'
+                  type='password'>
             {({ onChange, ...props}) => {
               return (<input {...props} 
                       className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
-                      onChange={(e) => onChange(e.target.value)} 
+                      onChange={(e) => {
+                        onChange(e.target.value);
+                        changeUserDataHandler(props.name, e.target.value);
+                      }} 
                       onFocus={() => errorSpanHandler(props.name, true)} 
                       onBlur={() => errorSpanHandler(props.name, false)}/>)
             }}</Field>
 
-          <Field name = 'userPassword'
-                  className = 'form__error-span'
-                  errorslist = {{
+          <Field name='password'
+                  className='form__error-span'
+                  errorslist={{
                     required: errors.required,
                     minLength: errors.minPassLength,
                   }}>
@@ -84,11 +98,12 @@ function Login() {
                       </span>)
           }}</Field>
 
-          <SubmitButton className = 'form__button from__button_place_login' 
-                        type = 'submit'>{
+          <SubmitButton className='form__button from__button_place_login' 
+                        type='submit'>{
             ({ disabled , ...props}) => {
               return (<button {...props} 
-                      className={`${props.className} ${disabled && 'form__button_type_disabled'}`}>
+                      className={`${props.className} ${disabled && 'form__button_type_disabled'}`}
+                      disabled={disabled}>
                       {'Войти'}
                       </button>)
             }}</SubmitButton>  

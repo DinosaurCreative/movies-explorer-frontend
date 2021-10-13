@@ -97,7 +97,8 @@ function EditProfile() {
                         type = 'submit'>{
             ({ disabled , ...props}) => {
               return (<button {...props} 
-                     className={`${props.className} ${disabled && 'form__button_type_disabled'}`}>
+                     className={`${props.className} ${disabled && 'form__button_type_disabled'}`}
+                     disabled={disabled}>
                      {'Сохранить'}
                      </button>)
           }}</SubmitButton>        

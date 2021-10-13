@@ -1,5 +1,5 @@
 function ModalPopup(props) {
-  const closeModalHandle = () => {
+  function closeModalHandle() {
     props.closeModal(false);
     document.removeEventListener('keyup', closeModalHandle);
     document.removeEventListener('click', closeModalHandle);

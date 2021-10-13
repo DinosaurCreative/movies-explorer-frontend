@@ -4,24 +4,34 @@ import { Form, Field, SubmitButton, errorStatusHandler, errorMessageHandler } fr
 import validators from '../../utils/validators';
 import { errors } from '../../utils/constants'
 
-function Register() {
-  const [emailError, setEmailError ] = useState(false);
-  const [passwordError, setPasswordError ] = useState(false);
-  const [nameError, setNameError ] = useState(false);
+function Register(props) {
+  const [ emailError, setEmailError ] = useState(false);
+  const [ passwordError, setPasswordError ] = useState(false);
+  const [ nameError, setNameError ] = useState(false);
+  const [ userRegisterData, setUserRegisterData ] = useState({ name: '', email: '', password: '' });
 
-  const errorSpanHandler = (prop, status) => {
-    if (prop === 'userEmail') {
+  function changeUserDataHandler(name, value) {
+    setUserRegisterData({ ...userRegisterData, [name]: value });
+  };
+
+  function submitHandler() {
+    props.onSubmit(userRegisterData);
+  };
+
+
+  function errorSpanHandler(prop, status) {
+    if (prop === 'email') {
       setEmailError(status);
       return;
-    }
-    if (prop === 'userPassword') {
+    };
+    if (prop === 'password') {
       setPasswordError(status);
       return;
-    }
-    if (prop === 'userName') {
+    };
+    if (prop === 'name') {
       setNameError(status);
-    }
-  }
+    };
+  };
   
   return (
     <div className='register'>
@@ -30,8 +40,7 @@ function Register() {
         <h1 className='form__greeting'>Добро пожаловать!</h1>
         <Form className='form'
                 type='submit'
-                // onSubmit={e => console.log(e)}
-                // onChange={e => console.log(e)}
+                onSubmit={submitHandler}
                 validators={validators}>
           <Field className='form__name-span'>
             {(props) => <span {...props}>Имя</span>}
@@ -39,20 +48,23 @@ function Register() {
 
 
           <Field className='form__input'
-                 name='userName'
+                 name='name'
                  type='text'>
             {({ onChange, ...props }) => {
               return (<input 
                 className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
                 onFocus={() => errorSpanHandler(props.name, true)}
                 onBlur={() => errorSpanHandler(props.name, false)}
-                onChange={(e) => onChange(e.target.value)} />)
+                onChange={(e) => {
+                  onChange(e.target.value);
+                  changeUserDataHandler(props.name, e.target.value )
+                }} />)
             }}
           </Field>
           
           
           <Field className='form__error-span'
-                 name='userName'
+                 name='name'
                  errorslist={{
                   required: errors.required,                      
                   minLength: errors.minNameLength,
@@ -68,7 +80,7 @@ function Register() {
             {(props) => <span {...props}>E-mail</span>}
           </Field>
 
-          <Field name='userEmail'
+          <Field name='email'
                   className='form__input'
                   type='email'>
 
@@ -77,12 +89,15 @@ function Register() {
                       className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
                       onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}
-                      onChange={(e) => onChange(e.target.value)} />)
+                      onChange={(e) => {
+                        onChange(e.target.value);
+                        changeUserDataHandler(props.name, e.target.value)
+                      }} />)
           }}
           </Field>
 
           <Field className='form__error-span'
-                 name='userEmail'
+                 name='email'
                  errorslist={{
                    required: errors.required,                      
                    isValidEmail: errors.isValidEmail,
@@ -97,18 +112,21 @@ function Register() {
             {(props) => <span {...props}>Пароль</span>}
           </Field>
 
-          <Field name='userPassword'
+          <Field name='password'
                   className='form__input'
                   type='password'>
             {({ onChange, ...props}) => {
               return (<input {...props} 
                       className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
-                      onChange={(e) => onChange(e.target.value)} 
                       onFocus={() => errorSpanHandler(props.name, true)} 
-                      onBlur={() => errorSpanHandler(props.name, false)}/>)
+                      onBlur={() => errorSpanHandler(props.name, false)}
+                      onChange={(e) => {
+                        onChange(e.target.value);
+                        changeUserDataHandler(props.name, e.target.value);
+                      }} />)
             }}</Field>
           
-          <Field name='userPassword'
+          <Field name='password'
                   className='form__error-span'
                   errorslist={{
                     required: errors.required,
@@ -125,7 +143,8 @@ function Register() {
                          type='submit'>{
             ({ disabled , ...props}) => {
               return (<button {...props} 
-                      className={`${props.className} ${disabled && 'form__button_type_disabled'}`}>
+                      className={`${props.className} ${disabled && 'form__button_type_disabled'}`}
+                      disabled={disabled}>
                       {'Зарегистрироваться'}
                       </button>)
            }}</SubmitButton> 

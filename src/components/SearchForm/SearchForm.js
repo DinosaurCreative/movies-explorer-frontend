@@ -4,8 +4,6 @@ import { Field, SubmitButton, errorMessageHandler, errorStatusHandler } from '..
 import { useState } from 'react';
 import { errors } from '../../utils/constants'
 
-
-
 function SearchForm(props) {
   const [movieError, setMovieError ] = useState(false);
 
@@ -17,7 +15,6 @@ function SearchForm(props) {
 
   function shortFilmHandler() {
     props.setIsShortFilm(!props.isShortFilm);
-    console.log(props.isShortFilm);
   }
 
   function setToLocalStorege(value) {
@@ -45,8 +42,7 @@ function SearchForm(props) {
                     onChange(e.target.value);
                     setToLocalStorege(e.target.value);
                   }} />);
-
-              } }
+              }}
             </Field>
             <Field name='userMovie'
               className='search-form__error-span'
@@ -62,7 +58,7 @@ function SearchForm(props) {
               return (<button
                 {...props}
                 type={'submit'}
-                className={`${props.className}  ${disabled && 'search-form__button_type_disabled'}`}
+                className={`${props.className} ${disabled && 'search-form__button_type_disabled'}`}
                 disabled={disabled} />);
             } }</SubmitButton>
         <div className='search-form__border' />

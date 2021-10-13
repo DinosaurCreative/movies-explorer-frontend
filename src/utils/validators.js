@@ -1,7 +1,7 @@
 import validator from 'validator';
 
 const validators = {
-  userEmail: {
+  email: {
     required(value){
       return value === '';
     },
@@ -9,7 +9,7 @@ const validators = {
       return !validator.isEmail(value);
     } 
   },
-  userPassword: {
+  password: {
     required(value){
       return value === '';
     },
@@ -17,7 +17,7 @@ const validators = {
       return value.length < 8;
     }
   },
-  userName: {
+  name: {
     required(value){
       return value === '';
     },
