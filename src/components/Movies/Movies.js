@@ -11,12 +11,19 @@ import mainApi from '../../utils/movieApi';
 function Movies(props) {
   const localMovies = JSON.parse(localStorage.getItem('movies'));
   const [ isShortFilm, setIsShortFilm ] = useState(false);
+  const [ movieNotFound, setMovieNotFound ] = useState(false);
+
   useEffect(() => {
     props.setMovies([]);
     if(localMovies) {
       localMoviesHandler(localMovies);
     }
   }, [])
+  function saveMovie(data) {
+    mainApi.saveMovie(data) 
+
+    
+  }
 
   function localMoviesHandler(value) {
     if(value) {
@@ -53,7 +60,7 @@ function Movies(props) {
   }
 
   function getMovieHandler() {
-    preloaderToggler(true)
+    preloaderToggler(true);
     Promise.all([props.setMovies([]), localStorage.removeItem('movies')])
       .then(() => {
         movieApi.getMovies()
@@ -63,6 +70,10 @@ function Movies(props) {
           .then(() => {
             const localMovies = JSON.parse(localStorage.getItem('movies'));
             localMoviesHandler(localMovies);
+            return localMovies
+          })
+          .then((res) => { 
+            !res.length ? setMovieNotFound(true) : setMovieNotFound(false);
           })
           .catch((err) => {
             console.log(err);
@@ -105,7 +116,9 @@ function Movies(props) {
                       screenWidth={props.screenWidth}
                       isPreloaderShowing={props.isPreloaderShowing}
                       movies={props.movies}
-                      showServerErrorHandler={props.showServerErrorHandler}>
+                      showServerErrorHandler={props.showServerErrorHandler}
+                      movieNotFound={movieNotFound}
+                      savedMovies={props.savedMovies}>
           {moreButtonVisibilityHandler() && <button className='movies-card-list__more-btn' type='button' onClick={addMoreMovies}>Ещё</button>}
           </MoviesCardList>
       {props.isPreloaderShowing && <Preloader />}

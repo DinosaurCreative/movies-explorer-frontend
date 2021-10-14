@@ -7,7 +7,7 @@ class Auth {
   };
 
   _checkServerResponse(item) {
-    return item.ok ? item.json() : Promise.reject(item.status);
+    return item.ok ? item.json() : Promise.reject(item);
   };
 
   signUp({ password, name, email }) {

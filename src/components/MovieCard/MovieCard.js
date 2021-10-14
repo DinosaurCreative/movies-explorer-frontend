@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { useLocation } from 'react-router';
+import { useEffect } from 'react/cjs/react.development';
 import { beatfilmApiURL } from '../../utils/constants';
 import mainApi from '../../utils/mainApi';
 import ModalPopup from '../ModalPopup/ModalPopup';
@@ -9,7 +10,8 @@ function MovieCard(props) {
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const location = useLocation();
   const { card } = props;
-
+  console.log(card);
+  
   function deleteMovieHandler() {
     mainApi.deleteMovie(card.id)
       .then(() => setIsMovieSaved(false))
@@ -18,21 +20,39 @@ function MovieCard(props) {
         props.showServerErrorHandler(err)
       })
     }
-    
-    function saveMovieHandler() {
-      mainApi.saveMovie(card)
-      .then(() => setIsMovieSaved(true))
-      .catch((err) => {
-        console.log(err);
-        props.showServerErrorHandler(err)
+
+    function saveMovieHandler(value) {
+      const film = { 
+        country: value.country,
+        director: value.director,
+        duration: value.duration,
+        year: value.year,
+        description: value.description,
+        image: value.image,
+        trailer: value.trailerLink,
+        movieId: String(value.id),
+        nameRU: value.nameRU,
+        nameEN: value.nameEN,
+      };
+      mainApi.saveMovie(film)
+        .then(() => setIsMovieSaved(true))
+        .catch((err) => {
+          console.log(err);
+          props.showServerErrorHandler(err)
       })
   }
 
-  function deleteOrRemoveHandler() {
+  function checkIsMovieSavedHander() {
+
+  }
+
+
+  function deleteOrSaveHandler(card) {
     if(isMovieSaved) {
       deleteMovieHandler();
     } else {
       saveMovieHandler();
+      setIsMovieSaved(true);
     }
   }
 
@@ -51,7 +71,7 @@ function MovieCard(props) {
         {location.pathname === '/movies' &&
           <button className={`movie-card__save-btn ${isMovieSaved ? 'movie-card__saved' : ''}`}
                   type='button' 
-                  onClick={deleteOrRemoveHandler}
+                  onClick={() => saveMovieHandler(card)}
                   aria-label='Сохранить'>
             {'Соxранить'}
           </button>}

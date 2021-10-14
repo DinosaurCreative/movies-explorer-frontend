@@ -6,11 +6,20 @@ import { errors } from '../../utils/constants'
 
 function SearchForm(props) {
   const [movieError, setMovieError ] = useState(false);
+  const [ isSubmiting, setIsSubmiting ] = useState(false);
 
   function errorSpanHandler(prop, status) {
     if (prop === 'userMovie') {
       setMovieError(status);
     }
+  }
+
+  function submitHandler() {
+    setIsSubmiting(true);
+    props.getMovieHandler();
+    setTimeout(() => {
+      setIsSubmiting(false);
+    }, 2000)
   }
 
   function shortFilmHandler() {
@@ -25,13 +34,13 @@ function SearchForm(props) {
     <div className='search-form__container'>
       <Form className='search-form'
             type='submit'
-            onSubmit={props.getMovieHandler}
+            onSubmit={submitHandler}
             validators={validators}>
         <div className='search-form__input-container'>
             <Field className='search-form__input'
               placeholder='Фильм'
               name='userMovie'
-              type='text'>
+              type='submit'>
               {({ onChange, ...props }) => {
                 return (<input
                   placeholder={props.placeholder}
@@ -41,7 +50,8 @@ function SearchForm(props) {
                   onChange={(e) => {
                     onChange(e.target.value);
                     setToLocalStorege(e.target.value);
-                  }} />);
+                  }}
+                  onSubmit={props.onSubmit} />);
               }}
             </Field>
             <Field name='userMovie'
@@ -59,7 +69,7 @@ function SearchForm(props) {
                 {...props}
                 type={'submit'}
                 className={`${props.className} ${disabled && 'search-form__button_type_disabled'}`}
-                disabled={disabled} />);
+                disabled={ disabled || isSubmiting} />);
             } }</SubmitButton>
         <div className='search-form__border' />
         <div className='search-form__checkbox-container'>

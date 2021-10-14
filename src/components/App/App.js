@@ -28,9 +28,10 @@ function App() {
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const [ modalError, setModalError ] = useState('');
   const [ movies, setMovies ] = useState([]);
-  const [ currentUser, setCurrentUser ] = useState({ name: '', email: '', id: '' });
+  const [ currentUser, setCurrentUser ] = useState({});
   const [ isPreloaderShowing, setIsPreloaderShowing ] = useState(false);
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [ savedMovies, setSavedMovies ] = useState([]);
+  const isLogged = sessionStorage.getItem('isLogged');
   const location = useLocation();
   const uploadingCards = screenWidth < 480 ? 5 : screenWidth < 769 ? 8 : 12;
   const uploadCardsQunt = screenWidth < 769 ?  2 : 3;
@@ -45,20 +46,31 @@ function App() {
  
   function handleCheckToken() {
     auth.checkToken()
-      .then(() => {
-        console.log('yes')
-        setIsLoggedIn(true);
+      .then((res) => {
+        setCurrentUser(res);
       })
-      .catch(() => {
-        console.log('no')
-        setIsLoggedIn(false);
+      .catch((err) => {
+        if (err.status === 401) {
+          sessionStorage.removeItem('isLogged');
+        };
       })
   }
 
-  // useEffect(() => {
-  //   console.log(location.pathname)
-  //   handleCheckToken();
-  // }, [location.pathname])
+  
+
+  function getSavedMoviesHandle() {
+    mainApi.getMovies()
+      .then((res) => {
+
+        setSavedMovies(res.data);
+      })
+      .catch((err) => console.log(err))
+  }
+
+  useEffect(() => {
+    handleCheckToken();
+    getSavedMoviesHandle();
+  }, [])
 
   // useEffect(() => {
   //   if(isLoggedIn) {
@@ -88,16 +100,13 @@ function App() {
   function handleSignIn({ email, password }) {
     auth.signIn({ email, password })
       .then((res) => {
-
-        console.log(res);
-        // setIsLoggedIn(true);
-        // history.push('/movies')
+        sessionStorage.setItem('isLogged', true);
+        history.push('/movies')
       })
       .catch((err) => {
         console.log(err);
         showServerErrorHandler(errors.loginFail);
       })
-      .finally(() => console.log(document.cookie, 11))
   }   
 
   function handleWidth() {
@@ -134,14 +143,14 @@ function App() {
                       menuStatus={isMenuOpen}
                       screenWidth={screenWidth}
                       isMenuOpen={isMenuOpen}
-                      isLoggedIn={isLoggedIn}/>}
+                      isLoggedIn={isLogged}/>}
             <Switch>
                 <Route  exact path='/'>
                   <Main />
                 </Route>
               <ProtectedRoute component={EditProfile}
                               path='/edit-profile' 
-                              isLoggedIn={isLoggedIn}/>
+                              isLoggedIn={isLogged}/>
               
               <ProtectedRoute component={Movies}
                               path='/movies'
@@ -153,18 +162,22 @@ function App() {
                               setIsPreloaderShowing={setIsPreloaderShowing}
                               uploadingCards={uploadingCards}
                               uploadCardsQunt={uploadCardsQunt}
-                              isLoggedIn={isLoggedIn} />
+                              isLoggedIn={isLogged}
+                              savedMovies={savedMovies} />
               
               <ProtectedRoute component={SavedMovies}
                               path='/saved-movies'
-                              isLoggedIn={isLoggedIn}
+                              isLoggedIn={isLogged}
                               isPreloaderShowing={isPreloaderShowing}
                               setIsPreloaderShowing={setIsPreloaderShowing}
-                              showServerErrorHandler={showServerErrorHandler} />
+                              showServerErrorHandler={showServerErrorHandler} 
+                              savedMovies={savedMovies}
+                              setSavedMovies={setSavedMovies}/>
 
               <ProtectedRoute component={Profile} 
                               path='/profile'
-                              isLoggedIn={isLoggedIn} />
+                              isLoggedIn={isLogged} 
+                              currentUser={currentUser}/>
 
               <Route path = '/signin'>
                 <Login onSubmit={handleSignIn}/>
