@@ -1,4 +1,4 @@
-import { beatfilmApiURL }  from './constants';
+import { beatfilmApiURL } from './constants';
 
 class MovieApi {
   constructor({ address, headers}) {

@@ -9,19 +9,19 @@ function Main() {
     <div className='main'>
       <div className='main__container'>
         <Promo />
-        <AboutProject 
+        <AboutProject
           id='about-project'
         />
-        <Techs 
+        <Techs
           id='techs'
         />
-        <AboutMe 
+        <AboutMe
           id='about-me'
         />
         <Portfolio />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Main;

@@ -1,49 +1,76 @@
 import { Form, Field, SubmitButton } from '../../utils/Forms';
 import validators from '../../utils/validators';
 import { useState } from 'react';
+import mainApi from '../../utils/mainApi';
+import { useHistory } from 'react-router-dom';
+import { errors } from '../../utils/constants';
 
+function EditProfile(props) {
+  const [ emailError, setEmailError ] = useState(false);
+  const [ nameError, setNameError ] = useState(false);
+  const [ userData, setUserData ] = useState({});
 
-function EditProfile() {
-  const [emailError, setEmailError ] = useState(false);
-  const [nameError, setNameError ] = useState(false);
+  const history = useHistory();
 
-  const errorMessageHandler = (props) => {
+  function errorMessageHandler(props) {
     for (const name in props.errors) {
       if(props.errors[name]) {
         return props.errorslist[name];
-      }
-    }  
-  }
+      };
+    };
+  };
 
-  const errorStatusHandler = (props) => {
+  function errorStatusHandler(props) {
     for(const name in props.errors) {
       if(props.errors[name]) {
         return true;
       }
-    }
+    };
     return false;
-  }
+  };
 
-  const errorSpanHandler = (prop, status) => {
-    if (prop === 'userEmail') {
+  function submitHandler() {
+    mainApi.setNewProfileData(userData)
+      .then((res) => {
+        props.setCurrentUser({ email: res.email , name: res.name});
+        history.push('/profile');
+      })
+      .catch((err) => {
+        if(err === 409) {
+         props.showServerErrorHandler(errors.emailBusy);
+        } else {
+          props.showServerErrorHandler(errors.serverResponseErr);
+        }
+        console.log(err);
+      })
+  };
+
+
+  function changeUserDataHandler(name, value) {
+    setUserData({ ...userData, [name]: value });
+  };
+
+  function errorSpanHandler(prop, status) {
+    if (prop === 'email') {
       setEmailError(status);
       return;
     }
-    if (prop === 'userName') {
+    if (prop === 'name') {
       setNameError(status);
     }
-  }
+  };
 
   return (
     <div className='edit-profile'>
       <div className='form__container form__container_place_edit'>
         <h1 className='form__greeting form__greeting_place_edit'>Редактирование профиля</h1>
         <Form className='form'
-              type = 'submit'
-              validators = {validators}>
+              type='submit'
+              onSubmit={submitHandler}
+              validators={validators}>
 
           <Field className='form__input form__input_place_edit'
-                 name='userEmail'
+                 name='email'
                  placeholder='E-mail'
                  type='email'>{
             ({ onChange, ...props}) => {
@@ -52,24 +79,29 @@ function EditProfile() {
                         className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                         onFocus={() => errorSpanHandler(props.name, true)}
                         onBlur={() => errorSpanHandler(props.name, false)}
-                        onChange={(e) => onChange(e.target.value)}/>)
+                        onChange={(e) => {
+                          onChange(() => {
+                            return e.target.value.toLowerCase();
+                          });
+                          changeUserDataHandler(props.name, e.target.value)
+                        }}/>)
             }}</Field>
 
           <Field className='form__error-span'
-                 name='userEmail'
+                 name='email'
                  errorslist = {{
-                  required: 'Поле не должно быть пустым.',                      
-                  isValidEmail: 'Введен некорректный имейл.',
+                  required: errors.required,
+                  isValidEmail: errors.isValidEmail,
                 }}>
             {(props) => {
               return (<span {...props} 
-                className = {`${props.className} ${!emailError && 'form__error-span_type_hidden'}`}>
+                className={`${props.className} ${!emailError && 'form__error-span_type_hidden'}`}>
                 {errorMessageHandler(props)}
                 </span>)
           }}</Field>
           
           <Field className='form__input form__input_place_edit'
-                 name='userName'
+                 name='name'
                  placeholder='Имя'
                  type='text'>{
                   ({ onChange, ...props}) => {
@@ -78,14 +110,18 @@ function EditProfile() {
                               className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                               onFocus={() => errorSpanHandler(props.name, true)}
                               onBlur={() => errorSpanHandler(props.name, false)}
-                              onChange={(e) => onChange(e.target.value)}/>)
+                              onChange={(e) => {
+                                onChange(e.target.value);
+                                changeUserDataHandler(props.name, e.target.value)
+                              }}/>)
           }}</Field>
           
           <Field className='form__error-span'
-                 name='userName'
+                 name='name'
                  errorslist = {{
-                 required: 'Поле не должно быть пустым.',                      
-                 minLength: 'Длина имени не может быть короче двух символов.',
+                 required: errors.required,
+                 minLength: errors.minNameLength,
+                 format: errors.formatError,
                 }}>
             {(props) => {
               return (<span {...props} 
@@ -93,19 +129,19 @@ function EditProfile() {
                 {errorMessageHandler(props)}
                 </span>)
           }}</Field>
-          <SubmitButton className = 'form__button' 
-                        type = 'submit'>{
+          <SubmitButton className='form__button' 
+                        type='submit'>{
             ({ disabled , ...props}) => {
               return (<button {...props} 
                      className={`${props.className} ${disabled && 'form__button_type_disabled'}`}
                      disabled={disabled}>
                      {'Сохранить'}
                      </button>)
-          }}</SubmitButton>        
+          }}</SubmitButton>
         </Form>
       </div>
     </div>
   )
-}
+};
 
 export default EditProfile;

@@ -3,22 +3,21 @@ import { animateScroll as scroll } from 'react-scroll';
 
 function ScrollUp() {
   const [ scrollPosition, setScrollPosition] = useState(0);
-
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });   
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  const handleScroll = () => {
+  function handleScroll() {
     const position = window.pageYOffset;
     setScrollPosition(position);
   };
 
   return (
-    <button className={`scroll-up ${scrollPosition > 500 && 'scroll-up_visible'}`}  type='button' onClick={scroll.scrollToTop}>GO UP</button>
-  )
-}
+    <button className={`scroll-up ${scrollPosition > 500 && 'scroll-up_visible'}`} type='button' onClick={scroll.scrollToTop}>GO UP</button>
+  );
+};
 
 export default ScrollUp;

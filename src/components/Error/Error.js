@@ -1,11 +1,11 @@
 import { useHistory } from 'react-router-dom';
 
-function Error(props) {
+function Error() {
   const history = useHistory();
-  const handleBackClick = () => {
-    props.pathErrorHandler(false);
+
+  function handleBackClick() {
     history.goBack();
-  }
+  };
   return (
     <div className='error'>
       <div className='error__container'>
@@ -16,7 +16,7 @@ function Error(props) {
         <button className='link link_place_error' onClick={handleBackClick}>Назад</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Error;

@@ -1,77 +1,75 @@
-/* eslint-disable no-unused-vars */
-import { useState } from 'react';
 import { useLocation } from 'react-router';
-import { useEffect } from 'react/cjs/react.development';
 import { beatfilmApiURL } from '../../utils/constants';
 import mainApi from '../../utils/mainApi';
-import ModalPopup from '../ModalPopup/ModalPopup';
+import { errors } from '../../utils/constants';
 
 function MovieCard(props) {
-  const [isMovieSaved, setIsMovieSaved] = useState(false);
   const location = useLocation();
   const { card } = props;
-  console.log(card);
-  
+
   function deleteMovieHandler() {
-    mainApi.deleteMovie(card.id)
-      .then(() => setIsMovieSaved(false))
-      .catch((err) => {
-        console.log(err);
-        props.showServerErrorHandler(err)
-      })
+    props.deleteMovieHandler(card);
+  };
+
+
+  function sortCards(value, length) {
+    const backVal = [];
+    for (let i = 0; i < length; i++) {
+      backVal.push(value[i]);
     }
-
-    function saveMovieHandler(value) {
-      const film = { 
-        country: value.country,
-        director: value.director,
-        duration: value.duration,
-        year: value.year,
-        description: value.description,
-        image: value.image,
-        trailer: value.trailerLink,
-        movieId: String(value.id),
-        nameRU: value.nameRU,
-        nameEN: value.nameEN,
-      };
-      mainApi.saveMovie(film)
-        .then(() => setIsMovieSaved(true))
-        .catch((err) => {
-          console.log(err);
-          props.showServerErrorHandler(err)
-      })
-  }
-
-  function checkIsMovieSavedHander() {
-
+    return backVal;
   }
 
 
-  function deleteOrSaveHandler(card) {
-    if(isMovieSaved) {
-      deleteMovieHandler();
-    } else {
-      saveMovieHandler();
-      setIsMovieSaved(true);
-    }
-  }
+  function saveMovieHandler() {
+    const film = { 
+      country: card.country,
+      director: card.director,
+      duration: card.duration,
+      year: card.year,
+      description: card.description,
+      image:  beatfilmApiURL + card.image.url,
+      trailer: card.trailerLink,
+      nameRU: card.nameRU,
+      nameEN: card.nameEN,
+      movieId: String(card.id),
+    };
+
+  mainApi.saveMovie(film)
+    .then((res) => {
+      const localMovies = JSON.parse(localStorage.getItem('movies'));
+      localMovies.forEach((movie) => {
+        if (movie.id === Number(res.data.movieId)) {
+          movie.saved = true;
+          movie._id = res.data._id;
+          props.setSavedMovies(savedMovies => [...savedMovies, movie ])
+        };
+      });
+      localStorage.setItem('movies', JSON.stringify(localMovies));
+      props.setMovies(sortCards(localMovies, props.movies.length));
+    })
+    .catch((err) => {
+      console.log(err);
+      props.showServerErrorHandler(errors.loginFail);
+    })
+  };
 
   return (
     <li className='movie-card'>
       <div className='movie-card__container'>
         <a className='movie-card__trailer'
-          href={card.trailerLink}
+          href={card.trailerLink || card.trailer}
           target='_blank'
           rel='noreferrer'
           tooltip={`Посмотреть трейлер на Youtube`}>
             <img className='movie-card__image'
                 alt={card.nameRU}
-                src={`${beatfilmApiURL}${card.image.url}`} />
+                src={typeof card.image === 'string' ? card.image : beatfilmApiURL + card.image.url} />
         </a>
         {location.pathname === '/movies' &&
-          <button className={`movie-card__save-btn ${isMovieSaved ? 'movie-card__saved' : ''}`}
-                  type='button' 
-                  onClick={() => saveMovieHandler(card)}
+          <button className={`movie-card__save-btn ${card.saved ? 'movie-card__saved' : ''}`}
+                  type='button'
+                  onClick={card.saved ? deleteMovieHandler : saveMovieHandler }
                   aria-label='Сохранить'>
             {'Соxранить'}
           </button>}
@@ -87,7 +85,7 @@ function MovieCard(props) {
         </div>
       </div>
     </li>
-  )
-}
+  );
+};
 
 export default MovieCard;

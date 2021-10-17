@@ -18,7 +18,7 @@ function Techs() {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Techs;

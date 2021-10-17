@@ -29,6 +29,6 @@ function AboutProject() {
       </div>
     </div>
   )
-}
+};
 
 export default AboutProject;

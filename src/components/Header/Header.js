@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 
 function Header(props) {
-  
   return (
     <header className='header'>
       <div className='header__container'>
@@ -16,8 +15,8 @@ function Header(props) {
         <Navigation isOpen = {props.menuStatus}
                     menuHandler = {props.menuHandler}
                     screenWidth = {props.screenWidth}
-        />
-      </div>}
+         />
+        </div>}
       </div>
     </header>
   );

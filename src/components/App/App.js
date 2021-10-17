@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import '../../index.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -17,13 +16,11 @@ import { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/contexts';
 import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/mainApi';
-import auth, { signIn } from '../../utils/auth';
+import auth from '../../utils/auth';
 import { errors } from '../../utils/constants';
-
 
 function App() {
   const [ isMenuOpen, setIsMenuOpen ] = useState(false);
-  const [ unknownPathError, setUnknownPathError ] = useState(false);
   const [ screenWidth, setScreenWidth ] = useState(document.documentElement.clientWidth);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const [ modalError, setModalError ] = useState('');
@@ -31,11 +28,14 @@ function App() {
   const [ currentUser, setCurrentUser ] = useState({});
   const [ isPreloaderShowing, setIsPreloaderShowing ] = useState(false);
   const [ savedMovies, setSavedMovies ] = useState([]);
-  const isLogged = sessionStorage.getItem('isLogged');
+  const [ backToSavedMovies, setBackToSavedMovies ] = useState(false);
+  const [ isResetButtonPushed, setIsResetButtonPushed ] = useState(false)
+  const [ isLogged, setIsLogged ] = useState(false);
   const location = useLocation();
   const uploadingCards = screenWidth < 480 ? 5 : screenWidth < 769 ? 8 : 12;
-  const uploadCardsQunt = screenWidth < 769 ?  2 : 3;
+  const uploadCardsQunt = screenWidth < 769 ? 2 : 3;
   const history = useHistory();
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
 
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });
@@ -48,66 +48,87 @@ function App() {
     auth.checkToken()
       .then((res) => {
         setCurrentUser(res);
+        setIsLogged(true);
       })
       .catch((err) => {
         if (err.status === 401) {
-          sessionStorage.removeItem('isLogged');
+          setIsLogged(false);
         };
+      })
+  };
+
+  function getProfileDataHandler() {
+    mainApi.getProfileData()
+      .then((res) => {
+        setCurrentUser(res);
+        history.push('/movies')
+      })
+      .catch(() => {
+        showServerErrorHandler(errors.emailBusy)
       })
   }
 
-  
-
-  function getSavedMoviesHandle() {
+  function getSavedMoviesHandler() {
     mainApi.getMovies()
       .then((res) => {
-
-        setSavedMovies(res.data);
+        setSavedMovies(sortSavedCards(res.data));
       })
-      .catch((err) => console.log(err))
+      .catch(() => {
+        showServerErrorHandler(errors.emailBusy);
+      })
+  };
+
+  function sortSavedCards(value) {
+    const userId = localStorage.getItem('userId');
+    return value.filter(item => {
+      if(item.owner === userId) {
+        return item;
+      }
+    })
   }
 
   useEffect(() => {
-    handleCheckToken();
-    getSavedMoviesHandle();
-  }, [])
+    if(isLogged) {
+      getProfileDataHandler();
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   if(isLoggedIn) {
-  //     mainApi.getProfileData()
-  //       .then((res) => {
-  //         setCurrentUser(res);
-  //         history.push('/movies')
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         showServerErrorHandler(err)
-  //       })
-  //   }
-  // }, [isLoggedIn])
+  useEffect(() => {
+    if(isLoggedIn){
+      getSavedMoviesHandler();
+      handleCheckToken();
+      setIsResetButtonPushed(false);
+    }
+  }, []);
 
   function handleSignUp({ name, password, email }) {
-    auth.signUp({ name, password, email })
+    auth.signUp({ name, password, email: email.toLowerCase() })
       .then(() => {
         history.push('/signin');
       })
       .catch((err) => {
-        console.log(err)
-        showServerErrorHandler(err);
+        if (err === 409) {
+          showServerErrorHandler(errors.emailBusy);
+        } else {
+          showServerErrorHandler(errors.serverResponseErr);
+        }
       })
-  }
+  };
   
   function handleSignIn({ email, password }) {
-    auth.signIn({ email, password })
+    auth.signIn({ email: email.toLowerCase(), password })
       .then((res) => {
-        sessionStorage.setItem('isLogged', true);
+        localStorage.setItem('userId', res._id);
+        getSavedMoviesHandler();
+        handleCheckToken();
+        localStorage.setItem('isLoggedIn', true);
+        setIsLogged(true);
         history.push('/movies')
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         showServerErrorHandler(errors.loginFail);
       })
-  }   
+  };
 
   function handleWidth() {
     setScreenWidth(document.documentElement.clientWidth);
@@ -115,42 +136,42 @@ function App() {
 
   function menuOpenHandler() {
     setIsMenuOpen(!isMenuOpen);
-  }
+  };
   
   function showServerErrorHandler(error) {
     setIsModalOpen(true);
     setModalError(error);
-  }
+  };
 
   function hideServerErrorHandler() {
     setIsModalOpen(false);
     setModalError('');
-  }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
         <div className='page'>{
           isModalOpen && <ModalPopup closeModal={hideServerErrorHandler}
-                                     isModalOpen={ isModalOpen }
-                                     error={modalError}
-          />
-          }{unknownPathError ? <Error pathErrorHandler = {setUnknownPathError}
-            />
-          :<div className={`page__container ${isMenuOpen && screenWidth < 769 ? 'page__container_dark' : ''}`}>
-            { location.pathname !== '/signin' 
-            && location.pathname !== '/signup' 
+                                     isModalOpen={isModalOpen}
+                                     error={modalError} />
+          }<div className={`page__container ${isMenuOpen && screenWidth < 769 ? 'page__container_dark' : ''}`}>
+            { location.pathname !== '/signin'
+            && location.pathname !== '/signup'
             && <Header menuHandler={menuOpenHandler}
-                      menuStatus={isMenuOpen}
-                      screenWidth={screenWidth}
-                      isMenuOpen={isMenuOpen}
-                      isLoggedIn={isLogged}/>}
+                       menuStatus={isMenuOpen}
+                       screenWidth={screenWidth}
+                       isMenuOpen={isMenuOpen}
+                       isLoggedIn={isLogged} />}
             <Switch>
-                <Route  exact path='/'>
-                  <Main />
-                </Route>
+              <Route  exact path='/'>
+                <Main />
+              </Route>
+              
               <ProtectedRoute component={EditProfile}
-                              path='/edit-profile' 
-                              isLoggedIn={isLogged}/>
+                              path='/edit-profile'
+                              isLoggedIn={isLoggedIn}
+                              setCurrentUser={setCurrentUser}
+                              showServerErrorHandler={showServerErrorHandler} />
               
               <ProtectedRoute component={Movies}
                               path='/movies'
@@ -162,42 +183,51 @@ function App() {
                               setIsPreloaderShowing={setIsPreloaderShowing}
                               uploadingCards={uploadingCards}
                               uploadCardsQunt={uploadCardsQunt}
-                              isLoggedIn={isLogged}
-                              savedMovies={savedMovies} />
+                              isLoggedIn={isLoggedIn}
+                              savedMovies={savedMovies}
+                              setSavedMovies={setSavedMovies} />
               
               <ProtectedRoute component={SavedMovies}
                               path='/saved-movies'
-                              isLoggedIn={isLogged}
+                              isLoggedIn={isLoggedIn}
                               isPreloaderShowing={isPreloaderShowing}
                               setIsPreloaderShowing={setIsPreloaderShowing}
-                              showServerErrorHandler={showServerErrorHandler} 
+                              showServerErrorHandler={showServerErrorHandler}
                               savedMovies={savedMovies}
-                              setSavedMovies={setSavedMovies}/>
+                              setSavedMovies={setSavedMovies}
+                              setMovies={setMovies} 
+                              setBackToSavedMovies={setBackToSavedMovies}
+                              backToSavedMovies={backToSavedMovies}
+                              setIsResetButtonPushed={setIsResetButtonPushed}
+                              isResetButtonPushed={isResetButtonPushed} />
 
-              <ProtectedRoute component={Profile} 
+              <ProtectedRoute component={Profile}
                               path='/profile'
-                              isLoggedIn={isLogged} 
-                              currentUser={currentUser}/>
+                              isLoggedIn={isLoggedIn}
+                              currentUser={currentUser}
+                              setIsLogged={setIsLogged}
+                              showServerErrorHandler={showServerErrorHandler} />
 
               <Route path = '/signin'>
-                <Login onSubmit={handleSignIn}/>
+                <Login onSubmit={handleSignIn} />
               </Route>
               
               <Route path = '/signup'>
-                <Register onSubmit={handleSignUp}/>
+                <Register onSubmit={handleSignUp} />
               </Route>
+            
+              <Route path="" component={Error} />
             </Switch>
-            { location.pathname !== '/profile' 
-            && location.pathname !== '/signin' 
-            && location.pathname !== '/signup' 
-            && location.pathname !== '/edit-profile' 
+            { location.pathname !== '/profile'
+            && location.pathname !== '/signin'
+            && location.pathname !== '/signup'
+            && location.pathname !== '/edit-profile'
             && <Footer />}
             <ScrollUp />
-          </div>}
+          </div>
         </div>
     </CurrentUserContext.Provider>
   )
-
 };
 
 export default App;

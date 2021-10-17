@@ -14,10 +14,6 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
     }))
   }, []);
 
-  // useEffect(() => {
-  //   onChange(formValues)
-  // },[formValues, onChange])
-
   useEffect(() => {
     const formKeys = Object.keys(formValues); 
     const allErrors = formKeys.map((key) => {
@@ -31,27 +27,24 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
       return { [key]: errors }
     }).reduce((acc, item) => ({...acc, ...item}), {});
     setFormErrors(allErrors);
-  },[formValues, setFormErrors, validators])
-  
+  },[formValues, setFormErrors, validators]);
+
   function handleSubmit(e) {
     e.preventDefault();
     onSubmit();
-  }
+  };
+
   useEffect(() => {
     for (let fieldKey in formErrors) {
       const errorKeys = formErrors[fieldKey];
-      
       for (let errorKey in errorKeys) {
-        if (errorKeys[errorKey] ===  true) {
+        if (errorKeys[errorKey] === true) {
           return setIsInvalid(true);
         }
         setIsInvalid(false);
       }
-
     }
-   
-  }, [formErrors, setIsInvalid])
-
+  }, [formErrors, setIsInvalid]);
 
   const formContextValue = {
     onChangeInput,
@@ -59,7 +52,7 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
     formErrors,
     formValues,
   }; 
-  
+
   return (
     <form className = {className}
           onSubmit = {handleSubmit}>
@@ -73,11 +66,11 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
 export const Field = ({ children, name, className, type, errorslist, placeholder}) => {
   const [ value, setValue] = useState('');
   const { onChangeInput, formErrors, formValues } = useContext(FormContext);
-  
+
   useEffect(() => {
     onChangeInput(name, value,);
-  }, [value, name, onChangeInput ])
-  
+  }, [value, name, onChangeInput ]);
+
   return (
     children({
       name,
@@ -89,8 +82,8 @@ export const Field = ({ children, name, className, type, errorslist, placeholder
       placeholder,
       onChange: setValue,
     })
-  )
-}
+  );
+};
 
 export const SubmitButton = ({ children, className, type, form }) => {
   const { isInvalid } = useContext(FormContext);
@@ -101,22 +94,22 @@ export const SubmitButton = ({ children, className, type, form }) => {
       form,
       disabled: isInvalid,
     })
-  )
-}
+  );
+};
 
 export const errorMessageHandler = (props) => {
   for (const name in props.errors) {
     if(props.errors[name]) {
       return props.errorslist[name];
-    }
-  }  
-}
+    };
+  };
+};
 
 export const errorStatusHandler = (props) => {
   for(const name in props.errors) {
     if(props.errors[name]) {
       return true;
-    }
-  }
+    };
+  };
   return false;
-}
+};

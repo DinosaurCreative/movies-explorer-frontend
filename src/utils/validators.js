@@ -1,4 +1,5 @@
 import validator from 'validator';
+import { regexp } from './constants';
 
 const validators = {
   email: {
@@ -23,6 +24,9 @@ const validators = {
     },
     minLength(value){
       return value.length < 2;
+    },
+    format(value) {
+      return !regexp.test(value);
     }
   },
   userMovie: {

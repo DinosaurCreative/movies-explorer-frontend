@@ -18,7 +18,6 @@ function Register(props) {
     props.onSubmit(userRegisterData);
   };
 
-
   function errorSpanHandler(prop, status) {
     if (prop === 'email') {
       setEmailError(status);
@@ -52,7 +51,7 @@ function Register(props) {
                  type='text'>
             {({ onChange, ...props }) => {
               return (<input 
-                className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
+                className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                 onFocus={() => errorSpanHandler(props.name, true)}
                 onBlur={() => errorSpanHandler(props.name, false)}
                 onChange={(e) => {
@@ -66,14 +65,15 @@ function Register(props) {
           <Field className='form__error-span'
                  name='name'
                  errorslist={{
-                  required: errors.required,                      
+                  required: errors.required,
                   minLength: errors.minNameLength,
+                  format: errors.formatError,
                 }}>
             {(props) => {
               return (<span {...props} 
                 className={`${props.className} ${!nameError && 'form__error-span_type_hidden'}`}>
                 {errorMessageHandler(props)}
-                </span>)              
+                </span>)
             }}
           </Field>
           <Field className='form__name-span'>
@@ -84,9 +84,9 @@ function Register(props) {
                   className='form__input'
                   type='email'>
 
-          {({ onChange, ...props}) => { 
-            return (<input 
-                      className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
+          {({ onChange, ...props}) => {
+            return (<input
+                      className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                       onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}
                       onChange={(e) => {
@@ -99,11 +99,11 @@ function Register(props) {
           <Field className='form__error-span'
                  name='email'
                  errorslist={{
-                   required: errors.required,                      
+                   required: errors.required,
                    isValidEmail: errors.isValidEmail,
                  }}>
             {(props) => {
-              return (<span {...props} 
+              return (<span {...props}
                 className={`${props.className} ${!emailError && 'form__error-span_type_hidden'}`}>{errorMessageHandler(props)}</span>)
             }}
           </Field>
@@ -116,9 +116,9 @@ function Register(props) {
                   className='form__input'
                   type='password'>
             {({ onChange, ...props}) => {
-              return (<input {...props} 
-                      className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
-                      onFocus={() => errorSpanHandler(props.name, true)} 
+              return (<input {...props}
+                      className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
+                      onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}
                       onChange={(e) => {
                         onChange(e.target.value);
@@ -133,7 +133,7 @@ function Register(props) {
                     minLength: errors.minPassLength,
                   }}>
             {(props) => {
-              return (<span {...props} 
+              return (<span {...props}
                       className={`${props.className} ${!passwordError && 'form__error-span_type_hidden'}`}>
                       {errorMessageHandler(props)}
                       </span>)
@@ -142,18 +142,18 @@ function Register(props) {
            <SubmitButton className='form__button form__button_place_register'
                          type='submit'>{
             ({ disabled , ...props}) => {
-              return (<button {...props} 
+              return (<button {...props}
                       className={`${props.className} ${disabled && 'form__button_type_disabled'}`}
                       disabled={disabled}>
                       {'Зарегистрироваться'}
                       </button>)
-           }}</SubmitButton> 
+           }}</SubmitButton>
 
         </Form>
         <p className='from__status-ask'>Уже зарегистрированы?{<Link to='/signin' className='link link_place_form link_place_form-registration'>Войти</Link>}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Register;

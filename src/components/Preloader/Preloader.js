@@ -5,7 +5,7 @@ const Preloader = () => {
         <span className='preloader__round'></span>
       </div>
     </div>
-  )
+  );
 };
 
 export default Preloader

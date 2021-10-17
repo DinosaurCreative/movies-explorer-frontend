@@ -10,7 +10,7 @@ function Promo() {
       <NavTab />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Promo;

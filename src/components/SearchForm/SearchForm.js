@@ -11,8 +11,8 @@ function SearchForm(props) {
   function errorSpanHandler(prop, status) {
     if (prop === 'userMovie') {
       setMovieError(status);
-    }
-  }
+    };
+  };
 
   function submitHandler() {
     setIsSubmiting(true);
@@ -20,15 +20,15 @@ function SearchForm(props) {
     setTimeout(() => {
       setIsSubmiting(false);
     }, 2000)
-  }
+  };
 
   function shortFilmHandler() {
     props.setIsShortFilm(!props.isShortFilm);
-  }
+  };
 
   function setToLocalStorege(value) {
     localStorage.setItem('movieName', value.toLowerCase());
-  }
+  };
 
   return (
     <div className='search-form__container'>
@@ -78,7 +78,7 @@ function SearchForm(props) {
         </div>
       </Form>
     </div>
-  )
-}
+  );
+};
 
 export default SearchForm;

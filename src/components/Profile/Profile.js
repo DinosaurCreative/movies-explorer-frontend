@@ -1,9 +1,26 @@
 import { Link } from 'react-router-dom';
 import { useContext  } from 'react';
 import { CurrentUserContext } from '../../contexts/contexts';
-
-function Profile() {
+import auth from '../../utils/auth';
+import { useHistory } from 'react-router-dom';
+import { errors } from '../../utils/constants';
+function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
+  const history = useHistory();
+
+  function signOutHandler() {
+    auth.signOut()
+      .then(() => {
+        props.setIsLogged(false);
+        localStorage.removeItem('isLoggedIn');
+        localStorage.setItem('movies', JSON.stringify([]));
+        localStorage.setItem('movieName', '');
+        localStorage.removeItem('userId');
+      })
+      .then(() => history.push('/'))
+      .catch(() => props.showServerErrorHandler(errors.serverResponseErr))
+  };
+
   return (
     <div className='profile'>
       <div className='profile__container'>
@@ -20,12 +37,12 @@ function Profile() {
           </div>
         </div>
         <div className='profile__links'>
-          <Link to='/edit-profile' hef='#' className='link link_place_profile'>Редактировать</Link>
-          <Link to='/signin' hef='#' className='link link_place_profile'>Выйти из аккаунта</Link>
+          <Link to='/edit-profile' className='link link_place_profile'>Редактировать</Link>
+          <Link to='/signin' className='link link_place_profile' onClick={signOutHandler}>Выйти из аккаунта</Link>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Profile;

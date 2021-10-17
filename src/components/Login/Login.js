@@ -7,7 +7,7 @@ import { errors } from '../../utils/constants'
 function Login(props) {
   const [ emailError, setEmailError ] = useState(false);
   const [ passwordError, setPasswordError ] = useState(false);
-  const [ userLoginData, setUserLoginData ] = useState({ email: '', password: '' })
+  const [ userLoginData, setUserLoginData ] = useState({ email: '', password: '' });
 
   function errorSpanHandler(prop, status) {
     if (prop === 'email') {
@@ -15,8 +15,8 @@ function Login(props) {
       return;
     } if (prop === 'password') {
       setPasswordError(status);
-    }
-  }
+    };
+  };
   
   function changeUserDataHandler(name, value) {
     setUserLoginData({ ...userLoginData, [name]: value });
@@ -24,7 +24,7 @@ function Login(props) {
 
   function submitHandler() {
     props.onSubmit(userLoginData);
-  }
+  };
 
   return (
     <div className='login'>
@@ -34,7 +34,6 @@ function Login(props) {
         <Form className='form'
                 type='submit'
                 onSubmit={submitHandler}
-                // onChange={e => console.log(e)}
                 validators={validators}>
 
           <Field className='form__name-span'>
@@ -45,9 +44,9 @@ function Login(props) {
                   className='form__input'
                   type='email'>
 
-          {({ onChange, ...props}) => { 
+          {({ onChange, ...props}) => {
             return (<input 
-                      className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
+                      className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                       onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}
                       onChange={(e) => {
@@ -59,7 +58,7 @@ function Login(props) {
           <Field name='email'
                   className='form__error-span'
                   errorslist={{
-                    required: errors.required,                      
+                    required: errors.required,
                     isValidEmail: errors.isValidEmail,
                   }}>
             {(props) => {
@@ -76,12 +75,12 @@ function Login(props) {
                   type='password'>
             {({ onChange, ...props}) => {
               return (<input {...props} 
-                      className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`} 
+                      className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                       onChange={(e) => {
                         onChange(e.target.value);
                         changeUserDataHandler(props.name, e.target.value);
-                      }} 
-                      onFocus={() => errorSpanHandler(props.name, true)} 
+                      }}
+                      onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}/>)
             }}</Field>
 
@@ -98,20 +97,20 @@ function Login(props) {
                       </span>)
           }}</Field>
 
-          <SubmitButton className='form__button from__button_place_login' 
+          <SubmitButton className='form__button from__button_place_login'
                         type='submit'>{
             ({ disabled , ...props}) => {
-              return (<button {...props} 
+              return (<button {...props}
                       className={`${props.className} ${disabled && 'form__button_type_disabled'}`}
                       disabled={disabled}>
                       {'Войти'}
                       </button>)
-            }}</SubmitButton>  
+            }}</SubmitButton>
           </Form>
         <p className='from__status-ask'>Еще не зарегистрированы?{<Link to='/signup' className='link link_place_form link_place_form-login'> Регистрация</Link>}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;
