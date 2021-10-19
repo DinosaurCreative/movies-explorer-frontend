@@ -4,18 +4,22 @@ import { CurrentUserContext } from '../../contexts/contexts';
 import auth from '../../utils/auth';
 import { useHistory } from 'react-router-dom';
 import { errors } from '../../utils/constants';
+
+
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
-
   function signOutHandler() {
     auth.signOut()
       .then(() => {
         props.setIsLogged(false);
         localStorage.removeItem('isLoggedIn');
-        localStorage.setItem('movies', JSON.stringify([]));
-        localStorage.setItem('movieName', '');
-        localStorage.removeItem('userId');
+        localStorage.removeItem('movies');
+        localStorage.removeItem('movieName');
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('savedMovies');
+        localStorage.removeItem('beatFilmBase');
+
       })
       .then(() => history.push('/'))
       .catch(() => props.showServerErrorHandler(errors.serverResponseErr))

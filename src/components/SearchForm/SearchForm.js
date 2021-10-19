@@ -58,6 +58,7 @@ function SearchForm(props) {
               className='search-form__error-span'
               errorslist={{
                 required: errors.required,
+                validData: errors.badValue,
               }}>
               {(props) => {
                 return (<span {...props}

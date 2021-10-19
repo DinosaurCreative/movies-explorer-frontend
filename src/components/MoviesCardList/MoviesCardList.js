@@ -2,7 +2,6 @@ import { useLocation } from 'react-router';
 import MovieCard from '../MovieCard/MovieCard';
 
 function MoviesCardList(props) {
-  
   const location = useLocation();
   return (
     <div className='movies-card-list'>

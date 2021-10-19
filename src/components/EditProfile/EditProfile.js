@@ -3,7 +3,7 @@ import validators from '../../utils/validators';
 import { useState } from 'react';
 import mainApi from '../../utils/mainApi';
 import { useHistory } from 'react-router-dom';
-import { errors } from '../../utils/constants';
+import { errors, userDataChanged } from '../../utils/constants';
 
 function EditProfile(props) {
   const [ emailError, setEmailError ] = useState(false);
@@ -32,17 +32,17 @@ function EditProfile(props) {
   function submitHandler() {
     mainApi.setNewProfileData(userData)
       .then((res) => {
-        props.setCurrentUser({ email: res.email , name: res.name});
+        props.setServerResponseNumber(200);
+        props.setServerResponseMsg(userDataChanged);
+        props.setIsRequestOk(true);
+        localStorage.setItem('currentUser', JSON.stringify(res));
         history.push('/profile');
       })
       .catch((err) => {
-        if(err === 409) {
-         props.showServerErrorHandler(errors.emailBusy);
-        } else {
-          props.showServerErrorHandler(errors.serverResponseErr);
-        }
-        console.log(err);
+        props.setIsRequestOk(false);
+        props.setServerResponseNumber(err);
       })
+      .finally(() => props.setIsRegPopupShowing(true))
   };
 
 
@@ -92,6 +92,7 @@ function EditProfile(props) {
                  errorslist = {{
                   required: errors.required,
                   isValidEmail: errors.isValidEmail,
+                  sameData: errors.sameData,
                 }}>
             {(props) => {
               return (<span {...props} 
@@ -122,6 +123,7 @@ function EditProfile(props) {
                  required: errors.required,
                  minLength: errors.minNameLength,
                  format: errors.formatError,
+                 sameData: errors.sameData,
                 }}>
             {(props) => {
               return (<span {...props} 

@@ -1,13 +1,33 @@
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/mainApi';
+import { useContext  } from 'react';
+import { CurrentUserContext } from '../../contexts/contexts';
 
 function SavedMovies(props) {
+  const currentUser = useContext(CurrentUserContext);
   const [ movieNotFound, setMovieNotFound ] = useState(false);
   const [ isShortFilm, setIsShortFilm ] = useState(false);
-  const currentUserId = localStorage.getItem('userId');
+  const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+  const [ backToSavedMovies, setBackToSavedMovies ] = useState(false);
+  useEffect(() => {
+    getSavedMoviesHandler();
+  }, [])
+
+  function sortSavedCards(value) {
+    return value.filter(item => item.owner === currentUser._id ? item : '');
+  };
+
+  function getSavedMoviesHandler() {
+    mainApi.getMovies()
+      .then((res) => {
+        props.setSavedMovies(sortSavedCards(res.data));
+        localStorage.setItem('savedMovies', JSON.stringify(sortSavedCards(res.data)));
+      })
+      .catch((err) => props.showServerErrorHandler(err))
+  };
 
   function preloaderToggler(val) {
     props.setIsPreloaderShowing(val);
@@ -22,42 +42,26 @@ function SavedMovies(props) {
 
   function sortCards(value) {
     const sorted = value.filter(item => {
-      if(item.nameRU && shortFilmHandler(item) && item.owner === currentUserId && item.nameRU.toLowerCase().includes(localStorage.getItem('movieName'))) {
+      if(item.nameRU && shortFilmHandler(item) && item.owner === currentUser._id && item.nameRU.toLowerCase().includes(localStorage.getItem('movieName'))) {
         return item;
-      } if (item.nameEN && shortFilmHandler(item) && item.owner === currentUserId && item.nameEN.toLowerCase().includes(localStorage.getItem('movieName'))) {
+      } if (item.nameEN && shortFilmHandler(item) && item.owner === currentUser._id && item.nameEN.toLowerCase().includes(localStorage.getItem('movieName'))) {
         return item;
       };
     });
     return sorted;
   };
 
-  function findInSavedMovies() {
-    Promise.resolve([props.setSavedMovies([]), preloaderToggler(true)])
-      .then(() => {
-        mainApi.getMovies()
-          .then((res) => {
-            props.setSavedMovies(sortCards(res.data))
-            return res.data;
-          })
-          .then((res) => {
-            !sortCards(res).length ? setMovieNotFound(true) : setMovieNotFound(false);
-            props.setBackToSavedMovies(true);
-          })
-          .catch((err) => {
-            console.log(err);
-            props.showServerErrorHandler(err);
-          })
-          .finally(() => preloaderToggler(false))
-      })
-      .catch((err) => {
-        console.log(err);
-        props.showServerErrorHandler(err);
-      })
+  async function findInSavedMovies() {
+    await [props.setSavedMovies([]), preloaderToggler(true)]
+    await props.setSavedMovies(sortCards(savedMovies))
+    await [!sortCards(savedMovies).length ? setMovieNotFound(true) : setMovieNotFound(false), setBackToSavedMovies(true)]
+    await preloaderToggler(false)
   };
 
   function hideResetButtonHendler() {
-    props.setBackToSavedMovies(false);
+    setBackToSavedMovies(false);
     props.setIsResetButtonPushed(true);
+    props.setSavedMovies(savedMovies);
   };
 
   function deleteMovieHandler(card) {
@@ -96,7 +100,7 @@ function SavedMovies(props) {
                       setSavedMovies={props.setSavedMovies}
                       setMovies={props.setMovies}
                       deleteMovieHandler={deleteMovieHandler} 
-                      backToSavedMovies={props.backToSavedMovies}
+                      backToSavedMovies={backToSavedMovies}
                       hideResetButtonHendler={hideResetButtonHendler} 
                       movieNotFound={movieNotFound}/>
       { props.isPreloaderShowing && <Preloader />}

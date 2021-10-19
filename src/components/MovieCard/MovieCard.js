@@ -35,24 +35,24 @@ function MovieCard(props) {
       movieId: String(card.id),
     };
 
-  mainApi.saveMovie(film)
-    .then((res) => {
-      const localMovies = JSON.parse(localStorage.getItem('movies'));
-      localMovies.forEach((movie) => {
-        if (movie.id === Number(res.data.movieId)) {
-          movie.saved = true;
-          movie._id = res.data._id;
-          props.setSavedMovies(savedMovies => [...savedMovies, movie ])
-        };
-      });
-      localStorage.setItem('movies', JSON.stringify(localMovies));
-      props.setMovies(sortCards(localMovies, props.movies.length));
-    })
-    .catch((err) => {
-      console.log(err);
-      props.showServerErrorHandler(errors.loginFail);
-    })
-  };
+    mainApi.saveMovie(film)
+      .then((res) => {
+        const localMovies = JSON.parse(localStorage.getItem('movies'));
+        localMovies.forEach((movie) => {
+          if (movie.id === Number(res.data.movieId)) {
+            movie.saved = true;
+            movie._id = res.data._id;
+            props.setSavedMovies(savedMovies => [...savedMovies, movie ])
+          };
+        });
+        localStorage.setItem('movies', JSON.stringify(localMovies));
+        props.setMovies(sortCards(localMovies, props.movies.length));
+      })
+      .catch((err) => {
+        console.log(err);
+        props.showServerErrorHandler(errors.loginFail);
+      })
+    };
 
   return (
     <li className='movie-card'>

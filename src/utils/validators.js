@@ -1,5 +1,8 @@
 import validator from 'validator';
-import { regexp } from './constants';
+import { regexp, passRegexp } from './constants';
+
+
+const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
 
 const validators = {
   email: {
@@ -8,7 +11,13 @@ const validators = {
     },
     isValidEmail(value){
       return !validator.isEmail(value);
-    } 
+    },
+    // sameData(value){
+    //   if(currentUser) {
+    //     return currentUser.email === value;
+    //   }
+    //   return false;
+    // }
   },
   password: {
     required(value){
@@ -16,22 +25,33 @@ const validators = {
     },
     minLength(value){
       return value.length < 8;
+    },
+    passFormat(value){
+      return !passRegexp.test(value);
     }
   },
   name: {
     required(value){
-      return value === '';
+      return value.trim() === '';
     },
     minLength(value){
       return value.length < 2;
     },
     format(value) {
       return !regexp.test(value);
+    },
+    sameData(value){
+      if(currentUser) {
+        return currentUser.name === value.trim();
+      }
     }
   },
   userMovie: {
     required(value){
       return value === '';
+    }, 
+    validData(value){
+      return value.trim() === '';
     }
   }
 }

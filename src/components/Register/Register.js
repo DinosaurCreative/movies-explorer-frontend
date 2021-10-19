@@ -55,7 +55,7 @@ function Register(props) {
                 onFocus={() => errorSpanHandler(props.name, true)}
                 onBlur={() => errorSpanHandler(props.name, false)}
                 onChange={(e) => {
-                  onChange(e.target.value);
+                  onChange(e.target.value.trim());
                   changeUserDataHandler(props.name, e.target.value )
                 }} />)
             }}
@@ -90,7 +90,7 @@ function Register(props) {
                       onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}
                       onChange={(e) => {
-                        onChange(e.target.value);
+                        onChange(e.target.value.trim());
                         changeUserDataHandler(props.name, e.target.value)
                       }} />)
           }}
@@ -131,6 +131,7 @@ function Register(props) {
                   errorslist={{
                     required: errors.required,
                     minLength: errors.minPassLength,
+                    passFormat: errors.badPass,
                   }}>
             {(props) => {
               return (<span {...props}
