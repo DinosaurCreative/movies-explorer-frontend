@@ -12,6 +12,7 @@ function SavedMovies(props) {
   const [ isShortFilm, setIsShortFilm ] = useState(false);
   const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
   const [ backToSavedMovies, setBackToSavedMovies ] = useState(false);
+  
   useEffect(() => {
     getSavedMoviesHandler();
   }, [])
@@ -23,8 +24,9 @@ function SavedMovies(props) {
   function getSavedMoviesHandler() {
     mainApi.getMovies()
       .then((res) => {
-        props.setSavedMovies(sortSavedCards(res.data));
-        localStorage.setItem('savedMovies', JSON.stringify(sortSavedCards(res.data)));
+        const ownersCardsFromCommonSavedValue = sortSavedCards(res.data);
+        props.setSavedMovies(ownersCardsFromCommonSavedValue);
+        localStorage.setItem('savedMovies', JSON.stringify(ownersCardsFromCommonSavedValue));
       })
       .catch((err) => props.showServerErrorHandler(err))
   };

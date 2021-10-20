@@ -9,6 +9,7 @@ import { errors } from '../../utils/constants';
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
+  console.log(JSON.parse(localStorage.getItem('savedUserMovies')), 1)
   function signOutHandler() {
     auth.signOut()
       .then(() => {

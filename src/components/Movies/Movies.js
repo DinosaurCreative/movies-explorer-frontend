@@ -8,7 +8,7 @@ import mainApi from '../../utils/mainApi';
 import { isURL } from 'validator';
 
 function Movies(props) {
-  const localMovies = JSON.parse(localStorage.getItem('movies'));
+  const localMovies = JSON.parse(localStorage.getItem('movies')); // фильмы сохраненные по запросу ключевым словом
   const [ isShortFilm, setIsShortFilm ] = useState(false);
   const [ movieNotFound, setMovieNotFound ] = useState(false);
   const beatFilmBase = JSON.parse(localStorage.getItem('beatFilmBase'));
@@ -19,33 +19,36 @@ function Movies(props) {
     toggleShortHandler(localMovies);
   }, [isShortFilm])
   
+
+//  отрисовывает карточки в зависимости от положения тоглера. Так же при старте страницы отрисовывает данные из localStorage
   function toggleShortHandler(value) {
     if(!localMovies) return
     if(isShortFilm) {
       localMoviesHandler(shortFilmHandler(sortCards(value)));
       return
     }
+    // выводит на экран фильмы отсортированные по ключевому слову.
     localMoviesHandler(sortCards(value))
   }
 
   function localMoviesHandler(value) {
-    setCurrentArrayLength(value.length);
+    setCurrentArrayLength(value.length);  // устанавлиывает длину массива с карточками, что бы скрытвать или отбражать кнопку "еще"
     if(value) {
       for(let i = 0; i < value.length && i < props.uploadingCards; i++) {
         props.setMovies(movies => [...movies, value[i]])
       }
     }
   }
-
+  /// тоглит прелоадер
   function preloaderToggler(val) {
     props.setIsPreloaderShowing(val)
   }
-
+  //  определяет попадает ли в категорию короткого метра
   function shortFilmHandler(value) {
     return value.filter(item => item.duration > 40 ? false : true);
   }
 
-
+  // сортирует базу бтфильма по ключевому слову и отдает результат^ смотрит в английском и руском именах.
   function sortCards(value) {
     const sorted = value.filter(item => {
       if(item.nameRU && item.nameRU.toLowerCase().includes(localStorage.getItem('movieName'))) {
@@ -57,7 +60,7 @@ function Movies(props) {
 
     return sorted;
   }
-
+  // проверяет пришедшие данные с сервака перед упаковкой в локалный сторадж
   function checkIncomingValueValidityHandler(values) {
     return values.map((item) => {
       item.saved = false;
@@ -74,7 +77,7 @@ function Movies(props) {
       return item;
     }
   )}
-
+  // Проверяет сохранен ли фильм
   function checkIsMovieSavedHandler(item) {
     props.savedMovies.forEach((movie) => {
       if(item.id === Number(movie.movieId)) {
@@ -84,6 +87,7 @@ function Movies(props) {
       }
     })
   }
+
 
   function sortDeletedCards(value, length) {
     const backVal = [];
@@ -95,12 +99,12 @@ function Movies(props) {
 
   function deleteMovieHandler(card) {
     mainApi.deleteMovie(card._id)
-      .then((res) => {
-        const checked = props.savedMovies.filter((movie) =>  !res.message.includes(movie.nameRU));
-        const deleted = props.savedMovies.filter((movie) =>  res.message.includes(movie.nameRU));
-        const localMovies = JSON.parse(localStorage.getItem('movies'));
-
-        localMovies.forEach((movie) => {
+    .then((res) => {
+      const deleted = props.movies.filter((movie) =>  res.message.includes(movie.nameRU));  /// та которую удалили
+      const checked = props.movies.filter((movie) =>  !res.message.includes(movie.nameRU)); /// те что остались
+      const localMovies = JSON.parse(localStorage.getItem('movies'));  ///достаю сохраненные по ключевому слову фильмы
+      
+        localMovies.forEach((movie) => { ///прохожу по ключевым фильмам
           if (movie.id === deleted[0].id || movie.id === Number(deleted[0].movieId)) {
             movie.saved = false;
             movie._id = '';
@@ -122,6 +126,7 @@ function Movies(props) {
         await [props.setMovies([]), localStorage.removeItem('movies'), preloaderToggler(true)];
         await localStorage.setItem('movies', JSON.stringify(checkIncomingValueValidityHandler(sortCards(beatFilmBase))));
         const localMovies = await JSON.parse(localStorage.getItem('movies'));
+        await console.log(localMovies)
         await toggleShortHandler(localMovies);
         await localMovies ? setMovieNotFound(true) : setMovieNotFound(false);
       } finally {
@@ -138,7 +143,7 @@ function Movies(props) {
       await localStorage.setItem('movies', JSON.stringify(checkIncomingValueValidityHandler(sortCards(response))));
       const localMovies = await JSON.parse(localStorage.getItem('movies'));
       await localMoviesHandler(localMovies);
-      await localMovies ? setMovieNotFound(true) : setMovieNotFound(false);
+      await localMovies.length > 0 ? setMovieNotFound(true) : setMovieNotFound(false);
     } catch (err){
       console.log(err);
       props.showServerErrorHandler(errors.serverResponseErr);
@@ -153,7 +158,6 @@ function Movies(props) {
   };
 
   function addMoreMovies() {
-
     const num = props.movies.length;
     for(let i = num; i < num + props.uploadCardsQunt; i++) {
       if(localMovies[i]){
