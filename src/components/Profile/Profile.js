@@ -9,9 +9,9 @@ function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
   function signOutHandler() {
+    props.setIsLogged(false);
     auth.signOut()
       .then(() => {
-        props.setIsLogged(false);
         localStorage.removeItem('currentUser');
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('savedMovies');
@@ -20,6 +20,8 @@ function Profile(props) {
         localStorage.removeItem('movies');
         localStorage.removeItem('localMovieName');
         props.setCurrentUser(null);
+        setTimeout(() => {
+        }, );
       })
       .then(() => history.push('/'))
       .catch(() => props.showServerErrorHandler(errors.serverResponseErr))

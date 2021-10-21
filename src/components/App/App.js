@@ -216,7 +216,7 @@ function App() {
                           setServerResponseNumber={setServerResponseNumber} />
               </Route>}
             
-              <Route path="" component={Error} />
+              {isLogged && <Route path="" component={Error} />}
             </Switch>
             { location.pathname !== '/profile'
             && location.pathname !== '/signin'

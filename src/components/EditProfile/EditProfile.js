@@ -9,7 +9,7 @@ function EditProfile(props) {
   const [ emailError, setEmailError ] = useState(false);
   const [ nameError, setNameError ] = useState(false);
   const [ userData, setUserData ] = useState({});
-
+  const [ submitting, setIsSubmitting ] = useState(false);
   const history = useHistory();
 
   function errorMessageHandler(props) {
@@ -30,6 +30,7 @@ function EditProfile(props) {
   };
 
   function submitHandler() {
+    setIsSubmitting(true)
     mainApi.setNewProfileData(userData)
       .then((res) => {
         props.setServerResponseNumber(200);
@@ -42,7 +43,10 @@ function EditProfile(props) {
         props.setIsRequestOk(false);
         props.setServerResponseNumber(err);
       })
-      .finally(() => props.setIsRegPopupShowing(true))
+      .finally(() => {
+        props.setIsRegPopupShowing(true);
+        setIsSubmitting(false);
+      })
   };
 
 
@@ -76,6 +80,7 @@ function EditProfile(props) {
             ({ onChange, ...props}) => {
               return (<input
                         placeholder={props.placeholder}
+                        disabled={submitting}
                         className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                         onFocus={() => errorSpanHandler(props.name, true)}
                         onBlur={() => errorSpanHandler(props.name, false)}
@@ -107,6 +112,7 @@ function EditProfile(props) {
                  type='text'>{
                   ({ onChange, ...props}) => {
                     return (<input 
+                              disabled={submitting}
                               placeholder={props.placeholder}
                               className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                               onFocus={() => errorSpanHandler(props.name, true)}

@@ -114,10 +114,7 @@ function SavedMovies(props) {
     <div className='saved-movies'>
       <SearchForm getMovieHandler={findInSavedMovies}
                   shortsToggler={shortsToggler}
-                  movieNotFound={movieNotFound}
-                  searchKeyword='localMovieName' 
-                  isShortFilm={isShortFilm}
-                  movieNotFound={movieNotFound}/>
+                  searchKeyword='localMovieName' />
 
       <MoviesCardList movies={props.savedMovies}
                       setSavedMovies={props.setSavedMovies}

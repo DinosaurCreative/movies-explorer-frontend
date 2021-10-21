@@ -39,7 +39,7 @@ function SearchForm(props) {
               type='submit'>
               {({ onChange, ...props }) => {
                 return (<input
-                  disabled={props.movieNotFound && props.isShortFilm }
+                  disabled={isSubmiting}
                   placeholder={props.placeholder}
                   className={`${props.className} ${errorStatusHandler(props) && 'serch-form__input_type_error'}`}
                   onFocus={() => errorSpanHandler(props.name, true)}

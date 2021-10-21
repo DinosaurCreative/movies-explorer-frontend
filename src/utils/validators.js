@@ -41,9 +41,10 @@ const validators = {
       return !regexp.test(value);
     },
     sameData(value){
-      if(currentUser) {
-        return currentUser.name === value.trim();
+      if(JSON.parse(localStorage.getItem('currentUser')) !== null) {
+        return JSON.parse(localStorage.getItem('currentUser')).name === value.trim();
       }
+      return false
     }
   },
   userMovie: {

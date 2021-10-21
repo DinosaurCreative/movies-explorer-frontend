@@ -9,7 +9,7 @@ function Register(props) {
   const [ passwordError, setPasswordError ] = useState(false);
   const [ nameError, setNameError ] = useState(false);
   const [ userRegisterData, setUserRegisterData ] = useState({ name: '', email: '', password: '' });
-
+  const [ submitting, setIsSubmitting ] = useState(false);
   function changeUserDataHandler(name, value) {
     setUserRegisterData({ ...userRegisterData, [name]: value });
   };
@@ -51,6 +51,7 @@ function Register(props) {
                  type='text'>
             {({ onChange, ...props }) => {
               return (<input 
+                disabled={submitting}
                 className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                 onFocus={() => errorSpanHandler(props.name, true)}
                 onBlur={() => errorSpanHandler(props.name, false)}
@@ -86,6 +87,7 @@ function Register(props) {
 
           {({ onChange, ...props}) => {
             return (<input
+                      disabled={submitting}
                       className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                       onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}
@@ -117,6 +119,7 @@ function Register(props) {
                   type='password'>
             {({ onChange, ...props}) => {
               return (<input {...props}
+                      disabled={submitting}
                       className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                       onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}
