@@ -18,6 +18,7 @@ import { CurrentUserContext } from '../../contexts/contexts';
 import ProtectedRoute from  '../ProtectedRoute/ProtectedRoute';
 import auth from '../../utils/auth';
 import { errors, registrationSucceed } from '../../utils/constants';
+import mainApi from '../../utils/mainApi';
 
 function App() {
   const [ isMenuOpen, setIsMenuOpen ] = useState(false);
@@ -27,21 +28,19 @@ function App() {
   const [ isPreloaderShowing, setIsPreloaderShowing ] = useState(false);
   const [ isResetButtonPushed, setIsResetButtonPushed ] = useState(false)
   const [ isLogged, setIsLogged ] = useState(false);
+  const [ isRequestOk, setIsRequestOk ] = useState(true);
+  const [ isRegisterPopupShowing, setIsRegPopupShowing ] = useState(false);
+  const [ serverResponceNubmber, setServerResponseNumber ] = useState(0);
+  const [ serevrResponseMsg, setServerResponseMsg ] = useState('');
+  const [ movies, setMovies ] = useState([]);
+  const [ savedMovies, setSavedMovies ] = useState([]);
   const location = useLocation();
   const uploadingCards = screenWidth < 480 ? 5 : screenWidth < 769 ? 8 : 12;
   const uploadCardsQunt = screenWidth < 769 ? 2 : 3;
   const history = useHistory();
   const isLoggedIn = localStorage.getItem('isLoggedIn');
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  const [ isRequestOk, setIsRequestOk ] = useState(true);
-  const [ isRegisterPopupShowing, setIsRegPopupShowing ] = useState(false);
-  const [ serverResponceNubmber, setServerResponseNumber ] = useState(0);
-  const [ serevrResponseMsg, setServerResponseMsg ] = useState('');
-  
-  const [ movies, setMovies ] = useState([]);
-  const [ savedMovies, setSavedMovies ] = useState([]);
+  const [ currentUser, setCurrentUser ] = useState(JSON.parse(localStorage.getItem('currentUser')));
 
-  
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });
     return () => {
@@ -49,6 +48,19 @@ function App() {
     };
   }, []);
  
+  if(!currentUser && isLogged) {
+    mainApi.getProfileData()
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        if(err === 401) {
+          showServerErrorHandler(errors.loginFail);
+          return
+        }
+        showServerErrorHandler(errors.serverResponseErr);
+      })
+  }
   function handleCheckToken() {
     auth.checkToken()
       .then(() => {
@@ -58,7 +70,12 @@ function App() {
         if (err.status === 401) {
           setIsLogged(false);
           localStorage.removeItem('currentUser');
-          ////  здесь надо почитсить весь localStorage
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('savedMovies');
+          localStorage.removeItem('movieName');
+          localStorage.removeItem('beatFilmBase');
+          localStorage.removeItem('movies');
+          localStorage.removeItem('localMovieName');
         };
       })
   };
@@ -122,7 +139,7 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={ isLogged ? currentUser : ''}>
         <div className='page'>{
           isModalOpen && <ModalPopup closeModal={hideServerErrorHandler}
                                      isModalOpen={isModalOpen}
@@ -153,7 +170,8 @@ function App() {
                               setIsRequestOk={setIsRequestOk}
                               setServerResponseNumber={setServerResponseNumber}
                               setServerResponseMsg={setServerResponseMsg}
-                              setIsRegPopupShowing={setIsRegPopupShowing} />
+                              setIsRegPopupShowing={setIsRegPopupShowing} 
+                              setIsLogged={setIsLogged}/>
               
               <ProtectedRoute component={Movies}
                               path='/movies'
@@ -185,17 +203,18 @@ function App() {
                               path='/profile'
                               isLoggedIn={isLoggedIn}
                               setIsLogged={setIsLogged}
-                              showServerErrorHandler={showServerErrorHandler} />
+                              showServerErrorHandler={showServerErrorHandler}
+                              setCurrentUser={setCurrentUser} />
 
-              <Route path = '/signin'>
+              {!isLoggedIn && <Route path = '/signin'>
                 <Login onSubmit={handleSignIn} />
-              </Route>
+              </Route>}
               
-              <Route path = '/signup'>
+              {!isLoggedIn && <Route path = '/signup'>
                 <Register onSubmit={handleSignUp} 
                           setIsRequestOk={setIsRequestOk}
                           setServerResponseNumber={setServerResponseNumber} />
-              </Route>
+              </Route>}
             
               <Route path="" component={Error} />
             </Switch>

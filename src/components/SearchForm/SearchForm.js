@@ -22,12 +22,8 @@ function SearchForm(props) {
     }, 2000)
   };
 
-  function shortFilmHandler() {
-    props.setIsShortFilm(!props.isShortFilm);
-  };
-
   function setToLocalStorege(value) {
-    localStorage.setItem('movieName', value.toLowerCase());
+    localStorage.setItem(props.searchKeyword, value.toLowerCase());
   };
 
   return (
@@ -43,13 +39,14 @@ function SearchForm(props) {
               type='submit'>
               {({ onChange, ...props }) => {
                 return (<input
+                  disabled={props.movieNotFound && props.isShortFilm }
                   placeholder={props.placeholder}
                   className={`${props.className} ${errorStatusHandler(props) && 'serch-form__input_type_error'}`}
                   onFocus={() => errorSpanHandler(props.name, true)}
                   onBlur={() => errorSpanHandler(props.name, false)}
                   onChange={(e) => {
-                    onChange(e.target.value);
-                    setToLocalStorege(e.target.value);
+                    onChange(e.target.value.trim());
+                    setToLocalStorege(e.target.value.trim());
                   }}
                   onSubmit={props.onSubmit} />);
               }}
@@ -74,7 +71,7 @@ function SearchForm(props) {
             } }</SubmitButton>
         <div className='search-form__border' />
         <div className='search-form__checkbox-container'>
-          <input className='search-form__checkbox' onClick={shortFilmHandler} type='checkbox' />
+          <input className='search-form__checkbox' name='shorts' onClick={props.shortsToggler} type='checkbox' />
           <p className='search-form__checkbox-caption'>Короткометражки</p>
         </div>
       </Form>

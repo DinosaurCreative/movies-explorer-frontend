@@ -7,16 +7,30 @@ import { useContext  } from 'react';
 import { CurrentUserContext } from '../../contexts/contexts';
 
 function SavedMovies(props) {
-  const currentUser = useContext(CurrentUserContext);
-  const [ movieNotFound, setMovieNotFound ] = useState(false);
-  const [ isShortFilm, setIsShortFilm ] = useState(false);
   const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+  const currentUser = useContext(CurrentUserContext);
+  const [ isShortFilm, setIsShortFilm ] = useState(false);
+  const [ movieNotFound, setMovieNotFound ] = useState(false);
   const [ backToSavedMovies, setBackToSavedMovies ] = useState(false);
+  const [ updatedCardList, setUpdetedcardList ] = useState([]);
 
   useEffect(() => {
-    props.setSavedMovies([])
+    props.setSavedMovies([]);
     getSavedMoviesHandler();
-  }, [])
+  }, []);
+
+  function shortsToggler() {
+    if(!isShortFilm) {
+      if(shortFilmHandler(updatedCardList).length === 0) {
+        setMovieNotFound(true);
+      }
+      props.setSavedMovies(shortFilmHandler(updatedCardList));
+      setIsShortFilm(true)
+    } if(isShortFilm) {
+      props.setSavedMovies(updatedCardList);
+      setIsShortFilm(false)
+    }
+  }
 
   function sortSavedCards(value) {
     return value.filter(item => item.owner === currentUser._id ? item : '');
@@ -28,6 +42,7 @@ function SavedMovies(props) {
         const ownersCardsFromCommonSavedValue = sortSavedCards(res.data);
         props.setSavedMovies(ownersCardsFromCommonSavedValue);
         localStorage.setItem('savedMovies', JSON.stringify(ownersCardsFromCommonSavedValue));
+        setUpdetedcardList(ownersCardsFromCommonSavedValue);
       })
       .catch((err) => props.showServerErrorHandler(err))
   };
@@ -37,17 +52,14 @@ function SavedMovies(props) {
   };
 
   function shortFilmHandler(value) {
-    if(!isShortFilm) {
-      return true;
-    };
-    return value.duration > 40 ? false : true;
-  };
+    return value.filter(item => item.duration > 40 ? false : true);
+  }
 
   function sortCards(value) {
     const sorted = value.filter(item => {
-      if(item.nameRU && shortFilmHandler(item) && item.owner === currentUser._id && item.nameRU.toLowerCase().includes(localStorage.getItem('movieName'))) {
+      if(item.nameRU && item.owner === currentUser._id && item.nameRU.toLowerCase().includes(localStorage.getItem('localMovieName'))) {
         return item;
-      } if (item.nameEN && shortFilmHandler(item) && item.owner === currentUser._id && item.nameEN.toLowerCase().includes(localStorage.getItem('movieName'))) {
+      } if (item.nameEN && item.owner === currentUser._id && item.nameEN.toLowerCase().includes(localStorage.getItem('localMovieName'))) {
         return item;
       };
     });
@@ -55,9 +67,11 @@ function SavedMovies(props) {
   };
 
   async function findInSavedMovies() {
-    await [props.setSavedMovies([]), preloaderToggler(true)]
-    await props.setSavedMovies(sortCards(savedMovies))
-    await [!sortCards(savedMovies).length ? setMovieNotFound(true) : setMovieNotFound(false), setBackToSavedMovies(true)]
+    await preloaderToggler(true)
+    await isShortFilm && props.setSavedMovies(sortCards(props.savedMovies));
+    await isShortFilm && props.savedMovies.length === 0 && setMovieNotFound(true);
+    await !isShortFilm && props.setSavedMovies(sortCards(JSON.parse(localStorage.getItem('savedMovies'))));
+    await [!sortCards(JSON.parse(localStorage.getItem('savedMovies'))).length ? setMovieNotFound(true) : setMovieNotFound(false), setBackToSavedMovies(true)]
     await preloaderToggler(false)
   };
 
@@ -70,7 +84,7 @@ function SavedMovies(props) {
   function deleteMovieHandler(card) {
     mainApi.deleteMovie(card._id)
       .then((res) => {
-        const checked = props.savedMovies.filter((movie) => !res.message.includes(movie.nameRU));
+        const checked = JSON.parse(localStorage.getItem('savedMovies')).filter((movie) => !res.message.includes(movie.nameRU));
         const deleted = props.savedMovies.filter((movie) => res.message.includes(movie.nameRU));
         const localMovies = JSON.parse(localStorage.getItem('movies'));
         props.setMovies([])
@@ -85,7 +99,13 @@ function SavedMovies(props) {
             props.setMovies(localMovies);
           })
         }
-        props.setSavedMovies(checked);
+        setUpdetedcardList((checked));
+        localStorage.setItem('savedMovies', JSON.stringify(checked));
+        if(isShortFilm) {
+          props.setSavedMovies(shortFilmHandler(checked));
+        } if(!isShortFilm) {
+          props.setSavedMovies(checked);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -95,12 +115,13 @@ function SavedMovies(props) {
   return (
     <div className='saved-movies'>
       <SearchForm getMovieHandler={findInSavedMovies}
-                  setIsShortFilm={setIsShortFilm}
+                  shortsToggler={shortsToggler}
+                  movieNotFound={movieNotFound}
+                  searchKeyword='localMovieName' 
                   isShortFilm={isShortFilm}
-                   />
+                  movieNotFound={movieNotFound}/>
 
       <MoviesCardList movies={props.savedMovies}
-                      // savedMovies={props.savedMovies}
                       setSavedMovies={props.setSavedMovies}
                       setMovies={props.setMovies}
                       deleteMovieHandler={deleteMovieHandler} 

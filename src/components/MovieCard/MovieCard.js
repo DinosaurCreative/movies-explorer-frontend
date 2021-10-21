@@ -11,7 +11,6 @@ function MovieCard(props) {
     props.deleteMovieHandler(card);
   };
 
-
   function sortCards(value, length) {
     const backVal = [];
     for (let i = 0; i < length; i++) {
@@ -20,6 +19,9 @@ function MovieCard(props) {
     return backVal;
   }
 
+  function shortFilmHandler(value) {
+    return value.filter(item => item.duration > 40 ? false : true);
+  }
 
   function saveMovieHandler() {
     const film = { 
@@ -37,21 +39,23 @@ function MovieCard(props) {
     };
 
     mainApi.saveMovie(film)
-    .then((res) => {
-      const localMovies = JSON.parse(localStorage.getItem('movies'));
-      console.log(JSON.parse(localStorage.getItem('movies')))
-
-      localMovies.forEach((movie) => {
-        if (movie.id === Number(res.data.movieId)) {
-          movie.saved = true;
-          movie._id = res.data._id;
-          props.setSavedMovies(savedMovies => [...savedMovies, movie ])
-        }; 
-      });
+      .then((res) => {
+        const localMovies = JSON.parse(localStorage.getItem('movies'));
+        localMovies.forEach((movie) => {
+          if (movie.id === Number(res.data.movieId)) {
+            movie.saved = true;
+            movie._id = res.data._id;
+            props.setSavedMovies(savedMovies => [...savedMovies, movie ])
+          }; 
+        });
 
         localStorage.setItem('movies', JSON.stringify(localMovies));
-        props.setMovies(sortCards(localMovies, props.movies.length));
-        localStorage.setItem('savedUserMovies', JSON.stringify(props.savedMovies))
+        // localStorage.setItem('savedUserMovies', JSON.stringify(props.savedMovies))
+        if(props.isShortFilm) {
+          props.setMovies(shortFilmHandler(localMovies));
+        } if (!props.isShortFilm) {
+          props.setMovies(sortCards(localMovies, props.movies.length));
+        }
       })
       .catch((err) => {
         console.log(err);

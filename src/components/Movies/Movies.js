@@ -29,9 +29,13 @@ function Movies(props) {
   function toggleShortHandler(value) {
     if(!localMovies) return
     if(isShortFilm) {
+      if(shortFilmHandler(sortCards(value)).length === 0) {
+        setMovieNotFound(true);
+      }
       localMoviesHandler(shortFilmHandler(sortCards(value)));
       return
     }
+    setMovieNotFound(false);
     localMoviesHandler(sortCards(value))
   }
 
@@ -64,7 +68,6 @@ function Movies(props) {
   }
 
   function checkIncomingValueValidityHandler(values) {
-    console.log(values)
     return values.map((item) => {
       item.saved = false;
       checkIsMovieSavedHandler(item);
@@ -83,7 +86,6 @@ function Movies(props) {
 
   function checkIsMovieSavedHandler(item) {
     props.savedMovies.forEach((movie) => {
-      console.log(item.nameRU)
       if(item.id === Number(movie.movieId)) {
         item._id = movie._id;
         item.saved = true;
@@ -117,8 +119,13 @@ function Movies(props) {
           movie._id = '';
         }
           localStorage.setItem('movies', JSON.stringify(localMovies));
-          props.setMovies(sortDeletedCards(localMovies, props.movies.length));
+          
         })
+        if(isShortFilm) {
+          props.setMovies(shortFilmHandler(localMovies));
+        } if (!isShortFilm) {
+          props.setMovies(sortDeletedCards(localMovies, props.movies.length));
+        }
         props.setSavedMovies(checked);
       })
       .catch((err) => {
@@ -174,7 +181,9 @@ function Movies(props) {
       };
     };
   };
-
+  function shortsToggler() {
+    setIsShortFilm(!isShortFilm);
+  };
   return (
     <div className='movies'>
       <SearchForm setMovies={props.setMovies}
@@ -183,8 +192,8 @@ function Movies(props) {
                   screenWidth={props.screenWidth}
                   setIsPreloaderShowing={props.setIsPreloaderShowing}
                   getMovieHandler={getMovieHandler}
-                  isShortFilm={isShortFilm}
-                  setIsShortFilm={setIsShortFilm}/>
+                  shortsToggler={shortsToggler}
+                  searchKeyword='movieName'/>
 
       <MoviesCardList setMovies={props.setMovies}
                       screenWidth={props.screenWidth}
@@ -195,7 +204,8 @@ function Movies(props) {
                       savedMovies={props.savedMovies}
                       setSavedMovies={props.setSavedMovies}
                       localMoviesHandler={localMoviesHandler}
-                      deleteMovieHandler={deleteMovieHandler}>
+                      deleteMovieHandler={deleteMovieHandler}
+                      isShortFilm={isShortFilm}>
           { moreButtonVisibilityHandler() && <button className='movies-card-list__more-btn' type='button' onClick={addMoreMovies}>Ещё</button>}
           </MoviesCardList>
       {props.isPreloaderShowing && <Preloader />}

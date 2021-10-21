@@ -63,7 +63,7 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
   );
 };
 
-export const Field = ({ children, name, className, type, errorslist, placeholder}) => {
+export const Field = ({ children, name, className, type, errorslist, placeholder, id}) => {
   const [ value, setValue] = useState('');
   const { onChangeInput, formErrors, formValues } = useContext(FormContext);
 
@@ -80,6 +80,7 @@ export const Field = ({ children, name, className, type, errorslist, placeholder
       errors: formErrors[name],
       values: formValues[name],
       placeholder,
+      id,
       onChange: setValue,
     })
   );

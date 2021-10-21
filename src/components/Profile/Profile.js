@@ -5,7 +5,6 @@ import auth from '../../utils/auth';
 import { useHistory } from 'react-router-dom';
 import { errors } from '../../utils/constants';
 
-
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
@@ -13,14 +12,14 @@ function Profile(props) {
     auth.signOut()
       .then(() => {
         props.setIsLogged(false);
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('movies');
-        localStorage.removeItem('movieName');
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('savedMovies');
+        localStorage.removeItem('movieName');
         localStorage.removeItem('beatFilmBase');
-        localStorage.removeItem('savedUserMovies');
-
+        localStorage.removeItem('movies');
+        localStorage.removeItem('localMovieName');
+        props.setCurrentUser(null);
       })
       .then(() => history.push('/'))
       .catch(() => props.showServerErrorHandler(errors.serverResponseErr))

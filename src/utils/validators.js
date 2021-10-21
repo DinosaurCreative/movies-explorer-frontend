@@ -12,12 +12,12 @@ const validators = {
     isValidEmail(value){
       return !validator.isEmail(value);
     },
-    // sameData(value){
-    //   if(currentUser) {
-    //     return currentUser.email === value;
-    //   }
-    //   return false;
-    // }
+    sameData(value){
+      if(JSON.parse(localStorage.getItem('currentUser')) !== null ) {
+        return JSON.parse(localStorage.getItem('currentUser')).email === value;
+      }
+      return false;
+    }
   },
   password: {
     required(value){
