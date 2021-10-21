@@ -19,3 +19,10 @@ export const passRegexp = /^\S+$/;
 export const regexp = /^[а-яА-ЯёЁa-zA-Z \-]+$/;
 export const registrationSucceed = 'Вы зарегистрировались.';
 export const userDataChanged = 'Новые данные сохранены.';
+export const shorts = 'Короткометражки';
+
+export const name = 'Имя';
+export const greeting = 'Добро пожаловать!';
+export const email = 'E-mail';
+export const password = 'Пароль';
+export const registerAsk = 'Уже зарегистрированы?';

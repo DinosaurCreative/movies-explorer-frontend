@@ -116,7 +116,7 @@ function EditProfile(props) {
                                 changeUserDataHandler(props.name, e.target.value)
                               }}/>)
           }}</Field>
-          
+    
           <Field className='form__error-span'
                  name='name'
                  errorslist = {{
@@ -131,6 +131,7 @@ function EditProfile(props) {
                 {errorMessageHandler(props)}
                 </span>)
           }}</Field>
+          
           <SubmitButton className='form__button' 
                         type='submit'>{
             ({ disabled , ...props}) => {

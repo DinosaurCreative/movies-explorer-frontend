@@ -1,5 +1,4 @@
 import { errors } from '../../utils/constants';
-import  { registrationSucceed }  from '../../utils/constants';
 
 function Popup(props) {
 
@@ -23,7 +22,6 @@ function Popup(props) {
       return errors.serverResponseErr;
     }
   }
-
 
   document.addEventListener('click', closePopupHandle);
   document.addEventListener('keydown', closePopupHandle);

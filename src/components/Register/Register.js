@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Field, SubmitButton, errorStatusHandler, errorMessageHandler } from '../../utils/Forms';
 import validators from '../../utils/validators';
-import { errors } from '../../utils/constants'
+import { errors, name, greeting, email ,password, registerAsk } from '../../utils/constants'
 
 function Register(props) {
   const [ emailError, setEmailError ] = useState(false);
@@ -36,13 +36,13 @@ function Register(props) {
     <div className='register'>
       <div className='form__container'>
       <Link to='/' href='#' className='logo logo_place_form' />
-        <h1 className='form__greeting'>Добро пожаловать!</h1>
+        <h1 className='form__greeting'>{greeting}</h1>
         <Form className='form'
                 type='submit'
                 onSubmit={submitHandler}
                 validators={validators}>
           <Field className='form__name-span'>
-            {(props) => <span {...props}>Имя</span>}
+            {(props) => <span {...props}>{name}</span>}
           </Field>
 
 
@@ -77,7 +77,7 @@ function Register(props) {
             }}
           </Field>
           <Field className='form__name-span'>
-            {(props) => <span {...props}>E-mail</span>}
+            {(props) => <span {...props}>{email}</span>}
           </Field>
 
           <Field name='email'
@@ -109,7 +109,7 @@ function Register(props) {
           </Field>
 
           <Field className='form__name-span'>
-            {(props) => <span {...props}>Пароль</span>}
+            {(props) => <span {...props}>{password}</span>}
           </Field>
 
           <Field name='password'
@@ -151,7 +151,7 @@ function Register(props) {
            }}</SubmitButton>
 
         </Form>
-        <p className='from__status-ask'>Уже зарегистрированы?{<Link to='/signin' className='link link_place_form link_place_form-registration'>Войти</Link>}</p>
+        <p className='from__status-ask'>{registerAsk}{<Link to='/signin' className='link link_place_form link_place_form-registration'>Войти</Link>}</p>
       </div>
     </div>
   );

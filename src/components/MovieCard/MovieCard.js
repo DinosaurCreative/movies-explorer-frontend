@@ -35,7 +35,6 @@ function MovieCard(props) {
       nameRU: card.nameRU,
       nameEN: card.nameEN || card.nameRU,
       movieId: String(card.id),
-
     };
 
     mainApi.saveMovie(film)
@@ -48,9 +47,7 @@ function MovieCard(props) {
             props.setSavedMovies(savedMovies => [...savedMovies, movie ])
           }; 
         });
-
         localStorage.setItem('movies', JSON.stringify(localMovies));
-        // localStorage.setItem('savedUserMovies', JSON.stringify(props.savedMovies))
         if(props.isShortFilm) {
           props.setMovies(shortFilmHandler(localMovies));
         } if (!props.isShortFilm) {
@@ -58,7 +55,6 @@ function MovieCard(props) {
         }
       })
       .catch((err) => {
-        console.log(err);
         props.showServerErrorHandler(errors.serverResponseErr);
       })
     };

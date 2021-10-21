@@ -2,7 +2,7 @@ import { Form } from '../../utils/Forms';
 import validators from '../../utils/validators';
 import { Field, SubmitButton, errorMessageHandler, errorStatusHandler } from '../../utils/Forms';
 import { useState } from 'react';
-import { errors } from '../../utils/constants'
+import { errors, shorts } from '../../utils/constants'
 
 function SearchForm(props) {
   const [movieError, setMovieError ] = useState(false);
@@ -72,7 +72,7 @@ function SearchForm(props) {
         <div className='search-form__border' />
         <div className='search-form__checkbox-container'>
           <input className='search-form__checkbox' name='shorts' onClick={props.shortsToggler} type='checkbox' />
-          <p className='search-form__checkbox-caption'>Короткометражки</p>
+          <p className='search-form__checkbox-caption'>{shorts}</p>
         </div>
       </Form>
     </div>

@@ -3,12 +3,10 @@ import SearchForm from '../SearchForm/SearchForm';
 import { useState, useEffect } from 'react';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/mainApi';
-import { useContext  } from 'react';
-import { CurrentUserContext } from '../../contexts/contexts';
 
 function SavedMovies(props) {
   const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [ isShortFilm, setIsShortFilm ] = useState(false);
   const [ movieNotFound, setMovieNotFound ] = useState(false);
   const [ backToSavedMovies, setBackToSavedMovies ] = useState(false);

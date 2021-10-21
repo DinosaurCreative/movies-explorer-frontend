@@ -14,8 +14,7 @@ function Header(props) {
       {props.isLoggedIn && <div className='header__links-container'>
         <Navigation isOpen = {props.menuStatus}
                     menuHandler = {props.menuHandler}
-                    screenWidth = {props.screenWidth}
-         />
+                    screenWidth = {props.screenWidth} />
         </div>}
       </div>
     </header>
