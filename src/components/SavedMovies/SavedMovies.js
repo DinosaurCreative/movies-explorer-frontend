@@ -12,8 +12,9 @@ function SavedMovies(props) {
   const [ isShortFilm, setIsShortFilm ] = useState(false);
   const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
   const [ backToSavedMovies, setBackToSavedMovies ] = useState(false);
-  
+
   useEffect(() => {
+    props.setSavedMovies([])
     getSavedMoviesHandler();
   }, [])
 
@@ -72,16 +73,18 @@ function SavedMovies(props) {
         const checked = props.savedMovies.filter((movie) => !res.message.includes(movie.nameRU));
         const deleted = props.savedMovies.filter((movie) => res.message.includes(movie.nameRU));
         const localMovies = JSON.parse(localStorage.getItem('movies'));
-        props.setMovies([]);
-        localMovies.forEach((movie) => {
-          if (movie.id === deleted[0].id || movie.id === Number(deleted[0].movieId)) {
-            movie.saved = false;
-            movie._id = '';
-            props.setMovies(movies => [ ...movies, movie ]);
-          };
-          localStorage.setItem('movies', JSON.stringify(localMovies));
-          props.setMovies(localMovies);
-        })
+        props.setMovies([])
+        if(localMovies) {
+          localMovies.forEach((movie) => {
+            if (movie.id === deleted[0].id || movie.id === Number(deleted[0].movieId)) {
+              movie.saved = false;
+              movie._id = '';
+              props.setMovies(movies => [ ...movies, movie ]);
+            };
+            localStorage.setItem('movies', JSON.stringify(localMovies));
+            props.setMovies(localMovies);
+          })
+        }
         props.setSavedMovies(checked);
       })
       .catch((err) => {
@@ -89,7 +92,6 @@ function SavedMovies(props) {
         props.showServerErrorHandler(err);
       })
   };
-
   return (
     <div className='saved-movies'>
       <SearchForm getMovieHandler={findInSavedMovies}
@@ -98,7 +100,7 @@ function SavedMovies(props) {
                    />
 
       <MoviesCardList movies={props.savedMovies}
-                      savedMovies={props.savedMovies}
+                      // savedMovies={props.savedMovies}
                       setSavedMovies={props.setSavedMovies}
                       setMovies={props.setMovies}
                       deleteMovieHandler={deleteMovieHandler} 

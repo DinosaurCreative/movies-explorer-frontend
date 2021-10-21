@@ -6,7 +6,7 @@ import { errors } from '../../utils/constants';
 function MovieCard(props) {
   const location = useLocation();
   const { card } = props;
-
+  
   function deleteMovieHandler() {
     props.deleteMovieHandler(card);
   };
@@ -35,27 +35,27 @@ function MovieCard(props) {
       movieId: String(card.id),
 
     };
-    
-    console.log(card);
-    console.log(film);
-    mainApi.saveMovie(film)   /// отправляю зпрос на сервак 
-    .then((res) => {    ///  получю ответ
-      
-      const localMovies = JSON.parse(localStorage.getItem('movies'));  /// достиаю схранку из стораджа
-        localMovies.forEach((movie) => {   ///  прохлжу по данным
-          if (movie.id === Number(res.data.movieId)) {   /// ссравниваю айдиники, ищу нужный фильм
-            movie.saved = true;   ///  делаю его сохраненным
-            movie._id = res.data._id;   /// добавляю еще айдишник
-            props.setSavedMovies(savedMovies => [...savedMovies, movie ])   /// добавляю все на страницу
-          }; 
-        });
-        localStorage.setItem('movies', JSON.stringify(localMovies));   ///  упаковываю данные в локал сторадж
-        props.setMovies(sortCards(localMovies, props.movies.length));   /// 
+
+    mainApi.saveMovie(film)
+    .then((res) => {
+      const localMovies = JSON.parse(localStorage.getItem('movies'));
+      console.log(JSON.parse(localStorage.getItem('movies')))
+
+      localMovies.forEach((movie) => {
+        if (movie.id === Number(res.data.movieId)) {
+          movie.saved = true;
+          movie._id = res.data._id;
+          props.setSavedMovies(savedMovies => [...savedMovies, movie ])
+        }; 
+      });
+
+        localStorage.setItem('movies', JSON.stringify(localMovies));
+        props.setMovies(sortCards(localMovies, props.movies.length));
         localStorage.setItem('savedUserMovies', JSON.stringify(props.savedMovies))
-      })   /// 
-      .catch((err) => {   /// 
-        console.log(err);   /// 
-        props.showServerErrorHandler(errors.serverResponseErr);   /// 
+      })
+      .catch((err) => {
+        console.log(err);
+        props.showServerErrorHandler(errors.serverResponseErr);
       })
     };
 

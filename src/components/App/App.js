@@ -24,9 +24,7 @@ function App() {
   const [ screenWidth, setScreenWidth ] = useState(document.documentElement.clientWidth);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const [ modalError, setModalError ] = useState('');
-  const [ movies, setMovies ] = useState([]);
   const [ isPreloaderShowing, setIsPreloaderShowing ] = useState(false);
-  const [ savedMovies, setSavedMovies ] = useState([]);
   const [ isResetButtonPushed, setIsResetButtonPushed ] = useState(false)
   const [ isLogged, setIsLogged ] = useState(false);
   const location = useLocation();
@@ -39,6 +37,10 @@ function App() {
   const [ isRegisterPopupShowing, setIsRegPopupShowing ] = useState(false);
   const [ serverResponceNubmber, setServerResponseNumber ] = useState(0);
   const [ serevrResponseMsg, setServerResponseMsg ] = useState('');
+  
+  const [ movies, setMovies ] = useState([]);
+  const [ savedMovies, setSavedMovies ] = useState([]);
+
   
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });
