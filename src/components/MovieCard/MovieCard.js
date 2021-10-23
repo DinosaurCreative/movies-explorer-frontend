@@ -39,6 +39,8 @@ function MovieCard(props) {
 
     mainApi.saveMovie(film)
       .then((res) => {
+        const savedMovies = [...JSON.parse(localStorage.getItem('savedMovies')), res.data];
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
         const localMovies = JSON.parse(localStorage.getItem('movies'));
         localMovies.forEach((movie) => {
           if (movie.id === Number(res.data.movieId)) {

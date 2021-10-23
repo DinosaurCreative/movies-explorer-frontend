@@ -17,10 +17,13 @@ function SavedMovies(props) {
     getSavedMoviesHandler();
   }, []);
 
+  
   function shortsToggler() {
+    // setBackToSavedMovies(false)§;
     if(!isShortFilm) {
       if(shortFilmHandler(updatedCardList).length === 0) {
         setMovieNotFound(true);
+        setIsShortFilm(true)
       }
       props.setSavedMovies(shortFilmHandler(updatedCardList));
       setIsShortFilm(true)
@@ -75,7 +78,7 @@ function SavedMovies(props) {
 
   function hideResetButtonHendler() {
     setBackToSavedMovies(false);
-    props.setIsResetButtonPushed(true);
+    // props.setIsResetButtonPushed(true);
     props.setSavedMovies(savedMovies);
   };
 
@@ -114,7 +117,9 @@ function SavedMovies(props) {
     <div className='saved-movies'>
       <SearchForm getMovieHandler={findInSavedMovies}
                   shortsToggler={shortsToggler}
-                  searchKeyword='localMovieName' />
+                  searchKeyword='localMovieName'
+                  isShortFilm={isShortFilm}
+                  setIsShortFilm={setIsShortFilm} />
 
       <MoviesCardList movies={props.savedMovies}
                       setSavedMovies={props.setSavedMovies}
@@ -122,7 +127,10 @@ function SavedMovies(props) {
                       deleteMovieHandler={deleteMovieHandler} 
                       backToSavedMovies={backToSavedMovies}
                       hideResetButtonHendler={hideResetButtonHendler} 
-                      movieNotFound={movieNotFound}/>
+                      movieNotFound={movieNotFound}
+                      setMovieNotFound={setMovieNotFound}
+                      /* isShortFilm={isShortFilm} */ />
+                      
       { props.isPreloaderShowing && <Preloader />}
     </div>
   )

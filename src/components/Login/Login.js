@@ -5,10 +5,10 @@ import validators from '../../utils/validators';
 import { errors } from '../../utils/constants'
 
 function Login(props) {
-  const [ emailError, setEmailError ] = useState(false);
   const [ passwordError, setPasswordError ] = useState(false);
   const [ userLoginData, setUserLoginData ] = useState({ email: '', password: '' });
-  const [ submitting, setIsSubmitting ] = useState(false);
+  const [ emailError, setEmailError ] = useState(false);
+
   function errorSpanHandler(prop, status) {
     if (prop === 'email') {
       setEmailError(status);
@@ -23,11 +23,8 @@ function Login(props) {
   };
 
   function submitHandler() {
-    setIsSubmitting(true);
+    props.setIsSubmitting(true);
     props.onSubmit(userLoginData);
-    setTimeout(() => {
-      setIsSubmitting(false);
-    }, 5000)
   };
 
   return (
@@ -50,7 +47,7 @@ function Login(props) {
 
           {({ onChange, ...props}) => {
             return (<input 
-                      disabled={submitting}
+                      disabled={props.submitting}
                       className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                       onFocus={() => errorSpanHandler(props.name, true)}
                       onBlur={() => errorSpanHandler(props.name, false)}
@@ -80,7 +77,7 @@ function Login(props) {
                   type='password'>
             {({ onChange, ...props}) => {
               return (<input {...props} 
-                      disabled={submitting}
+                      disabled={props.submitting}
                       className={`${props.className} ${errorStatusHandler(props) && 'form__input_type_error'}`}
                       onChange={(e) => {
                         onChange(e.target.value);
@@ -109,7 +106,7 @@ function Login(props) {
             ({ disabled , ...props}) => {
               return (<button {...props}
                       className={`${props.className} ${disabled && 'form__button_type_disabled'}`}
-                      disabled={disabled && submitting}>
+                      disabled={disabled && props.submitting}>
                       {'Войти'}
                       </button>)
             }}</SubmitButton>

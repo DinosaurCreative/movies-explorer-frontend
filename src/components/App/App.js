@@ -40,6 +40,7 @@ function App() {
   const history = useHistory();
   const isLoggedIn = localStorage.getItem('isLoggedIn');
   const [ currentUser, setCurrentUser ] = useState(JSON.parse(localStorage.getItem('currentUser')));
+  const [ submitting, setIsSubmitting ] = useState(false);
 
   useEffect(() => {
     window.addEventListener('resize', handleWidth, { passive: true });
@@ -47,7 +48,7 @@ function App() {
       window.removeEventListener('rezize', handleWidth);
     };
   }, []);
- 
+
   if(!currentUser && isLogged) {
     mainApi.getProfileData()
       .then((res) => {
@@ -61,6 +62,7 @@ function App() {
         showServerErrorHandler(errors.serverResponseErr);
       })
   }
+
   function handleCheckToken() {
     auth.checkToken()
       .then(() => {
@@ -83,7 +85,7 @@ function App() {
   useEffect(() => {
     if(isLoggedIn){
       handleCheckToken();
-    }
+    };
   }, []);
 
   function handleSignUp({ name, password, email }) {
@@ -112,6 +114,7 @@ function App() {
       .catch(() => {
         showServerErrorHandler(errors.loginFail);
       })
+      .finally(() => setIsSubmitting(false))
   };
 
   function handleWidth() {
@@ -125,8 +128,7 @@ function App() {
   function showRegistrationStatus() {
     setIsRegPopupShowing(false);
     setServerResponseNumber(0);
-  }
-
+  };
 
   function showServerErrorHandler(error) {
     setIsModalOpen(true);
@@ -151,7 +153,7 @@ function App() {
                        menuStatus={isMenuOpen}
                        screenWidth={screenWidth}
                        isMenuOpen={isMenuOpen}
-                       isLoggedIn={isLogged} />}
+                       isLoggedIn={isLoggedIn} />}
 
             {isRegisterPopupShowing && <Popup  isRequestOk={isRequestOk}
                     serverResponceNubmber={serverResponceNubmber} 
@@ -197,7 +199,7 @@ function App() {
                               setSavedMovies={setSavedMovies}
                               setMovies={setMovies} 
                               setIsResetButtonPushed={setIsResetButtonPushed}
-                              isResetButtonPushed={isResetButtonPushed}  />
+                              isResetButtonPushed={isResetButtonPushed} />
 
               <ProtectedRoute component={Profile}
                               path='/profile'
@@ -207,7 +209,9 @@ function App() {
                               setCurrentUser={setCurrentUser} />
 
               {!isLoggedIn && <Route path = '/signin'>
-                <Login onSubmit={handleSignIn} />
+                <Login onSubmit={handleSignIn} 
+                       submitting={submitting}
+                       setIsSubmitting={setIsSubmitting} />
               </Route>}
               
               {!isLoggedIn && <Route path = '/signup'>
@@ -227,7 +231,7 @@ function App() {
           </div>
         </div>
     </CurrentUserContext.Provider>
-  )
+  );
 };
 
 export default App;
