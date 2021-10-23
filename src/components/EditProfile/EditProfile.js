@@ -49,7 +49,6 @@ function EditProfile(props) {
       })
   };
 
-
   function changeUserDataHandler(name, value) {
     setUserData({ ...userData, [name]: value });
   };

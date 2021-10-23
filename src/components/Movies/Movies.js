@@ -31,7 +31,6 @@ function Movies(props) {
       localMoviesHandler(shortFilmHandler(sortCards(value)));
       return
     };
-    setMovieNotFound(false);
     localMoviesHandler(sortCards(value));
   };
   
@@ -162,7 +161,7 @@ function Movies(props) {
       const checked = await checkIsMovieSavedHandler(checkedValidityMovies);
       await localStorage.setItem('movies', JSON.stringify(checked));
       await localMoviesHandler(checked);
-      await localMovies.length > 0 ? setMovieNotFound(true) : setMovieNotFound(false);
+      await localMovies === null ? setMovieNotFound(true) : setMovieNotFound(false);
     } catch (err) {
       props.showServerErrorHandler(errors.serverResponseErr);
     } finally {

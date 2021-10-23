@@ -3,6 +3,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import { useState, useEffect } from 'react';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/mainApi';
+import { errors } from '../../utils/constants';
 
 function SavedMovies(props) {
   const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
@@ -16,16 +17,15 @@ function SavedMovies(props) {
     props.setSavedMovies([]);
     getSavedMoviesHandler();
   }, []);
-
   
   function shortsToggler() {
-    // setBackToSavedMovies(false)§;
+
     if(!isShortFilm) {
       if(shortFilmHandler(updatedCardList).length === 0) {
         setMovieNotFound(true);
         setIsShortFilm(true)
       }
-      props.setSavedMovies(shortFilmHandler(updatedCardList));
+      props.setSavedMovies(shortFilmHandler(props.savedMovies));
       setIsShortFilm(true)
     } if(isShortFilm) {
       props.setSavedMovies(updatedCardList);
@@ -45,7 +45,7 @@ function SavedMovies(props) {
         localStorage.setItem('savedMovies', JSON.stringify(ownersCardsFromCommonSavedValue));
         setUpdetedcardList(ownersCardsFromCommonSavedValue);
       })
-      .catch((err) => props.showServerErrorHandler(err))
+      .catch(() => props.showServerErrorHandler(errors.serverResponseErr))
   };
 
   function preloaderToggler(val) {
@@ -78,7 +78,6 @@ function SavedMovies(props) {
 
   function hideResetButtonHendler() {
     setBackToSavedMovies(false);
-    // props.setIsResetButtonPushed(true);
     props.setSavedMovies(savedMovies);
   };
 
@@ -88,7 +87,8 @@ function SavedMovies(props) {
         const checked = JSON.parse(localStorage.getItem('savedMovies')).filter((movie) => !res.message.includes(movie.nameRU));
         const deleted = props.savedMovies.filter((movie) => res.message.includes(movie.nameRU));
         const localMovies = JSON.parse(localStorage.getItem('movies'));
-        props.setMovies([])
+        props.setMovies([]);
+
         if(localMovies) {
           localMovies.forEach((movie) => {
             if (movie.id === deleted[0].id || movie.id === Number(deleted[0].movieId)) {
@@ -100,8 +100,11 @@ function SavedMovies(props) {
             props.setMovies(localMovies);
           })
         }
+
         setUpdetedcardList((checked));
+        
         localStorage.setItem('savedMovies', JSON.stringify(checked));
+        
         if(isShortFilm) {
           props.setSavedMovies(shortFilmHandler(checked));
         } if(!isShortFilm) {
@@ -109,8 +112,8 @@ function SavedMovies(props) {
         }
       })
       .catch((err) => {
-        console.log(err);
-        props.showServerErrorHandler(err);
+
+        props.showServerErrorHandler(errors.serverResponseErr);
       })
   };
   return (
@@ -128,8 +131,7 @@ function SavedMovies(props) {
                       backToSavedMovies={backToSavedMovies}
                       hideResetButtonHendler={hideResetButtonHendler} 
                       movieNotFound={movieNotFound}
-                      setMovieNotFound={setMovieNotFound}
-                      /* isShortFilm={isShortFilm} */ />
+                      setMovieNotFound={setMovieNotFound} />
                       
       { props.isPreloaderShowing && <Preloader />}
     </div>

@@ -219,8 +219,8 @@ function App() {
                           setIsRequestOk={setIsRequestOk}
                           setServerResponseNumber={setServerResponseNumber} />
               </Route>}
-            
-              {isLogged && <Route path="" component={Error} />}
+              
+              {(isLogged || !isLoggedIn) && <Route path="" component={Error} />}
             </Switch>
             { location.pathname !== '/profile'
             && location.pathname !== '/signin'

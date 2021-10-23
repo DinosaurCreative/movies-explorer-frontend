@@ -32,6 +32,7 @@ export const Form = ({children, className, validators, onChange, onSubmit}) => {
   function handleSubmit(e) {
     e.preventDefault();
     onSubmit();
+    // setIsInvalid(true);
   };
 
   useEffect(() => {

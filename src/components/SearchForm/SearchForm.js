@@ -7,17 +7,17 @@ import { errors, shorts } from '../../utils/constants'
 function SearchForm(props) {
   const [ movieError, setMovieError ] = useState(false);
   const [ isSubmiting, setIsSubmiting ] = useState(false);
-  const inputRef = useRef();
+  const checkboxRef = useRef();
 
   function errorSpanHandler(prop, status) {
     if (prop === 'userMovie') {
       setMovieError(status);
     };
   };
-
+  
   function submitHandler() {
     props.setIsShortFilm(false);
-    inputRef.current.checked = false;
+    checkboxRef.current.checked = false;
     setMovieError(true);
     setIsSubmiting(true);
     props.getMovieHandler();
@@ -43,7 +43,6 @@ function SearchForm(props) {
               type='submit'>
               {({ onChange, ...props }) => {
                 return (<input
-                  
                   disabled={isSubmiting}
                   placeholder={props.placeholder}
                   className={`${props.className} ${errorStatusHandler(props) && 'serch-form__input_type_error'}`}
@@ -76,7 +75,7 @@ function SearchForm(props) {
             } }</SubmitButton>
         <div className='search-form__border' />
         <div className='search-form__checkbox-container'>
-          <input className='search-form__checkbox' ref={inputRef} name='shorts' onClick={props.shortsToggler} type='checkbox' />
+          <input className='search-form__checkbox' ref={checkboxRef} name='shorts' onClick={props.shortsToggler} type='checkbox' />
           <p className='search-form__checkbox-caption'>{shorts}</p>
         </div>
       </Form>
