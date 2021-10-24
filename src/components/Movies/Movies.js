@@ -16,7 +16,8 @@ function Movies(props) {
   const [ movieNotFound, setMovieNotFound ] = useState(false);
   const beatFilmBase = JSON.parse(localStorage.getItem('beatFilmBase'));
   const [ currentCardArrayLength, setCurrentArrayLength ] = useState(0);
- 
+  const [ isSubmiting, setIsSubmiting ] = useState(false);
+  
   useEffect(() => {
     props.setMovies([]);
     toggleShortHandler(localMovies);
