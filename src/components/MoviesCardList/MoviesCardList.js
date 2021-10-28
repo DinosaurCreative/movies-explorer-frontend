@@ -1,20 +1,26 @@
 import MovieCard from '../MovieCard/MovieCard';
-import photos from '../../utils/constants';
 
-import { useLocation } from 'react-router-dom';
-function MoviesCardList() {
-  const location  = useLocation();
-  console.log(photos[0])
+function MoviesCardList(props) {
+
   return (
     <div className='movies-card-list'>
       <ul className='movie-card-list__catalog'>{
-        photos.map(item =>  <MovieCard card = {item} 
-                                       key = {item}
-        />)
+        props.movies.map(item => {
+          return <MovieCard card={item} 
+                            key={item.id || item.movieId }
+                            movies={props.movies}
+                            showServerErrorHandler={props.showServerErrorHandler}
+                            setSavedMovies={props.setSavedMovies}
+                            savedMovies={props.savedMovies} 
+                            localMoviesHandler={props.localMoviesHandler} 
+                            setMovies={props.setMovies}
+                            deleteMovieHandler={props.deleteMovieHandler}
+                            isShortFilm={props.isShortFilm} />})
       }</ul>
-      {location.pathname !== '/saved-movies' &&<button className='movies-card-list__more-btn'>Ещё</button>}
+      {props.movies.length === 0 && !props.isPreloaderShowing && props.movieNotFound && <h1 className='movie-card-list__missing-content-msg'>Ничего не найдено</h1>}
+      {props.children}
     </div>
-  )
-}
+  );
+};
 
 export default MoviesCardList;

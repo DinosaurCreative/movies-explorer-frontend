@@ -5,6 +5,7 @@
   margin-left: 70px;
   margin-right: 70px;
   align-self: center;
+  position: relative;
 }
 
 @media screen and (max-width: 768px) {

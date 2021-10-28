@@ -3,3 +3,9 @@
   max-width: 21px;
   font-size: 0;
 }
+
+
+.movie-card__saved:hover {
+  transform: scale(1.35);
+  filter: drop-shadow(0px 0px 3px #ca0a0a);
+}

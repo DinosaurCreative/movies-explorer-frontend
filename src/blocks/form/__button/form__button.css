@@ -10,6 +10,7 @@
   font-weight: 500;
   transition: transform .2s ease-in-out;
   cursor: pointer;
+  outline: none;
 }
 
 .form__button:hover {

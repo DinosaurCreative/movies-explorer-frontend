@@ -6,17 +6,19 @@
   margin-left: auto;
   transition: all .4s ease-in;
   z-index: 2;
+  background-color: #202020;
 }
 
-.navigation_opened::before {
+.navigation_opened::after {
   background-color: black;
   opacity: .3;
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: 1;
+
 }
 
 @media screen and (max-width: 500px) {

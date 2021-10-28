@@ -20,7 +20,7 @@ function NavTab() {
             smooth={true}
             duration= {500}>Студент</Link>
     </div>
-  )
-}
+  );
+};
 
 export default NavTab;

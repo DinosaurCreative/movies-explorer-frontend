@@ -1,20 +1,20 @@
 function ModalPopup(props) {
-  const closeMoldalHandle = () => {
+  function closeModalHandle() {
     props.closeModal(false);
-    document.removeEventListener('keyup', closeMoldalHandle);
-    document.removeEventListener('click', closeMoldalHandle);
-  }
+    document.removeEventListener('keyup', closeModalHandle);
+    document.removeEventListener('click', closeModalHandle);
+  };
 
-  window.addEventListener('click', closeMoldalHandle);
-  window.addEventListener('keydown', closeMoldalHandle);
+  window.addEventListener('click', closeModalHandle);
+  window.addEventListener('keydown', closeModalHandle);
 
   return (
     <div className='modal-popup'>
       <div className='modal-popup__container'>
-        <p className='modal-popup__message'>Сервер ответил ошибкой: переданы некорректные данные.</p>
+        <p className='modal-popup__message'>{props.error}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ModalPopup;

@@ -12,14 +12,13 @@ function AboutMe() {
             <h3 className='about-me__name'>Герман</h3>
             <p className='about-me__additional-info'>Фронтенд-разработчик, 33 года</p>
             <p className='about-me__personal'>
-              Я родился и живу в Санкт-Петербурге, закончил факультет режиссуры. У меня есть 
-              жена и кот. Катаюсь н сноуборде, играю на гитаре а ещё увлекаюсь .
-              Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». 
-              После того, как прошёл курс по веб-разработке,
+              Я родился и живу в Санкт-Петербурге, закончил факультет режиссуры. У меня есть
+              жена и кот. Катаюсь н сноуборде, играю на гитаре а ещё увлекаюсь.
+              Недавно начал кодить и уже не помню каково это не кодить.
             </p>
             <div className='about-me__connections'>
-              <Link to='/' href='#' className='link link_place_about-me'>Facebook</Link>
-              <Link to='/' href='#' className='link link_place_about-me'>Github</Link>
+              <a href='https://facebook.com' className='link link_place_about-me' target='_blank'>Facebook</a>
+              <a  href='https://github.com/DinosaurCreative' className='link link_place_about-me' target='_blank'>Github</a>
             </div>
           </div>
           <div className='about-me__avatar' />
@@ -27,6 +26,6 @@ function AboutMe() {
       </div>
     </div>
   )
-}
+};
 
 export default AboutMe;
