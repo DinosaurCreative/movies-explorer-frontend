@@ -12,13 +12,7 @@ function Profile(props) {
     props.setIsLogged(false);
     auth.signOut()
       .then(() => {
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('savedMovies');
-        localStorage.removeItem('movieName');
-        localStorage.removeItem('beatFilmBase');
-        localStorage.removeItem('movies');
-        localStorage.removeItem('localMovieName');
+        localStorage.clear();
         props.setCurrentUser(null);
         setTimeout(() => {
         }, );

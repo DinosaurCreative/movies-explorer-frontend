@@ -71,13 +71,7 @@ function App() {
       .catch((err) => {
         if (err.status === 401) {
           setIsLogged(false);
-          localStorage.removeItem('currentUser');
-          localStorage.removeItem('isLoggedIn');
-          localStorage.removeItem('savedMovies');
-          localStorage.removeItem('movieName');
-          localStorage.removeItem('beatFilmBase');
-          localStorage.removeItem('movies');
-          localStorage.removeItem('localMovieName');
+          localStorage.clear();
         };
       })
   };
