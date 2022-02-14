@@ -1,5 +1,5 @@
 export const beatfilmApiURL = 'https://api.nomoreparties.co';
-export const mainApiURL = 'https://api.watchthis.nomoredomains.club';
+export const mainApiURL = 'https://wootch.herokuapp.com';
 
 export const errors = {
   minPassLength: 'Длина пароля должна быть более восьми символов.',
@@ -20,7 +20,6 @@ export const regexp = /^[а-яА-ЯёЁa-zA-Z \-]+$/;
 export const registrationSucceed = 'Вы зарегистрировались.';
 export const userDataChanged = 'Новые данные сохранены.';
 export const shorts = 'Короткометражки';
-
 export const name = 'Имя';
 export const greeting = 'Добро пожаловать!';
 export const email = 'E-mail';
