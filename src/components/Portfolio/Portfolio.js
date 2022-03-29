@@ -15,7 +15,7 @@ function Portfolio() {
         <div className='portfolio__underline' />
         <div className='portfolio__links'>
           <h3 className='portfolio__link'>Одностраничное приложение</h3>
-          <a className='portfolio__arrow' href='https://lookaround.students.nomoredomains.club/' name='ссылка на проект' target='_blanc' rel='noreferrer' />
+          <a className='portfolio__arrow' href='https://look-around-two.vercel.app/' name='ссылка на проект' target='_blanc' rel='noreferrer' />
         </div>
       </div>
     </div>
